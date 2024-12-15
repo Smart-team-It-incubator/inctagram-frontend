@@ -17,9 +17,31 @@
 
 
 .active {
-    @include primary-500()
+    @include primary-500 ();
+        color: green; // Основной цвет
+        svg {
+            @include primary-500 ();// SVG будет наследовать цвет текста
+        }
+      
+      
 }
 
 .disabled {
     @include light-100()
 }
+
+.icon {
+    color: green; // Цвет иконки
+  
+    .svgicon svg   {
+        path {
+            fill: currentColor; // Используем текущий цвет текста
+            
+        }
+      
+    }
+    &:hover {
+        color: red;
+        outline: 1px cyan solid;
+    }
+  }

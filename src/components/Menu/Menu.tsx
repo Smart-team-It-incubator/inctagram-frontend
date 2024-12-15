@@ -5,24 +5,37 @@ import styles from "./menu.module.scss"
 import Image from "next/image"
 import { useState } from "react"
 import Home from "@/app/page"
+import { ReactSVG } from "react-svg"
 // import Search from '/menu/search.svg'
 
-const HOME_SVG_PATH = '/menu/home.svg'
-const HOME_ACTIVE_SVG_PATH = '/menu/home-active.svg'
+export const HOME_SVG_PATH = '/menu/home.svg' 
+export const HOME_ACTIVE_SVG_PATH = '/menu/home-active.svg'
 
-const PLUS_SVG_PATH = '/menu/plus-square.svg'
-const PLUS_ACTIVE_SVG_PATH = '/menu/plus-square-active.svg'
+export const PLUS_SVG_PATH = '/menu/plus-square.svg'
+export const PLUS_ACTIVE_SVG_PATH = '/menu/plus-square-active.svg'
 
-const MESSAGE_SVG_PATH = '/menu/message.svg'
-const MESSAGE_ACTIVE_SVG_PATH = '/menu/message-active.svg'
+export const MESSAGE_SVG_PATH = '/menu/message.svg'
+export const MESSAGE_ACTIVE_SVG_PATH = '/menu/message-active.svg'
 
-const SEARCH_SVG_PATH = '/menu/search.svg'
-const SEARCH_ACTIVE_SVG_PATH = '/menu/search-active.svg'
+export const SEARCH_SVG_PATH = '/menu/search.svg'
+export const SEARCH_ACTIVE_SVG_PATH = '/menu/search-active.svg'
 
-const ACCOUNT_SVG_PATH = '/menu/account.svg'
-const ACCOUNT_ACTIVE_SVG_PATH = '/menu/account-active.svg'
+export const ACCOUNT_SVG_PATH = '/menu/account.svg'
+export const ACCOUNT_ACTIVE_SVG_PATH = '/menu/account-active.svg'
 
-type MenuMode = 'home' | 'plus' | 'message' | 'search' | 'account'
+
+
+export type MenuMode = 'home' | 'plus' | 'message' | 'search' | 'account'
+
+export type MenuIconsType = {
+    mode: MenuMode,
+    icon: string
+}
+
+const icons: Array<MenuIconsType> = [{
+    mode: "home",
+    icon: HOME_SVG_PATH
+}]
 
 export const Menu = () => {
     const [menu, setMenu] = useState<MenuMode>('home')
@@ -55,6 +68,12 @@ export const Menu = () => {
 
     return (
         <div className={styles.menu}>
+            
+            <div className={styles.icon}>
+                <ReactSVG src={HOME_ACTIVE_SVG_PATH} className={styles.svgicon} />
+            </div>
+
+
             <Link href="/" >
                 <Image src={menu == "home" ? HOME_ACTIVE_SVG_PATH : HOME_SVG_PATH} alt={''} width={24} height={24} className={''} onClick={homeClickHandle} />
             </Link>
