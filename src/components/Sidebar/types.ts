@@ -1,3 +1,4 @@
+import { MenuMode } from "../Menu/Menu";
 
 
 export const SVG_PATHS = {
@@ -20,3 +21,9 @@ export const SVG_PATHS = {
   
   
   export type SvgPath = typeof SVG_PATHS[keyof typeof SVG_PATHS];
+
+  export type IconsType = {
+    mode: MenuMode,
+    paths: SvgPath[],
+    text: string
+}

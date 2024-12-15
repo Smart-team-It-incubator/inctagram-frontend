@@ -25,7 +25,7 @@ export const ACCOUNT_ACTIVE_SVG_PATH = '/menu/account-active.svg'
 
 
 
-export type MenuMode = 'home' | 'plus' | 'message' | 'search' | 'account'
+export type MenuMode = 'home' | 'plus' | 'create' | 'message' | 'messenger' |'search' | 'account' | 'profile'
 
 export type MenuIconsType = {
     mode: MenuMode,

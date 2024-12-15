@@ -1,33 +1,13 @@
 'use client'
 
 import Link from "next/link"
-import { Button } from "../Button"
-import { HOME_ACTIVE_SVG_PATH, HOME_SVG_PATH, MenuMode } from "../Menu/Menu"
-import { Item } from "./item"
-
 import styles from "./sidebar.module.scss"
-import { SVG_PATHS, SvgPath } from "./types"
+import { IconsType } from "./types"
 import Image from "next/image"
 
-
-export type MenuIconsType = {
-    mode: MenuMode,
-    paths: SvgPath[],
-    text: string
-}
-
-export const icons: Array<MenuIconsType> = [
-    {
-    mode: "home",
-    paths: ["/menu/home.svg", "/menu/home-active.svg"],
-    text: 'Home'
-    }
-]
-
 type Props = {
-    icons: Array<MenuIconsType>
+    icons: Array<IconsType>
 }
-
 
 export const Sidebar = ({icons}: Props) => {
 
@@ -39,6 +19,10 @@ export const Sidebar = ({icons}: Props) => {
             </Link>
                 
             })}
+
+            <div className="sidebar-middle"></div>
+
+            <div className="sidebar-footer"></div>
         </div>
     )
 }
