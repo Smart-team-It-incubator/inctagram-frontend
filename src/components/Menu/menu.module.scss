@@ -17,6 +17,7 @@
 
 
 .active {
+
     @include primary-500 ();
         color: green; // Основной цвет
         svg {

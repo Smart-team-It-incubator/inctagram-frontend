@@ -1,37 +1,68 @@
 .sidebar {
-    width: 220px;
-    height: 660px;
+  width: 220px;
+  height: 660px;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 60px;
+  row-gap: 24px;
+
+  .sidebarHeader {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-left: 60px;
+
     row-gap: 24px;
 
-    .sidebarHeader {
-        padding-top: 72px;
+    width: 100%;
+    padding-top: 72px;
+    border: 1px solid white;
 
+    .icon {
+      display: flex;
+      column-gap: 12px;
+      align-items: center;
+
+      color: white; 
+      
+      .iconImage svg {
+        path {
+          fill: currentColor; // Используем текущий цвет текста
+        }
+      }
+
+      &:hover {
+        color: var(--primary-500)
+    
+      }
+
+      &:disabled {
+       
+      }
+      
+     
+     
     }
+  }
 
-    .sidebarMiddle {
-        padding-top: 72px;
-        display: flex;
-        flex-direction: column;
-        row-gap: 24px;
+  .sidebarMiddle {
+    width: 100%;
+    padding-top: 72px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+  }
 
-    }
+  .sidebarFooter {
+    height: 100%;
+    width: 100%;
 
-    .sidebarFooter {
-        height: 100%;
+    align-content: end;
 
-        align-content: end;
-
-        padding-bottom: 36px;
-
-        border: 1px solid white;
-    }
-
-
+    padding-bottom: 36px;
 
     border: 1px solid white;
+  }
+
+  border: 1px solid white;
 }
