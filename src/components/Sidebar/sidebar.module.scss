@@ -7,7 +7,8 @@
   align-items: center;
   padding-left: 60px;
   row-gap: 24px;
-
+  border-right: 1px solid var(--dark-300);
+  
   .sidebarHeader {
     display: flex;
     flex-direction: column;
@@ -16,33 +17,6 @@
 
     width: 100%;
     padding-top: 72px;
-    border: 1px solid white;
-
-    .icon {
-      display: flex;
-      column-gap: 12px;
-      align-items: center;
-
-      color: white; 
-      
-      .iconImage svg {
-        path {
-          fill: currentColor; // Используем текущий цвет текста
-        }
-      }
-
-      &:hover {
-        color: var(--primary-500)
-    
-      }
-
-      &:disabled {
-       
-      }
-      
-     
-     
-    }
   }
 
   .sidebarMiddle {
@@ -60,9 +34,29 @@
     align-content: end;
 
     padding-bottom: 36px;
-
-    border: 1px solid white;
   }
 
-  border: 1px solid white;
+  .icon {
+    display: flex;
+    column-gap: 12px;
+    align-items: center;
+
+    color: white;
+
+    .iconImage svg {
+      path {
+        fill: currentColor; // Используем текущий цвет текста
+      }
+    }
+
+    &:hover {
+      color: var(--primary-500);
+    }
+
+    &:focus {
+      outline: 2px solid var(--primary-700);
+      width:max-content
+      // border-color: var(--primary-700);
+    }
+  }
 }

@@ -82,15 +82,15 @@ export const Menu = () => {
         <ReactSVG className={styles.svgicon} src={HOME_ACTIVE_SVG_PATH} />
       </div>
 
-      <Link href={'/'}></Link>
+      <Link href={'/'}>1</Link>
 
-      <Link href={'/'}>
+      <Link className={styles.icon} href={'/'}>
         <Image
           alt={''}
-          className={''}
+          className={styles.svgicon}
           height={24}
           onClick={homeClickHandle}
-          src={menu == 'home' ? HOME_ACTIVE_SVG_PATH : HOME_SVG_PATH}
+          src={HOME_ACTIVE_SVG_PATH}
           width={24}
         />
       </Link>

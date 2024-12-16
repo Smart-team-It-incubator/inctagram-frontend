@@ -1,10 +1,5 @@
 'use client'
 
-import { ReactSVG } from 'react-svg'
-
-import Image from 'next/image'
-import Link from 'next/link'
-
 import styles from './sidebar.module.scss'
 
 import { Icon } from './icon'
@@ -12,20 +7,32 @@ import { IconsType } from './types'
 
 type Props = {
   icons: Array<IconsType>
+  iconsFooter?: Array<IconsType>
+  iconsMiddle?: Array<IconsType>
 }
 
-export const Sidebar = ({ icons }: Props) => {
+export const Sidebar = ({ icons, iconsFooter, iconsMiddle }: Props) => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
         {icons.map(i => {
-          return <Icon className={styles.icon} icon={i} key={i.mode} />
+          return <Icon className={styles.icon} icon={i} key={i.variant} />
         })}
       </div>
 
-      <div className={styles.sidebarMiddle}></div>
+      <div className={styles.sidebarMiddle}>
+        {iconsMiddle &&
+          iconsMiddle.map(i => {
+            return <Icon className={styles.icon} icon={i} key={i.variant} />
+          })}
+      </div>
 
-      <div className={styles.sidebarFooter}></div>
+      <div className={styles.sidebarFooter}>
+        {iconsFooter &&
+          iconsFooter.map(i => {
+            return <Icon className={styles.icon} icon={i} key={i.variant} />
+          })}
+      </div>
     </div>
   )
 }

@@ -36,11 +36,10 @@
   
     .svgicon svg   {
         path {
-            fill: currentColor; // Используем текущий цвет текста
-            
+            fill: currentColor; // Используем текущий цвет текста        
         }
-      
     }
+
     &:hover {
         color: red;
         outline: 1px cyan solid;
