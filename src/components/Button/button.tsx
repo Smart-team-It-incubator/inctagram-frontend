@@ -4,7 +4,7 @@ import { Slot } from '@radix-ui/react-slot'
 
 import styles from './button.module.scss'
 
-type Variant = 'outline' | 'primary' | 'secondary' | 'text' | 'variant21' | 'withIcon'
+type Variant = 'link' | 'outline' | 'primary' | 'secondary' | 'variant21' | 'withIcon'
 
 type Props = {
   asChild?: boolean
@@ -18,6 +18,3 @@ export const Button = ({ asChild, className, variant = 'primary', ...rest }: Pro
     <Component {...rest} className={`${styles.button} ${styles[variant]} ${className}`} {...rest} />
   )
 }
-
-
-
