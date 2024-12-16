@@ -25,6 +25,10 @@ export const Sidebar = ({icons}: Props) => {
             <Link href="/" >
                 <Image src={'/file.svg'} alt={''} width={24} height={24} className={''} />
             </Link>
+
+            <Link href="/" >
+                <Image src={'/file.svg'} alt={''} width={24} height={24} className={''} />
+            </Link>
             </div>
 
             <div className={styles.sidebarFooter}>
