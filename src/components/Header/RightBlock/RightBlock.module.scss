@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.bell {
+  cursor: pointer;
+  filter: invert(1) sepia(1) saturate(0) hue-rotate(180deg);
+  @media (max-width: 500px) {
+    display: none;
+  }
+}
+.hideOnMobile {
+  display: flex;
+  gap: 24px;
+  @media (max-width: 500px) {
+    display: none;
+  }
+}
+
+.ellipsis {
+  display: none;
+  font-size: 24px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  @media (max-width: 500px) {
+    display: block;
+  }
+}
