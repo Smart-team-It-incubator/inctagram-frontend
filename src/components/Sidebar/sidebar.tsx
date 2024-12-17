@@ -13,16 +13,13 @@ type Props = {
 }
 
 export const Sidebar = ({ disabledItems = [], icons, iconsFooter, iconsMiddle }: Props) => {
-  const className = `${styles.icon}`
-  // const className = styles.disabled
-
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
         {icons.map(i => {
           const isDisabled = disabledItems?.includes(i.variant)
 
-          return <Icon className={className} disabled={isDisabled} icon={i} key={i.variant} />
+          return <Icon className={styles.icon} disabled={isDisabled} icon={i} key={i.variant} />
         })}
       </div>
 
@@ -40,7 +37,7 @@ export const Sidebar = ({ disabledItems = [], icons, iconsFooter, iconsMiddle }:
           iconsFooter.map(i => {
             const isDisabled = disabledItems?.includes(i.variant)
 
-            return <Icon className={className} disabled={isDisabled} icon={i} key={i.variant} />
+            return <Icon className={styles.icon} disabled={isDisabled} icon={i} key={i.variant} />
           })}
       </div>
     </div>
