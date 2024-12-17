@@ -1,0 +1,76 @@
+.radiogroup_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.radiogroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  &:active {
+    background-color: var(--dark-100);
+  }
+  &:hover {
+    background-color: var(--dark-300);
+  }
+  &:focus {
+    background-color: var(--dark-500);
+  }
+}
+
+.radiogroup_root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: var(--font-size-s);
+}
+
+.radiogroup_item {
+  position: relative;
+  all: unset;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--light-100);
+  border-radius: 50%;
+  &:disabled {
+    border-color: var(--dark-100);
+  }
+}
+
+.radiogroup_indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  &::after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--light-100);
+  }
+}
+
+.radiogroup_indicator_disabled {
+  &::after {
+    background-color: var(--dark-100);
+  }
+}
+
+.radiogroup_label {
+  color: var(--light-100);
+  line-height: 1;
+  padding-left: 2px;
+}
+
+.radiogroup_label_disabled {
+  color: var(--light-900);
+}
+//Сделать стили под focus
