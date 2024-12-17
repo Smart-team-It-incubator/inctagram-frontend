@@ -16,6 +16,7 @@ const meta = {
     args: { onClick: fn() },
 } satisfies Meta<typeof Tabs>;
 
+
 export default meta;
 type Story = StoryObj<typeof meta>;
 

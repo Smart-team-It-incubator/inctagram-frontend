@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import './tabs.css'
 
 export interface ButtonProps {
@@ -26,6 +26,7 @@ export const Tabs = ({
             disabled={disabled}
             className={["tabs", `tabs--${border}`, mode].join(' ')}
         >
+
             {label}
             <style jsx>{`
               button {
