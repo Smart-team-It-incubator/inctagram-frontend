@@ -8,6 +8,8 @@ import './../styles/index.scss'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
+import '@fontsource-variable/inter'
+import { Header } from '@/components/Header'
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/500.css'
 import '@fontsource/inter/600.css'
@@ -36,7 +38,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={'en'}>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
