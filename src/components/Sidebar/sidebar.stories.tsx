@@ -26,6 +26,7 @@ export const Default: Story = {
     icons: icons,
     iconsFooter: iconsFooter,
     iconsMiddle: iconsMiddle,
+   
   },
 }
 
