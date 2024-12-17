@@ -12,11 +12,14 @@ type Props = {
 }
 
 export const Sidebar = ({ icons, iconsFooter, iconsMiddle }: Props) => {
+  const className = `${styles.icon}`
+  // const className = styles.disabled
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
         {icons.map(i => {
-          return <Icon className={styles.icon} icon={i} key={i.variant} />
+          return <Icon className={className} icon={i} key={i.variant} />
         })}
       </div>
 
