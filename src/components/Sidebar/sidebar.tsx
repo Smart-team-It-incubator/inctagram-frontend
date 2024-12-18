@@ -1,41 +1,45 @@
 'use client'
 
-import Link from "next/link"
-import styles from "./sidebar.module.scss"
-import { IconsType } from "./types"
-import Image from "next/image"
+import styles from './sidebar.module.scss'
+
+import { Icon } from './icon'
+import { IconsType, Variant } from './types'
 
 type Props = {
-    icons: Array<IconsType>
+  disabledItems?: Array<Variant>
+  icons: Array<IconsType>
+  iconsFooter?: Array<IconsType>
+  iconsMiddle?: Array<IconsType>
 }
 
-export const Sidebar = ({icons}: Props) => {
+export const Sidebar = ({ disabledItems = [], icons, iconsFooter, iconsMiddle }: Props) => {
+  return (
+    <div className={styles.sidebar}>
+      <div className={styles.sidebarHeader}>
+        {icons.map(i => {
+          const isDisabled = disabledItems?.includes(i.variant)
 
-    return (
-        <div className={styles.sidebar}>
-            <div className={styles.sidebarHeader}></div>
-            {icons.map(i => {
-                return <Link href="/" key={i.mode}>
-                <Image src={i.paths[0]} alt={''} width={24} height={24} className={''} />
-            </Link>
-                
-            })}
+          return <Icon className={styles.icon} disabled={isDisabled} icon={i} key={i.variant} />
+        })}
+      </div>
 
-            <div className={styles.sidebarMiddle}>
-            <Link href="/" >
-                <Image src={'/file.svg'} alt={''} width={24} height={24} className={''} />
-            </Link>
+      <div className={styles.sidebarMiddle}>
+        {iconsMiddle &&
+          iconsMiddle.map(i => {
+            const isDisabled = disabledItems.includes(i.variant)
 
-            <Link href="/" >
-                <Image src={'/file.svg'} alt={''} width={24} height={24} className={''} />
-            </Link>
-            </div>
+            return <Icon className={styles.icon} disabled={isDisabled} icon={i} key={i.variant} />
+          })}
+      </div>
 
-            <div className={styles.sidebarFooter}>
-            <Link href="/" >
-                <Image src={'/file.svg'} alt={''} width={24} height={24} className={''} />
-            </Link>
-            </div>
-        </div>
-    )
+      <div className={styles.sidebarFooter}>
+        {iconsFooter &&
+          iconsFooter.map(i => {
+            const isDisabled = disabledItems?.includes(i.variant)
+
+            return <Icon className={styles.icon} disabled={isDisabled} icon={i} key={i.variant} />
+          })}
+      </div>
+    </div>
+  )
 }
