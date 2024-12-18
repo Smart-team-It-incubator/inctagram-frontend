@@ -1,0 +1,128 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--primary-500);
+  /* width: 182px;
+    height: 36px;*/
+  padding: 6px 24px;
+  border-radius: 2px;
+  border: none;
+
+  font-family: var(--font-family-primary) sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: var(--light-100);
+  cursor: pointer;
+
+  &:active {
+    color: var(--light-500);
+    background: var(--primary-700);
+  }
+
+  &:hover {
+    background: var(--primary-100);
+  }
+
+  &:focus {
+    outline: 2px solid var(--primary-700);
+    background: var(--primary-500);
+  }
+
+  &:disabled {
+    color: var(--light-900);
+    background: var(--primary-900);
+  }
+}
+
+.secondary {
+  background: var(--dark-300);
+
+  &:active {
+    background: var(--dark-500);
+  }
+
+  &:hover {
+    background: var(--dark-100);
+  }
+
+  &:focus {
+    outline: 1px solid var(--primary-300);
+    background: var(--dark-300);
+  }
+
+  &:disabled {
+    background: var(--dark-500);
+  }
+}
+
+.outline {
+  background: transparent;
+  color: var(--primary-500);
+  border: 1px solid var(--primary-500);
+
+  &:active,
+  &:focus {
+    color: var(--primary-700);
+    border: 1px solid var(--primary-700);
+    background: transparent;
+  }
+
+  &:hover {
+    color: var(--primary-100);
+    border: 1px solid var(--primary-100);
+    background: transparent;
+  }
+
+  &:disabled {
+    color: var(--primary-900);
+    border: 1px solid var(--primary-900);
+    background: transparent;
+  }
+}
+
+.link {
+  background: transparent;
+  color: var(--primary-500);
+
+  &:active {
+    color: var(--primary-700);
+    background: transparent;
+  }
+
+  &:hover {
+    color: var(--primary-100);
+    background: transparent;
+  }
+
+  &:focus {
+    color: var(--primary-500);
+    background: transparent;
+    outline: 2px solid var(--primary-500);
+  }
+
+  &:disabled {
+    color: var(--primary-900);
+    background: transparent;
+  }
+}
+
+.variant21 {
+  padding: 6px 12px;
+  background: var(--dark-300);
+  color: var(--light-100);
+}
+
+.withIcon {
+  padding: 6px 12px;
+  gap: 10px;
+  background: var(--dark-300);
+
+  & svg {
+    width: 24px;
+    height: 24px;
+  }
+}
