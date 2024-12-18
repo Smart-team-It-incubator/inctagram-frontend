@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react'
 
 import styles from './CustomSelect.module.css'
@@ -7,7 +9,7 @@ interface Option {
   label: string
 }
 
-interface StyledSelectProps {
+interface Props {
   options: Option[]
   title?: string
   placeholder?: string
@@ -16,14 +18,14 @@ interface StyledSelectProps {
   size?: 'sm' | 'default'
 }
 
-export const CustomSelect: React.FC<StyledSelectProps> = ({
+export const CustomSelect = ({
   options,
   title,
   placeholder = 'Select an option',
   onChange,
   disabled = false,
   size,
-}) => {
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState<string | null>(null)
 
