@@ -1,6 +1,19 @@
-import { iconsMobile } from "../Sidebar/data"
-import { Sidebar } from "../Sidebar/sidebar"
+import { ComponentPropsWithoutRef } from 'react'
+import { iconsMobile } from '../Sidebar/data'
+import { MenuContent } from '../Sidebar/menuContent'
 
-export const Menu2 = () => {
-    return <Sidebar icons={iconsMobile} isText={false}/>
+import { IconsType } from '../Sidebar/types'
+import styles from './menu.module.scss'
+import { MenuWrapper } from '../Sidebar/MenuWrapper'
+
+type MenuProps = {
+  icons: Array<IconsType>
+} & ComponentPropsWithoutRef<'div'>
+
+export const Menu2 = ({ icons, ...rest }: MenuProps) => {
+  return (
+    <MenuWrapper >
+      <MenuContent icons={iconsMobile} isText={false} className={rest.className ? rest.className : styles.menu} />
+    </MenuWrapper>
+  )
 }
