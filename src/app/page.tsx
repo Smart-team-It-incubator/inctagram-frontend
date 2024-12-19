@@ -1,4 +1,5 @@
 import { Menu } from '@/components/Menu/Menu'
+import { Menu2 } from '@/components/Menu/menu2'
 import { icons, iconsFooter, iconsMiddle } from '@/components/Sidebar/data'
 import { Sidebar } from '@/components/Sidebar/sidebar'
 
@@ -11,8 +12,9 @@ export default function Home() {
         icons={icons}
         iconsFooter={iconsFooter}
         iconsMiddle={iconsMiddle}
+        
       />
-      <Menu />
+      <Menu2 />
     </div>
   )
 }
