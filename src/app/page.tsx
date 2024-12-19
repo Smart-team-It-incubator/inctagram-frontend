@@ -12,7 +12,6 @@ export default function Home() {
         icons={icons}
         iconsFooter={iconsFooter}
         iconsMiddle={iconsMiddle}
-        
       />
       <Menu2 />
     </div>
