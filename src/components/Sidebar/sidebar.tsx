@@ -22,6 +22,7 @@ export const Sidebar = ({
 }: Props) => {
   return (
     <div className={styles.sidebar}>
+   
       <div className={styles.sidebarHeader}>
         {icons.map(i => {
           const isDisabled = disabledItems?.includes(i.variant)
@@ -38,23 +39,23 @@ export const Sidebar = ({
         })}
       </div>
 
-      <div className={styles.sidebarMiddle}>
+     { iconsMiddle && <div className={styles.sidebarMiddle}>
         {iconsMiddle &&
           iconsMiddle.map(i => {
             const isDisabled = disabledItems.includes(i.variant)
 
             return <Icon className={styles.icon} disabled={isDisabled} icon={i} key={i.variant} />
           })}
-      </div>
+      </div>}
 
-      <div className={styles.sidebarFooter}>
+      {iconsFooter && <div className={styles.sidebarFooter}>
         {iconsFooter &&
           iconsFooter.map(i => {
             const isDisabled = disabledItems?.includes(i.variant)
 
             return <Icon className={styles.icon} disabled={isDisabled} icon={i} key={i.variant} />
           })}
-      </div>
+      </div>}
     </div>
   )
 }
