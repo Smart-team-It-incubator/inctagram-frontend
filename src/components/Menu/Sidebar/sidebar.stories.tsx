@@ -14,7 +14,7 @@ const meta: Meta<typeof Sidebar> = {
 
   component: Sidebar,
   tags: ['autodocs'], // Для генерации документации
-  title: 'Components/Sidebar',
+  title: 'Components/Menu/Sidebar',
 }
 
 export default meta
