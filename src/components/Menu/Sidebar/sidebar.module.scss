@@ -27,6 +27,20 @@
     padding-bottom: 36px;
   }
 
+}
+.menu {
+  width: 360px;
+  height: 60px;
+  padding: 18px 48px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 18px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.sidebar, .menu {
   .icon {
     display: flex;
     column-gap: 12px;

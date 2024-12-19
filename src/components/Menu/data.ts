@@ -1,4 +1,4 @@
-import { IconsType, SVG_PATHS } from './types'
+import { IconsType, SVG_PATHS } from './Sidebar/types'
 
 export const icons: Array<IconsType> = [
   {

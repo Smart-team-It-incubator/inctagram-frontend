@@ -1,4 +1,4 @@
-import { MenuMode } from '../Menu/Menu'
+
 
 export const SVG_PATHS = {
   create: '/menu/plus-square.svg',

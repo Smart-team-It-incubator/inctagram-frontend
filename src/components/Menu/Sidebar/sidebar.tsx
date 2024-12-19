@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
 import { IconsType, Variant } from './types'
-import { MenuWrapper } from './MenuWrapper'
+
 import styles from './sidebar.module.scss'
 
-import { Icon } from './icon'
-import { MenuContent } from './menuContent'
+import { MenuContent } from '../menuContent'
+import { MenuWrapper } from '../menuWrapper'
 
 type SidebarProps = {
   disabledItems?: Array<Variant>
@@ -15,7 +15,7 @@ type SidebarProps = {
   isText?: boolean
 }
 
-export const Sidebar2 = ({
+export const Sidebar = ({
   disabledItems = [],
   icons,
   iconsFooter,

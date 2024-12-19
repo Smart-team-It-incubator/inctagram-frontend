@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
-import { IconsType, Variant } from './types'
+import { IconsType, Variant } from './Sidebar/types'
 import { Icon } from './icon'
-import styles from './sidebar.module.scss'
+import styles from './Sidebar/sidebar.module.scss'
 
 type MenuContentProps = {
   disabledItems?: Array<Variant>
