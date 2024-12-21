@@ -1,0 +1,105 @@
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+.selectWrapper {
+  position: relative;
+  width: 210px;
+}
+
+.sm {
+  width: 163px;
+}
+
+.title {
+  color: #bdc1c7;
+  font-size: 14px;
+  font-weight: 400;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.select {
+  position: relative;
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:focus-visible {
+    outline: 2px solid #397df6;
+  }
+
+  &.open {
+    border: 1px solid #fff;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom: none;
+    outline: none;
+  }
+}
+
+.arrow {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  display: inline-block;
+  align-items: center;
+  width: 9px;
+  height: 9px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+
+  &.up {
+    transform: rotate(135deg); /* Стрелка вверх */
+    top: 17px;
+  }
+
+  &.down {
+    transform: rotate(-45deg); /* Стрелка вниз */
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #000;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+}
+
+.option {
+  padding: 10px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background: #333333;
+    color: #397df6;
+  }
+}
+
+.selectWrapper.disabled {
+  pointer-events: none;
+}
+
+.select.disabled {
+  color: #4c4c4c;
+
+  &:focus {
+    outline: none;
+  }
+}
