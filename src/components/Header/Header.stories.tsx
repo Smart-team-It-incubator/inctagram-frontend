@@ -1,21 +1,20 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react'
 import { Header } from './Header'
 
-export default {
+const meta: Meta<typeof Header> = {
   title: 'Components/Header',
   component: Header,
   argTypes: {
     isAuth: {
       control: { type: 'boolean' },
+      description: 'Indicates whether the user is authenticated.',
     },
   },
-} as Meta
-
-const Template: StoryFn<{ isAuth: boolean }> = args => {
-  return <Header {...args} />
+  args: {
+    isAuth: true,
+  },
 }
 
-export const Default = Template.bind({})
-Default.args = {
-  isAuth: true,
-}
+export default meta
+
+export const Default: StoryObj<typeof Header> = {}
