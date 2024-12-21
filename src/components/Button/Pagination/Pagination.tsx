@@ -70,23 +70,8 @@ export const TablePagination = ({
 
   return (
     <div className={styles.pagination}>
-      <div className={styles.rowsPerPage}>
-        <label htmlFor={'rows-per-page'}>Rows per page:</label>
-        <select
-          id={'rows-per-page'}
-          value={selectedRowsPerPage}
-          onChange={handleRowsPerPageChange}
-          className={styles.select}
-        >
-          {rowsPerPageOptions.map((option, index) => (
-            <option key={index} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      </div>
-
       <button
+        type={'button'}
         disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}
         className={styles.button}
@@ -97,6 +82,7 @@ export const TablePagination = ({
       {paginationRange.map((page, index) =>
         typeof page === 'number' ? (
           <button
+            type={'button'}
             key={index}
             onClick={() => onPageChange(page)}
             className={`${styles.pageButton} ${page === currentPage ? styles.active : ''}`}
@@ -111,12 +97,30 @@ export const TablePagination = ({
       )}
 
       <button
+        type={'button'}
         disabled={currentPage === totalPages}
         onClick={() => onPageChange(currentPage + 1)}
         className={styles.button}
       >
         {'>'}
       </button>
+
+      <div className={styles.rowsPerPage}>
+        <label htmlFor={'rows-per-page'}>Show</label>
+        <select
+          id={'rows-per-page'}
+          value={selectedRowsPerPage}
+          onChange={handleRowsPerPageChange}
+          className={styles.select}
+        >
+          {rowsPerPageOptions.map((option, index) => (
+            <option key={index} value={option} className={styles.option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <label>on page</label>
+      </div>
     </div>
   )
 }
