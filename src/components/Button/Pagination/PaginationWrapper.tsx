@@ -6,7 +6,7 @@ import { TablePagination } from './Pagination'
 export const PaginationWrapper = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [rowsPerPage, setRowsPerPage] = useState(10)
-  const totalPages = 20 // Пример: 20 страниц
+  const totalPages = 50 // Пример: 20 страниц
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)

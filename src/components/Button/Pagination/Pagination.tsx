@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 
 import styles from './pagination.module.scss'
 
-type TablePaginationProps = {
+export type TablePaginationProps = {
   currentPage: number // Текущая страница
   onPageChange: (page: number) => void // Функция для изменения текущей страницы
   onRowsPerPageChange: (rowsPerPage: number) => void // Функция для изменения количества строк на странице

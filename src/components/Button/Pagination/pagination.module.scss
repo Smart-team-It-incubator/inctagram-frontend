@@ -2,10 +2,8 @@
   display: flex;
   column-gap: 12px;
   align-items: baseline;
-
+  justify-content: center;
   font-size: var(--font-size-s);
-
-
 
   .rowsPerPage {
     .select {
@@ -15,22 +13,24 @@
       border-color: var(--dark-300);
       background-color: var(--dark-500);
       color: var(--light-100);
-    }
 
-    .option {
-      border: none;
-      background-color: var(--dark-500);
-      color: var(--light-100);
-      border-radius: 10px;
+      .option {
+        border: none;
+        background-color: var(--dark-500);
+        color: var(--light-100);
+        border-radius: 1px;
+        
 
-      &:hover {
-        background-color: var(--dark-100);
+        &:hover {
+          // background-color: var(--dark-100);
+          background-color: yellow;
+          
+        }
       }
     }
   }
 
   .button {
-    padding: 8px 12px;
     width: 24px;
     height: 24px;
     border: none;
@@ -45,7 +45,6 @@
   }
 
   .pageButton {
-    // padding: 8px 12px;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -62,10 +61,13 @@
       background: var(--dark-500);
       color: var(--light-100);
     }
+
+    &:focus {
+      // border: 1px solid var(--primary-700);
+    }
   }
 
   .ellipsis {
-    // padding: 8px 12px;
     color: var(--light-100);
     user-select: none;
   }
