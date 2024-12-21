@@ -1,0 +1,7 @@
+.error {
+  position: absolute;
+  transform: translateY(38px);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  color: var(--danger-500);
+}
