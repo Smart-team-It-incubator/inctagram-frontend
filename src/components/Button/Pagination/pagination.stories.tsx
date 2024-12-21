@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Meta, StoryObj } from '@storybook/react'
 
 import { TablePagination } from './Pagination'
@@ -21,17 +23,17 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     currentPage: 1,
-    onPageChange: (page: number) => console.log('Page changed to:', page),
-    onRowsPerPageChange: (rows: number) => console.log('Rows per page changed to:', rows),
     rowsPerPageOptions: [5, 10, 25],
     totalPages: 10,
   },
-}
+  render: args => {
+    const [currentPage, setCurrentPage] = useState(args.currentPage || 1)
 
-export const WithCustomPage: Story = {
-  args: {
-    currentPage: 5,
-    rowsPerPageOptions: [5, 10, 20, 50],
-    totalPages: 50,
+    const handlePageChange = (page: number) => {
+      setCurrentPage(page) // Обновляем локальное состояние
+      args.onPageChange(page) // Вызываем action для Storybook
+    }
+
+    return <TablePagination {...args} currentPage={currentPage} onPageChange={handlePageChange} />
   },
 }
