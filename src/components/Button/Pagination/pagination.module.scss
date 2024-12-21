@@ -1,0 +1,74 @@
+.pagination {
+  display: flex;
+  column-gap: 12px;
+  align-items: baseline;
+  justify-content: center;
+  font-size: var(--font-size-s);
+
+  .rowsPerPage {
+    .select {
+      margin-left: 4px;
+      margin-right: 8px;
+      border-radius: 2px;
+      border-color: var(--dark-300);
+      background-color: var(--dark-500);
+      color: var(--light-100);
+
+      .option {
+        border: none;
+        background-color: var(--dark-500);
+        color: var(--light-100);
+        border-radius: 1px;
+        
+
+        &:hover {
+          // background-color: var(--dark-100);
+          background-color: yellow;
+          
+        }
+      }
+    }
+  }
+
+  .button {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: var(--font-size-s);
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .pageButton {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: var(--font-size-s);
+    color: var(--light-100);
+
+    &.active {
+      background: var(--light-100);
+      color: var(--dark-900);
+    }
+
+    &:hover {
+      background: var(--dark-500);
+      color: var(--light-100);
+    }
+
+    &:focus {
+      // border: 1px solid var(--primary-700);
+    }
+  }
+
+  .ellipsis {
+    color: var(--light-100);
+    user-select: none;
+  }
+}
