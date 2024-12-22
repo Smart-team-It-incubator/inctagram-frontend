@@ -1,4 +1,4 @@
-import { IconsType, SVG_PATHS } from './types'
+import { IconsType, SVG_PATHS } from './Sidebar/types'
 
 export const icons: Array<IconsType> = [
   {
@@ -29,6 +29,38 @@ export const icons: Array<IconsType> = [
     paths: [SVG_PATHS.search, SVG_PATHS.searchActive],
     text: 'Search',
     variant: 'search',
+  },
+]
+
+export const iconsMobile: Array<IconsType> = [
+  {
+    paths: [SVG_PATHS.home, SVG_PATHS.homeActive],
+    text: 'Home',
+    variant: 'home',
+  },
+
+  {
+    paths: [SVG_PATHS.create, SVG_PATHS.createActicve],
+    text: 'Create',
+    variant: 'create',
+  },
+
+  {
+    paths: [SVG_PATHS.messenger, SVG_PATHS.messengerActive],
+    text: 'Messenger',
+    variant: 'messenger',
+  },
+
+  {
+    paths: [SVG_PATHS.search, SVG_PATHS.searchActive],
+    text: 'Search',
+    variant: 'search',
+  },
+
+  {
+    paths: [SVG_PATHS.profile, SVG_PATHS.profileActive],
+    text: 'Profile',
+    variant: 'account',
   },
 ]
 

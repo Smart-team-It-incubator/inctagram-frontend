@@ -5,20 +5,23 @@ import { ReactSVG } from 'react-svg'
 
 import Link from 'next/link'
 
-import styles from './sidebar.module.scss'
+import styles from './Sidebar/sidebar.module.scss'
 
-import { IconsType } from './types'
+import { IconsType } from './Sidebar/types'
 
 type IconProps = {
   disabled?: boolean
-  icon: IconsType
+  icon: IconsType,
+  isText?: boolean
+
 } & ComponentPropsWithoutRef<'a'>
 
-export const Icon = ({ disabled = false, icon, ...rest }: IconProps) => {
+export const Icon = ({ disabled = false, icon, isText = true, ...rest }: IconProps) => {
+
   return (
     <Link className={disabled ? `${styles.icon} ${styles.disabled}` : styles.icon} href={'/'}>
       <ReactSVG className={`${styles.iconImage}`} height={24} src={icon.paths[0]} width={24} />
-      <div>{icon.text}</div>
+      {isText && <div>{icon.text}</div>}
     </Link>
   )
 }

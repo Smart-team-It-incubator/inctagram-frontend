@@ -9,33 +9,38 @@
   row-gap: 24px;
   border-right: 1px solid var(--dark-300);
 
-  .sidebarHeader {
+  .sidebarBlock {
     display: flex;
     flex-direction: column;
-
-    row-gap: 24px;
-
     width: 100%;
+    height: 100%;
+    row-gap: 24px;
     padding-top: 72px;
   }
 
-  .sidebarMiddle {
-    width: 100%;
-    padding-top: 72px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 24px;
-  }
+
 
   .sidebarFooter {
     height: 100%;
     width: 100%;
-
     align-content: end;
-
     padding-bottom: 36px;
   }
 
+}
+.menu {
+  width: 360px;
+  height: 60px;
+  padding: 18px 48px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 18px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.sidebar, .menu {
   .icon {
     display: flex;
     column-gap: 12px;
