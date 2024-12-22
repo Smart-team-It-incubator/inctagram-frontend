@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
-import { IconsType, Variant } from './types'
 
 import styles from './sidebar.module.scss'
 
 import { MenuContent } from '../menuContent'
 import { MenuWrapper } from '../menuWrapper'
+import { IconsType, Variant } from './types'
 
 type SidebarProps = {
   disabledItems?: Array<Variant>
@@ -25,27 +25,29 @@ export const Sidebar = ({
   return (
     <MenuWrapper className={styles.sidebar}>
       <MenuContent
-        icons={icons}
         className={styles.sidebarBlock}
         disabledItems={disabledItems}
+        icons={icons}
         isText={isText}
       />
 
-     { iconsMiddle && <MenuContent
-        icons={iconsMiddle}
-        className={styles.sidebarBlock}
-        disabledItems={disabledItems}
-        isText={isText}
-      />}
+      {iconsMiddle && (
+        <MenuContent
+          className={styles.sidebarBlock}
+          disabledItems={disabledItems}
+          icons={iconsMiddle}
+          isText={isText}
+        />
+      )}
 
-{ iconsFooter && <MenuContent
-        icons={iconsFooter}
-        className={styles.sidebarFooter}
-        disabledItems={disabledItems}
-        isText={isText}
-      />}
+      {iconsFooter && (
+        <MenuContent
+          className={styles.sidebarFooter}
+          disabledItems={disabledItems}
+          icons={iconsFooter}
+          isText={isText}
+        />
+      )}
     </MenuWrapper>
   )
 }
-
-

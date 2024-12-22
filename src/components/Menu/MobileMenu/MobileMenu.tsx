@@ -1,21 +1,26 @@
 import { ComponentPropsWithoutRef } from 'react'
-import { iconsMobile } from '../data'
-import { MenuContent } from '../menuContent'
+
+import styles from '../Sidebar/sidebar.module.scss'
 
 import { IconsType, Variant } from '../Sidebar/types'
-import styles from '../Sidebar/sidebar.module.scss'
+import { iconsMobile } from '../data'
+import { MenuContent } from '../menuContent'
 import { MenuWrapper } from '../menuWrapper'
 
-
 type MenuProps = {
-  icons: Array<IconsType>,
   disabledItems?: Array<Variant>
+  icons: Array<IconsType>
 } & ComponentPropsWithoutRef<'div'>
 
-export const Menu = ({ icons, disabledItems = [], ...rest }: MenuProps) => {
+export const Menu = ({ disabledItems = [], icons, ...rest }: MenuProps) => {
   return (
-    <MenuWrapper >
-      <MenuContent icons={iconsMobile} isText={false} className={rest.className ? rest.className : styles.menu} disabledItems={disabledItems}/>
+    <MenuWrapper>
+      <MenuContent
+        className={rest.className ? rest.className : styles.menu}
+        disabledItems={disabledItems}
+        icons={iconsMobile}
+        isText={false}
+      />
     </MenuWrapper>
   )
 }
