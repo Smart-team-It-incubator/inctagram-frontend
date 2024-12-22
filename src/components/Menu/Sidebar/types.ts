@@ -1,5 +1,3 @@
-
-
 export const SVG_PATHS = {
   create: '/menu/plus-square.svg',
   createActicve: '/menu/plus-square-active.svg',

@@ -3,8 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { icons, iconsMobile } from '../data'
 import { Menu } from './MobileMenu'
 
-
-
 const meta: Meta<typeof Menu> = {
   argTypes: {
     disabledItems: {
@@ -25,13 +23,13 @@ type Story = StoryObj<typeof Menu>
 export const Default: Story = {
   args: {
     disabledItems: [],
-    icons: icons
-  }
+    icons: icons,
+  },
 }
 
 export const HomeDisabled: Story = {
   args: {
     disabledItems: ['home'],
     icons: iconsMobile,
-  }
+  },
 }

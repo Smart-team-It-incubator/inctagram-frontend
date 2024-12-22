@@ -1,7 +1,9 @@
 import { ComponentPropsWithoutRef } from 'react'
+
+import styles from './Sidebar/sidebar.module.scss'
+
 import { IconsType, Variant } from './Sidebar/types'
 import { Icon } from './icon'
-import styles from './Sidebar/sidebar.module.scss'
 
 type MenuContentProps = {
   disabledItems?: Array<Variant>
@@ -24,11 +26,11 @@ export const MenuContent = ({
           className={styles.icon}
           disabled={isDisabled}
           icon={i}
-          key={i.variant}
           isText={isText}
+          key={i.variant}
         />
       )
     })
-    
+
   return <div className={rest.className}>{renderIcons(icons)}</div>
 }

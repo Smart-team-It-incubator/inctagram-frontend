@@ -10,12 +10,12 @@ export const PaginationWrapper = () => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
-    console.log(`Current page: ${page}`)
+    // console.log(`Current page: ${page}`)
   }
 
   const handleRowsPerPageChange = (rowsPerPage: number) => {
     setRowsPerPage(rowsPerPage)
-    console.log(`Rows per page: ${rowsPerPage}`)
+    // console.log(`Rows per page: ${rowsPerPage}`)
   }
 
   return (
@@ -24,6 +24,7 @@ export const PaginationWrapper = () => {
         currentPage={currentPage}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleRowsPerPageChange}
+        rowsPerPage={rowsPerPage}
         rowsPerPageOptions={[5, 10, 15, 20]}
         totalPages={totalPages}
       />

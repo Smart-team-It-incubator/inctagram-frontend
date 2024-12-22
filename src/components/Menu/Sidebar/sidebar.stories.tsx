@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { icons, iconsFooter, iconsMiddle } from '../data'
 import { Sidebar } from './sidebar'
 
-
 const meta: Meta<typeof Sidebar> = {
   argTypes: {
     disabledItems: {

@@ -10,6 +10,7 @@ export type TablePaginationProps = {
   currentPage: number // Текущая страница
   onPageChange: (page: number) => void // Функция для изменения текущей страницы
   onRowsPerPageChange: (rowsPerPage: number) => void // Функция для изменения количества строк на странице
+  rowsPerPage?: number
   rowsPerPageOptions: number[] // Опции для выбора количества строк на странице
   totalPages: number // Общее количество страниц
 }
