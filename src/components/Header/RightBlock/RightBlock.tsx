@@ -19,7 +19,7 @@ export const RightBlock = ({ isAuth }: Props) => {
         {!isAuth && (
           <>
             <div className={styles.hideOnMobile}>
-              <Button variant="text">Log in</Button>
+              <Button variant="link">Log in</Button>
               <Button>Sign up</Button>
             </div>
             <span className={styles.ellipsis}>...</span>
