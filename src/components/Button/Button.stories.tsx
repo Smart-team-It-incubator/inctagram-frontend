@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { action } from '@storybook/addon-actions'
 
-import { Button } from '../Button/button'
+import { Button } from 'src/components/Button/Button'
 
 const meta = {
   component: Button,
@@ -47,7 +47,7 @@ export const LinkAsButton: Story = {
   args: {
     asChild: false,
     children: (
-      <a href={'https://www.google.com/'} target={'_blank'}>
+      <a href={'https://www.google.com/'} rel={'noreferrer'} target={'_blank'}>
         Go to Google
       </a>
     ),
