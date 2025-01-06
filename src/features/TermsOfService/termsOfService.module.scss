@@ -10,6 +10,12 @@
     color: var(--primary-100);
   }
 
+  &:active,
+  &:focus {
+    border: none;
+    outline: none;
+   }
+
   svg {
     color: currentColor;
     width: 14px;

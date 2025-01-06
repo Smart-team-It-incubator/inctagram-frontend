@@ -8,7 +8,6 @@ import styles from './termsOfService.module.scss'
 
 import { ArrowBack } from '../../../public/icons'
 
-
 export const TermsOfService = () => {
   const router = useRouter()
 
