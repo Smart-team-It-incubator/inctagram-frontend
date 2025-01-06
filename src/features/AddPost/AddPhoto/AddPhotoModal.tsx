@@ -1,4 +1,5 @@
 import { Button } from '@/components/Button'
+import { Icon } from '@/components/Menu/icon'
 
 import styles from './addPhotoModal.module.scss'
 
@@ -11,12 +12,21 @@ type PropsType = {
 export const AddPhotoModal = () => {
   return (
     <div className={styles.modal}>
-      <div className={styles.header}>Add Photo</div>
+      <div className={styles.header}>
+        <div>
+          <h1 className={styles.title}>Add Photo</h1>
+        </div>
+        <div className={styles.header_button}>
+          <Button variant={'withIcon'}>x</Button>
+        </div>
+      </div>
       <div className={styles.content}>
-        <div className={'dropbox'}>
+        <div className={styles.droparea}>
           <img alt={'upload'} src={IMG_URL} width={'222px'} />
         </div>
-        <Button variant={'primary'}>Select from Computer</Button>
+        <Button style={{ marginBottom: '24px' }} variant={'primary'}>
+          Select from Computer
+        </Button>
         <Button variant={'outline'}>Open Draft</Button>
       </div>
     </div>
