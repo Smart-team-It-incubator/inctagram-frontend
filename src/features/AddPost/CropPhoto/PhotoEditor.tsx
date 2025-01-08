@@ -1,23 +1,42 @@
 'use client'
 
-import ReactCrop, { type Crop } from 'react-image-crop'
-import { useState } from 'react'
+import ReactCrop, { centerCrop, makeAspectCrop, PixelCrop, type Crop } from 'react-image-crop'
+import { useRef, useState } from 'react'
 import 'react-image-crop/src/ReactCrop.scss'
 
-type Props = {
- 
+type Props = {}
+
+function centerAspectCrop(mediaWidth: number, mediaHeight: number, aspect: number) {
+  return centerCrop(
+    makeAspectCrop(
+      {
+        unit: '%',
+        width: 90,
+      },
+      aspect,
+      mediaWidth,
+      mediaHeight
+    ),
+    mediaWidth,
+    mediaHeight
+  )
 }
+
 export const PhotoEditor = ({}: Props) => {
+  const imgRef = useRef<HTMLImageElement>(null)
   const [photos, setPhotos] = useState<string[]>([])
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null)
   const [scale, setScale] = useState(1)
-  const [aspect, setAspect] = useState<number>(16 / 9)
+  const [aspect, setAspect] = useState<number | undefined>(undefined)
+  const [rotate, setRotate] = useState(0)
+  const [completedCrop, setCompletedCrop] = useState<PixelCrop>()
+  const [apply, setApply] = useState<boolean>(false)
   const [crop, setCrop] = useState<Crop>({
     unit: '%', // Can be 'px' or '%'
     x: 25,
     y: 25,
     width: 50,
-    height: 50
+    height: 50,
   })
 
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,23 +64,43 @@ export const PhotoEditor = ({}: Props) => {
     })
   }
 
- const changeAspect = () => {
-setAspect(aspect => aspect + 1)
-setCrop(crop)
- }
+  const handleAspectChange = (aspect: number | undefined) => {
+    // setAspect(4/5)
+    // console.log(imgRef)
+    // const { naturalWidth: width, naturalHeight: height } = imgRef.current?.naturalHeight
+    let height = Number(imgRef.current?.naturalHeight)
+    let width = Number(imgRef.current?.naturalWidth)
+
+    if (aspect) {
+      setCrop(centerAspectCrop(width, height, aspect))
+    } else {
+      setAspect(aspect)
+    }
+
+    console.log(crop)
+  }
+
+  function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
+    if (aspect) {
+      const { width, height } = e.currentTarget
+      setCrop(centerAspectCrop(width, height, aspect))
+    }
+  }
+
+  const applyCropImg = () => {
+    setApply(true)
+  }
+
   return (
     <>
-     <input
+      <input
         type="file"
         accept="image/*"
         multiple
         onChange={handlePhotoUpload}
-        style={{ marginBottom: "20px" }}
-       
+        style={{ marginBottom: '20px' }}
       />
 
-      <button onClick={changeAspect}>changeAspect</button>
-      <div>{aspect}</div>
       {/* Галерея фотографий */}
       <div style={styles.gallery}>
         {photos.map((photo, index) => (
@@ -78,13 +117,51 @@ setCrop(crop)
         ))}
       </div>
 
+      {/* Изменение масштаба */}
+      <h3>Изменение масштаба</h3>
+      <button onClick={() => handleAspectChange(1)}>1:1</button>
+      <button onClick={() => handleAspectChange(4 / 5)}>4:5</button>
+      <button onClick={() => handleAspectChange(16 / 9)}>16:9</button>
+      <button onClick={applyCropImg}>V</button>
+
+      {/* Обрезка изображения */}
       {selectedPhotoIndex !== null && (
-        <ReactCrop crop={crop} onChange={c => setCrop(c)} aspect={aspect}>
-          <img src={photos[selectedPhotoIndex]} 
-        //   style={{ transform: `scale(${scale}) rotate(${rotate}deg)`}} 
-        style={{ transform: `scale(${scale})`}}
-          />
-        </ReactCrop>
+        <>
+          <ReactCrop crop={crop} aspect={aspect}
+            onChange={(_, percentCrop) => setCrop(percentCrop)}
+            onComplete={(c) => setCompletedCrop(c)}
+            locked>
+            {/* <img
+            src={photos[selectedPhotoIndex]}
+            //   style={{ transform: `scale(${scale}) rotate(${rotate}deg)`}}
+            style={{ transform: `scale(${scale})` }}
+          /> */}
+
+            <img
+              ref={imgRef}
+              alt="Crop me"
+              src={photos[selectedPhotoIndex]}
+              style={{
+                transform: `scale(${scale}) rotate(${rotate}deg)`,
+              }}
+              onLoad={onImageLoad}
+            />
+          </ReactCrop>
+
+          { (!!completedCrop &&apply) && (
+            <img
+            //   ref={imgRef}
+              alt="Crop me"
+              src={photos[selectedPhotoIndex]}
+              style={{
+                transform: `scale(${scale}) rotate(${rotate}deg)`,
+                width: completedCrop.width,
+                height: completedCrop.height,
+              }}
+              onLoad={onImageLoad}
+            />
+          )}
+        </>
       )}
     </>
   )
@@ -96,7 +173,7 @@ const styles = {
     flexWrap: 'wrap',
     gap: '10px',
     marginBottom: '20px',
-    width: '50%'
+    width: '50%',
   } as React.CSSProperties,
   thumbnail: {
     width: '100px',
