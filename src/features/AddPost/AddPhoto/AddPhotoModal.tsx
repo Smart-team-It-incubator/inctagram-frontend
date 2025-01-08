@@ -11,7 +11,7 @@ type PropsType = {
 }
 export const AddPhotoModal = () => {
   return (
-    <div className={styles.modal}>
+    < >
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Add Photo</h1>
@@ -29,6 +29,6 @@ export const AddPhotoModal = () => {
         </Button>
         <Button variant={'outline'}>Open Draft</Button>
       </div>
-    </div>
+    </>
   )
 }
