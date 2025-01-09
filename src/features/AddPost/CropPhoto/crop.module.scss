@@ -1,7 +1,4 @@
 .cropArea {
-
- 
-
   // display: flex; /* Для центрирования, если нужно */
   // justify-content: center;
   // align-items: center;
@@ -14,3 +11,16 @@
   }
 }
 
+.controls {
+  position: absolute;
+  bottom: 11px;
+  width: 100%;
+  // border: 1px solid white;
+  color: black;
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 11px;
+  }
+}
