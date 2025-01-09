@@ -1,7 +1,13 @@
+'use client'
 import { Button } from '@/components/Button'
 import { Icon } from '@/components/Menu/icon'
 
 import styles from './addPhotoModal.module.scss'
+import { Crop } from '../CropPhoto/Crop'
+import { UploadPhoto } from './UploadPhoto'
+import { useState } from 'react'
+import { v1 } from 'uuid'
+import { openUploadFileWindow } from './openUploadFileWindow'
 
 const IMG_URL =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/768px-Antu_insert-image.svg.png'
@@ -9,9 +15,31 @@ const IMG_URL =
 type PropsType = {
   title: string
 }
+
+type Image = {
+  id: string
+  imageUrl: string | null
+  croppedImageUrl: string | null
+}
+
+type Images = Image[]
+
 export const AddPhotoModal = () => {
+  const [images, setImages] = useState<Image[] | null>(null)
+
+  const uploadPhoto = async () => {
+    // Вынести загрузку в отдельный хук
+    const imageUrl = await openUploadFileWindow()
+    if (imageUrl) {
+      const newImage: Image = { id: v1(), imageUrl: imageUrl , croppedImageUrl: null }
+      const newImages = images ? [...images, newImage] : [newImage]
+      setImages(newImages)
+
+    }
+  }
+
   return (
-    < >
+    <>
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Add Photo</h1>
@@ -20,15 +48,9 @@ export const AddPhotoModal = () => {
           <Button variant={'withIcon'}>x</Button>
         </div>
       </div>
-      <div className={styles.content}>
-        <div className={styles.droparea}>
-          <img alt={'upload'} src={IMG_URL} width={'222px'} />
-        </div>
-        <Button style={{ marginBottom: '24px' }} variant={'primary'}>
-          Select from Computer
-        </Button>
-        <Button variant={'outline'}>Open Draft</Button>
-      </div>
+
+      <UploadPhoto uploadPhoto={uploadPhoto} />
+
     </>
   )
 }
