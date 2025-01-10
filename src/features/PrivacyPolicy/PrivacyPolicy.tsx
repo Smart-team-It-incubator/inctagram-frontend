@@ -1,12 +1,12 @@
 'use client'
 
-import styles from './termsOfService.module.scss'
+import styles from './privacyPolicy.module.scss'
 
-export const TermsOfService = () => {
+export const PrivacyPolicy = () => {
   return (
     <>
       <div className={styles.textContainer}>
-        <h1 className={styles.title}>Terms of service</h1>
+        <h1 className={styles.title}>Privacy Policy</h1>
         <p className={styles.text}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet
