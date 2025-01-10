@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 1px solid var(--dark-300);
+  background-color: var(--dark-500);
+  border-radius: 2px;
+}
+
+.title {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xm);
+  line-height: var(--line-height-xl);
+  text-align: center;
+  color: var(--light-100);
+}
+
+.iconsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
