@@ -2,6 +2,7 @@
 import { Button } from '@/components/Button'
 import styles from './addPhotoModal.module.scss'
 
+
 const IMG_URL =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/768px-Antu_insert-image.svg.png'
 
