@@ -5,15 +5,16 @@ import { EyeIcon, SearchIcon } from '../../../public/icons'
 import styles from './CustomInput.module.scss'
 
 type inputTypes = 'text' | 'password' | 'email'
-
-interface Props {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   title?: string
   textPlaceholder?: string
-  onChange: (value: string) => void
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
   disabled?: boolean
   type?: inputTypes
   icon?: 'search' | 'eye' | ''
   errorMessage?: string
+  autoComplete?: string;
+  className?:string
 }
 
 export const CustomInput = ({
@@ -24,6 +25,7 @@ export const CustomInput = ({
   type = 'text',
   icon = '',
   errorMessage,
+                              autoComplete,className,
   ...rest
 }: Props) => {
   const [active, setActive] = useState(false)
@@ -49,8 +51,9 @@ export const CustomInput = ({
     if (error) {
       setError(undefined)
     }
-    onChange(e.currentTarget.value)
-  }
+    if (onChange){
+      onChange(e)
+  }}
 
   const showPassword = () => {
     customType === 'password' ? setCustomType('text') : setCustomType('password')
@@ -91,11 +94,12 @@ export const CustomInput = ({
           </div>
         )}
         <input
-          onChange={e => onChangeHandle(e)}
+          onChange={onChangeHandle}
           placeholder={textPlaceholder}
           type={customType}
-          className={`${styles.input} ${disabled ? styles.disabled : ''}`}
+          className={`${styles.input} ${disabled ? styles.disabled : ''} ${className}`}
           ref={childInputRef}
+          autoComplete={autoComplete}
           {...rest}
           tabIndex={-1}
         />

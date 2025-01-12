@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 
 import styles from './layout.module.scss'
 
-import { ArrowBack } from '../../../../public/icons/ArrowBack'
+import { ArrowBack } from '../../../../../public/icons/ArrowBack'
 
 export default function AuthGroupLayout({
   children,
