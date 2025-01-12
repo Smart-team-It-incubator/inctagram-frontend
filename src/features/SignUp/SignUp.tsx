@@ -39,25 +39,21 @@ export const SignUp = () => {
           textPlaceholder={'Epam11'}
           title={'Username'}
           type={'text'}
-          {...register('username', { maxLength: 30, minLength: 6, required: true })}
+          {...register('username', {required: true })}
         />
         <CustomInput
           autoComplete={'new-password'}
           textPlaceholder={'Epam@epam.com'}
           title={'Email'}
           type={'text'}
-          {...register('email', { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, required: true })}
+          {...register('email', { required: true })}
         />
         <CustomInput
           autoComplete={'new-password'}
           textPlaceholder={'******************'}
           title={'Password'}
           type={'password'}
-          {...register('password', {
-            pattern:
-              /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).{8,}$/,
-            required: true,
-          })}
+          {...register('password', {  required: true })}
         />
         <CustomInput
           autoComplete={'new-password'}
@@ -65,8 +61,6 @@ export const SignUp = () => {
           title={'Password confirmation'}
           type={'password'}
           {...register('passwordConfirmation', {
-            pattern:
-              /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).{8,}$/,
             required: true,
           })}
         />
@@ -88,12 +82,3 @@ export const SignUp = () => {
     </div>
   )
 }
-
-// interface Props extends React.InputHTMLAttributes<HTMLInputElement>
-// onChange?: (event: ChangeEvent<HTMLInputElement>) => void
-/*
-if (onChange) {
-    onChange(e)
-}*/
-
-/*onChange={onChangeHandle}*/
