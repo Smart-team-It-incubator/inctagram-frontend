@@ -13,7 +13,7 @@
     "test:watch": "jest --watch",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "generate-icons" : "npx @svgr/cli --out-dir src/components/icons  --jsx-runtime automatic --typescript --ref --memo --replace-attr-values '#000=currentColor' -- public/add-post"
+    "generate-icons" : "npx @svgr/cli --out-dir src/components/icons  --jsx-runtime automatic --typescript --ref --memo --replace-attr-values '#000=currentColor' --replace-attr-values '#fff=currentColor' -- public/add-post"
   },
   "dependencies": {
     "@fontsource/inter": "^5.1.0",

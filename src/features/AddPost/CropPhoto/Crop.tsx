@@ -4,7 +4,7 @@ import Cropper, { Area, Point } from 'react-easy-crop'
 import styles from './crop.module.scss'
 import { type ImageType } from '../AddPhoto/AddPhotoModal'
 
-import { Expand, Image, Maximize } from '@/components/icons'
+import { Expand, Image, Maximize, PlusCircleOutline } from '@/components/icons'
 
 const URL =
   'https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
@@ -20,7 +20,7 @@ export const Crop = ({ images }: Props) => {
     setCrop(crop)
   }
 
-  const imgClick = () => {
+  const openImageList = () => {
     setSelectedImage(0)
   }
 
@@ -28,7 +28,6 @@ export const Crop = ({ images }: Props) => {
     <>
       <div
         className={styles.cropContainer}
-        onClick={imgClick}
         style={{ position: 'relative', width: '100%', height: '100%' }}
       >
         <Cropper image={URL} zoom={1} crop={crop} aspect={4 / 3} onCropChange={cropChange} />
@@ -41,16 +40,39 @@ export const Crop = ({ images }: Props) => {
               </div>
 
               <div className={styles.iconContainer}>
-                <Maximize  width={24} height={24} className={styles.icon} />
+                <Maximize width={24} height={24} className={styles.icon} />
               </div>
             </div>
 
+            <ImageListTooltip images={images} />
             <div className={styles.iconContainer}>
-              <Image width={24} height={24} className={styles.icon} />
+              <Image width={24} height={24} className={styles.icon} onClick={openImageList} />
             </div>
           </div>
         </div>
       </div>
     </>
+  )
+}
+
+const ImageListTooltip = ({ images }: Props) => {
+  return (
+    <div className={styles.imagesTooltip}>
+      <div className={styles.imageList}>
+        {images?.map(image => {
+          return (
+            <div>
+              <img
+                src={image.croppedImageUrl ? image.croppedImageUrl : image.imageUrl}
+                alt="image"
+              />
+            </div>
+          )
+        })}
+      </div>
+      <div className={styles.tooltipControls}>
+        <PlusCircleOutline />
+      </div>
+    </div>
   )
 }

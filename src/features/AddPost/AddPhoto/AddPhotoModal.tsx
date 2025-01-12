@@ -41,8 +41,7 @@ export const AddPhotoModal = () => {
   }
 
   return (
-    <>   
-    
+    <>
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Add Photo</h1>
