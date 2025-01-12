@@ -8,6 +8,7 @@ import { UploadPhoto } from './UploadPhoto'
 import { useState } from 'react'
 import { v1 } from 'uuid'
 import { openUploadFileWindow } from './openUploadFileWindow'
+import { Maximize } from '@/components/icons'
 
 const IMG_URL =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/768px-Antu_insert-image.svg.png'
@@ -16,23 +17,23 @@ type PropsType = {
   title: string
 }
 
-export type Image = {
+export type ImageType = {
   id: string
   imageUrl: string
   croppedImageUrl: string | null
 }
 
-export type Images = Image[]
+export type Images = ImageType[]
 
 export const AddPhotoModal = () => {
-  const [images, setImages] = useState<Image[]>([])
+  const [images, setImages] = useState<ImageType[]>([])
   const [showCropForm, setShowCropForm] = useState<boolean>(false)
 
   const uploadPhoto = async () => {
     // Вынести загрузку в отдельный хук
     const imageUrl = await openUploadFileWindow()
     if (imageUrl) {
-      const newImage: Image = { id: v1(), imageUrl: imageUrl, croppedImageUrl: null }
+      const newImage: ImageType = { id: v1(), imageUrl: imageUrl, croppedImageUrl: null }
       const newImages = images ? [...images, newImage] : [newImage]
       setImages(newImages)
       setShowCropForm(true)
@@ -40,7 +41,8 @@ export const AddPhotoModal = () => {
   }
 
   return (
-    <>
+    <>   
+    
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Add Photo</h1>
