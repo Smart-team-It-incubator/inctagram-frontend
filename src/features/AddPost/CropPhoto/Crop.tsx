@@ -5,7 +5,6 @@ import styles from './crop.module.scss'
 import { Image } from '../AddPhoto/AddPhotoModal'
 import { ImageButton } from './ImageButton'
 
-
 const URL =
   'https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
 
@@ -37,10 +36,8 @@ export const Crop = ({ images }: Props) => {
             <button>1</button>
             <button>2</button>
           </div>
-         <ImageButton />
-          
-        </ div>
-       
+          <ImageButton />
+        </div>
       </div>
     </div>
   )

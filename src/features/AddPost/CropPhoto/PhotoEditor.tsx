@@ -127,10 +127,13 @@ export const PhotoEditor = ({}: Props) => {
       {/* Обрезка изображения */}
       {selectedPhotoIndex !== null && (
         <>
-          <ReactCrop crop={crop} aspect={aspect}
+          <ReactCrop
+            crop={crop}
+            aspect={aspect}
             onChange={(_, percentCrop) => setCrop(percentCrop)}
-            onComplete={(c) => setCompletedCrop(c)}
-            locked>
+            onComplete={c => setCompletedCrop(c)}
+            locked
+          >
             {/* <img
             src={photos[selectedPhotoIndex]}
             //   style={{ transform: `scale(${scale}) rotate(${rotate}deg)`}}
@@ -148,9 +151,9 @@ export const PhotoEditor = ({}: Props) => {
             />
           </ReactCrop>
 
-          { (!!completedCrop &&apply) && (
+          {!!completedCrop && apply && (
             <img
-            //   ref={imgRef}
+              //   ref={imgRef}
               alt="Crop me"
               src={photos[selectedPhotoIndex]}
               style={{

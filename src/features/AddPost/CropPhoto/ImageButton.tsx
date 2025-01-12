@@ -1,5 +1,3 @@
 export const ImageButton = () => {
-    return (
-        <div></div>
-    )
+  return <div></div>
 }

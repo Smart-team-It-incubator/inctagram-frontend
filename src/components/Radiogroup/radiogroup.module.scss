@@ -38,7 +38,7 @@
     border-color: var(--dark-100);
   }
   &:focus {
-    &::before{
+    &::before {
       position: absolute;
       display: block;
       content: '';
@@ -62,7 +62,7 @@
   height: 100%;
   position: relative;
   &::after {
-    content: "";
+    content: '';
     display: block;
     width: 10px;
     height: 10px;

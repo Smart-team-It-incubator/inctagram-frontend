@@ -18,7 +18,7 @@ type PropsType = {
 
 export type Image = {
   id: string
-  imageUrl: string 
+  imageUrl: string
   croppedImageUrl: string | null
 }
 
@@ -27,17 +27,15 @@ export type Images = Image[]
 export const AddPhotoModal = () => {
   const [images, setImages] = useState<Image[]>([])
   const [showCropForm, setShowCropForm] = useState<boolean>(false)
-  
 
   const uploadPhoto = async () => {
     // Вынести загрузку в отдельный хук
     const imageUrl = await openUploadFileWindow()
     if (imageUrl) {
-      const newImage: Image = { id: v1(), imageUrl: imageUrl , croppedImageUrl: null }
+      const newImage: Image = { id: v1(), imageUrl: imageUrl, croppedImageUrl: null }
       const newImages = images ? [...images, newImage] : [newImage]
       setImages(newImages)
       setShowCropForm(true)
-
     }
   }
 
@@ -52,8 +50,7 @@ export const AddPhotoModal = () => {
         </div>
       </div>
 
-      {showCropForm ? <Crop images={images}/>: <UploadPhoto uploadPhoto={uploadPhoto} />}
-
+      {showCropForm ? <Crop images={images} /> : <UploadPhoto uploadPhoto={uploadPhoto} />}
     </>
   )
 }
