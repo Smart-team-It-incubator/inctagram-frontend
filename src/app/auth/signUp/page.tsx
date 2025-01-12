@@ -8,3 +8,5 @@ export default function Auth() {
     </Container>
   )
 }
+
+// /auth/signUp/

@@ -19,7 +19,7 @@ export default function AuthGroupLayout({
 
   return (
     <Container style={{ padding: '24px 2px' }}>
-      <Button className={styles.button} onClick={() => router.push('/auth')} variant={'withIcon'}>
+      <Button className={styles.button} onClick={() => router.push('/auth/signUp')} variant={'withIcon'}>
         <ArrowBack className={styles.iconArrow} />
         <div className={styles.text}>Back to Sign Up</div>
       </Button>
