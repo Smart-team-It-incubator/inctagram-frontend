@@ -25,22 +25,32 @@ export const Crop = ({ images }: Props) => {
   }
 
   return (
-    <div
-      className={styles.cropArea}
-      onClick={imgClick}
-      style={{ height: '222px', width: '100%', position: 'relative' }}
-    >
-      <Cropper image={URL} zoom={1} crop={crop} aspect={4 / 3} onCropChange={cropChange} />
-      <div className={styles.controls}>
-        <div className={styles.buttons}>
-          <div>
-            <Expand width={28} height={28} className={styles.icon} />
-            <Maximize width={28} height={28} className={styles.icon} />
-          </div>
+    <>
+      <div
+        className={styles.cropContainer}
+        onClick={imgClick}
+        style={{ position: 'relative', width: '100%', height: '100%' }}
+      >
+        <Cropper image={URL} zoom={1} crop={crop} aspect={4 / 3} onCropChange={cropChange} />
 
-          <Image width={28} height={28} className={styles.icon} />
+        <div className={styles.controls}>
+          <div className={styles.buttons}>
+            <div className={styles.buttonsLeft}>
+              <div className={styles.iconContainer}>
+                <Expand width={24} height={24} className={styles.icon} />
+              </div>
+
+              <div className={styles.iconContainer}>
+                <Maximize  width={24} height={24} className={styles.icon} />
+              </div>
+            </div>
+
+            <div className={styles.iconContainer}>
+              <Image width={24} height={24} className={styles.icon} />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
