@@ -39,7 +39,7 @@ export const SignUp = () => {
           textPlaceholder={'Epam11'}
           title={'Username'}
           type={'text'}
-          {...register('username', {required: true })}
+          {...register('username', { required: true })}
         />
         <CustomInput
           autoComplete={'new-password'}
@@ -53,7 +53,7 @@ export const SignUp = () => {
           textPlaceholder={'******************'}
           title={'Password'}
           type={'password'}
-          {...register('password', {  required: true })}
+          {...register('password', { required: true })}
         />
         <CustomInput
           autoComplete={'new-password'}
