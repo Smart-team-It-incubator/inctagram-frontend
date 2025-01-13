@@ -1,6 +1,5 @@
 import { Container } from '@/components/shared/Container'
-
-import { SignUp } from '../../features/SignUp/index'
+import { SignUp } from '@/features/SignUp'
 
 export default function Auth() {
   return (
@@ -9,3 +8,5 @@ export default function Auth() {
     </Container>
   )
 }
+
+// /auth/signUp/
