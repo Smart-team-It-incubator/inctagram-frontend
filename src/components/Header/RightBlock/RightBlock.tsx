@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Button } from '@/components/Button'
-import { CustomAccordion } from './CustomAccordion/CustomAccordion'
+import { CustomAccordion } from './CustomAccordion'
 
 import styles from './RightBlock.module.scss'
 
