@@ -23,7 +23,7 @@ export const SignIn = () => {
     register,
     formState: { errors },
   } = useForm<FormValue>()
-  // крч я набросал вход в акк  с обработкой ошибок и тд  и запушил  в dev
+
   const onSubmit: SubmitHandler<FormValue> = async data => {
     try {
       const response = await fetch('/api/v1/auth/login', {
