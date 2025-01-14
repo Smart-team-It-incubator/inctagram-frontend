@@ -2,10 +2,10 @@
 
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useController } from 'react-hook-form'
 
 import { Button } from '@/components/Button'
-import { CustomInput } from '@/components/CustomInput'
+import { FormInput } from '@/components/FormInput/FormInput'
+import { validationRules } from '@/features/SignUp/validationRules'
 import { useRouter } from 'next/navigation'
 
 import styles from './signUp.module.scss'
@@ -23,16 +23,19 @@ type FormValue = {
 export const SignUp = () => {
   const {
     control,
-    formState: { errors },
+    formState: { errors, isValid },
+    getValues,
     handleSubmit,
-    register,
     trigger,
-  } = useForm<FormValue>()
+  } = useForm<FormValue>({ mode: 'onChange' })
 
-  console.log('errors:', errors)
-  const onSubmit: SubmitHandler<FormValue> = data => console.log(data)
+  const onSubmit: SubmitHandler<FormValue> = data => {
+    if (getValues('password') === getValues('passwordConfirmation')) {
+      // пойдет запрос на сервер
+    }
+    console.log(data)
+  }
   const router = useRouter()
-  
 
   return (
     <div className={styles.container}>
@@ -43,88 +46,56 @@ export const SignUp = () => {
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <CustomInput
-          autoComplete={'new-password'}
+        <FormInput
           className={styles.field}
+          control={control}
           errorMessage={errors?.username?.message}
-          onBlur={() => trigger('username')}
+          name={'username'}
+          rules={validationRules.username}
           textPlaceholder={'Epam11'}
           title={'Username'}
+          trigger={trigger}
           type={'text'}
-          {...register('username', {
-            maxLength: {
-              message: 'Maximum number of characters 30',
-              value: 30,
-            },
-            minLength: {
-              message: 'Minimum number of characters 6',
-              value: 6,
-            },
-            required: {
-              message: 'This field is required',
-              value: true,
-            },
-          })}
         />
-        <CustomInput
-          autoComplete={'new-password'}
+        <FormInput
+          className={styles.field}
+          control={control}
           errorMessage={errors?.email?.message}
-          textPlaceholder={'Epam@epam.com'}
+          name={'email'}
+          rules={validationRules.email}
+          textPlaceholder={'Epam11'}
           title={'Email'}
+          trigger={trigger}
           type={'text'}
-          {...register('email', {
-            pattern: { message: 'The email must match the format example@example.com', value: /@/ },
-            required: {
-              message: 'This field is required',
-              value: true,
-            },
-          })}
         />
-        <CustomInput
-          autoComplete={'new-password'}
+        <FormInput
+          className={styles.field}
+          control={control}
           errorMessage={errors?.password?.message}
+          icon={'eye'}
+          name={'password'}
+          rules={validationRules.password}
           textPlaceholder={'******************'}
           title={'Password'}
+          trigger={trigger}
           type={'password'}
-          {...register('password', {
-            minLength: {
-              message: 'Minimum number of characters 6',
-              value: 6,
-            },
-            pattern: {
-              message: 'error',
-              value: /^[0-9A-Za-z!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]+$/,
-            },
-            required: {
-              message: 'This field is required',
-              value: true,
-            },
-          })}
         />
-        <CustomInput
-          autoComplete={'new-password'}
+        <FormInput
+          className={styles.field}
+          control={control}
           errorMessage={errors?.passwordConfirmation?.message}
+          icon={'eye'}
+          name={'passwordConfirmation'}
           textPlaceholder={'******************'}
           title={'Password confirmation'}
+          trigger={trigger}
           type={'password'}
-          {...register('passwordConfirmation', {
-            minLength: {
-              message: 'Minimum number of characters 6',
-              value: 6,
-            },
-            pattern: {
-              message: 'error',
-              value: /^[0-9A-Za-z!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]+$/,
-            },
-            required: {
-              message: 'This field is required',
-              value: true,
-            },
-          })}
         />
+
         {/*Checkbox*/}
         <Button
           className={styles.signUpButton}
+          disabled={!isValid}
           onClick={handleSubmit(onSubmit)}
           type={'submit'}
           variant={'primary'}
@@ -140,3 +111,5 @@ export const SignUp = () => {
     </div>
   )
 }
+
+// sI6ltOjVpKOz

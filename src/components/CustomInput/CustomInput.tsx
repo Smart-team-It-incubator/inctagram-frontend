@@ -1,11 +1,11 @@
 'use client'
 
-import React, { ChangeEvent, FocusEvent, useState, useRef } from 'react'
+import React, {ChangeEvent, FocusEvent, useState, useRef, useEffect} from 'react'
 import { EyeIcon, SearchIcon } from '../../../public/icons'
 import styles from './CustomInput.module.scss'
 import Image from 'next/image'
 
-type inputTypes = 'text' | 'password' | 'email'
+export type inputTypes = 'text' | 'password' | 'email'
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   title?: string
   textPlaceholder?: string
@@ -25,7 +25,7 @@ export const CustomInput = ({
   disabled = false,
   type = 'text',
   icon = '',
-  errorMessage,
+  errorMessage= '',
   autoComplete,
   className,
   ...rest
@@ -33,7 +33,11 @@ export const CustomInput = ({
   const [active, setActive] = useState(false)
   const [customType, setCustomType] = useState(type)
   const [focus, setFocus] = useState(false)
-  const [error, setError] = useState(errorMessage)
+  const [error, setError] = useState(errorMessage || '');
+
+  useEffect(() => {
+    setError(errorMessage || '')
+  }, [errorMessage])
 
   const activateInput = () => {
     setActive(true)
