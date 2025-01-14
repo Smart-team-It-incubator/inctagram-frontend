@@ -3,6 +3,7 @@
 import React, { ChangeEvent, FocusEvent, useState, useRef } from 'react'
 import { EyeIcon, SearchIcon } from '../../../public/icons'
 import styles from './CustomInput.module.scss'
+import Image from 'next/image'
 
 type inputTypes = 'text' | 'password' | 'email'
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -13,8 +14,8 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: inputTypes
   icon?: 'search' | 'eye' | ''
   errorMessage?: string
-  autoComplete?: string;
-  className?:string
+  autoComplete?: string
+  className?: string
 }
 
 export const CustomInput = ({
@@ -25,7 +26,8 @@ export const CustomInput = ({
   type = 'text',
   icon = '',
   errorMessage,
-                              autoComplete,className,
+  autoComplete,
+  className,
   ...rest
 }: Props) => {
   const [active, setActive] = useState(false)
@@ -51,9 +53,10 @@ export const CustomInput = ({
     if (error) {
       setError(undefined)
     }
-    if (onChange){
+    if (onChange) {
       onChange(e)
-  }}
+    }
+  }
 
   const showPassword = () => {
     customType === 'password' ? setCustomType('text') : setCustomType('password')
@@ -105,7 +108,11 @@ export const CustomInput = ({
         />
         {icon === 'eye' && (
           <div className={styles.eye} onClick={showPassword}>
-            <EyeIcon fillColor={disabled ? '#4C4C4C' : ''} />
+            {customType === 'password' ? (
+              <Image src={'/eye-off.svg'} width={24} height={24} alt={'yey'} />
+            ) : (
+              <EyeIcon fillColor={disabled ? '#4C4C4C' : ''} />
+            )}
           </div>
         )}
       </label>

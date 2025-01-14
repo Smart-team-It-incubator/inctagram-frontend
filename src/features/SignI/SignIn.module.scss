@@ -28,14 +28,26 @@
   margin-bottom: 24px;
 }
 
-.field {
+.signInButton {
   width: 100%;
 }
 
 .text {
   margin: 0 auto;
 }
+.inputWrap {
+  position: relative;
+}
 
-.signUpButton {
-  width: 100%;
+.icon {
+  position: absolute;
+  top: 45%;
+  right: 5%;
+  cursor: pointer;
+}
+
+.error {
+  font-size: 14px;
+  color: var(--danger-500);
+  margin-top: -20px;
 }
