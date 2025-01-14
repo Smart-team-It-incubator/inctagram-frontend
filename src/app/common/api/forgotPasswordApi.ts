@@ -1,8 +1,8 @@
-import { instance } from '../instance'
+import { instance } from '../instance/instance'
 
 export const forgotPasswordApi = {
-  sendingMail(email: { email: string }) {
-    return instance.post('/api/v1/auth/password-reset/request', email)
+  sendingMail(email: string) {
+    return instance.post('/api/v1/auth/password-reset/request', { email: email })
   },
 }
 

@@ -8,6 +8,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import s from './ForgotPassword.module.scss'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { forgotPasswordApi } from '@/app/common/api/forgotPasswordApi'
+import { FormEvent } from 'react'
 
 export const ForgotPassword = () => {
   const [textInput, setTextInput] = useState<string>('')
@@ -62,15 +63,16 @@ export const ForgotPassword = () => {
     }
   }, [])
 
-  const sendMail = () => {
-    forgotPasswordApi.sendingMail({ email: textInput })
+  const sendMail = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    forgotPasswordApi.sendingMail(textInput)
   }
 
   return (
     <div className={s.ground}>
       <div className={s.wrapper}>
         <h2 className={s.title}>Forgot Password</h2>
-        <form onSubmit={sendMail}>
+        <form onSubmit={e => sendMail(e)}>
           <CustomInput
             onChange={handleInputChange}
             title="Email"
