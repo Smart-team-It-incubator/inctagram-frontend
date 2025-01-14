@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useController } from 'react-hook-form'
 
 import { Button } from '@/components/Button'
 import { CustomInput } from '@/components/CustomInput'
@@ -11,7 +12,6 @@ import styles from './signUp.module.scss'
 
 import { GithubIcon } from '../../../public/icons/GithubIcon'
 import { GoogleIcon } from '../../../public/icons/GoogleIcon'
-import { useController } from 'react-hook-form'
 
 type FormValue = {
   email: string
@@ -22,21 +22,17 @@ type FormValue = {
 
 export const SignUp = () => {
   const {
+    control,
+    formState: { errors },
     handleSubmit,
     register,
-    formState: { errors },
     trigger,
-    control,
   } = useForm<FormValue>()
+
   console.log('errors:', errors)
   const onSubmit: SubmitHandler<FormValue> = data => console.log(data)
   const router = useRouter()
-
-  const { field, fieldState } = useController({
-    name,
-    control,
-    rules: options,
-  })
+  
 
   return (
     <div className={styles.container}>
@@ -50,79 +46,79 @@ export const SignUp = () => {
         <CustomInput
           autoComplete={'new-password'}
           className={styles.field}
+          errorMessage={errors?.username?.message}
+          onBlur={() => trigger('username')}
           textPlaceholder={'Epam11'}
           title={'Username'}
           type={'text'}
-          onBlur={() => trigger('username')}
-          errorMessage={errors?.username?.message}
           {...register('username', {
-            required: {
-              value: true,
-              message: 'This field is required',
-            },
             maxLength: {
-              value: 30,
               message: 'Maximum number of characters 30',
+              value: 30,
             },
             minLength: {
-              value: 6,
               message: 'Minimum number of characters 6',
+              value: 6,
+            },
+            required: {
+              message: 'This field is required',
+              value: true,
             },
           })}
         />
         <CustomInput
           autoComplete={'new-password'}
+          errorMessage={errors?.email?.message}
           textPlaceholder={'Epam@epam.com'}
           title={'Email'}
           type={'text'}
-          errorMessage={errors?.email?.message}
           {...register('email', {
+            pattern: { message: 'The email must match the format example@example.com', value: /@/ },
             required: {
-              value: true,
               message: 'This field is required',
+              value: true,
             },
-            pattern: { value: /@/, message: 'The email must match the format example@example.com' },
           })}
         />
         <CustomInput
           autoComplete={'new-password'}
+          errorMessage={errors?.password?.message}
           textPlaceholder={'******************'}
           title={'Password'}
           type={'password'}
-          errorMessage={errors?.password?.message}
           {...register('password', {
-            required: {
-              value: true,
-              message: 'This field is required',
+            minLength: {
+              message: 'Minimum number of characters 6',
+              value: 6,
             },
             pattern: {
-              value: /^[0-9A-Za-z!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]+$/,
               message: 'error',
+              value: /^[0-9A-Za-z!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]+$/,
             },
-            minLength: {
-              value: 6,
-              message: 'Minimum number of characters 6',
+            required: {
+              message: 'This field is required',
+              value: true,
             },
           })}
         />
         <CustomInput
           autoComplete={'new-password'}
+          errorMessage={errors?.passwordConfirmation?.message}
           textPlaceholder={'******************'}
           title={'Password confirmation'}
           type={'password'}
-          errorMessage={errors?.passwordConfirmation?.message}
           {...register('passwordConfirmation', {
-            required: {
-              value: true,
-              message: 'This field is required',
+            minLength: {
+              message: 'Minimum number of characters 6',
+              value: 6,
             },
             pattern: {
-              value: /^[0-9A-Za-z!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]+$/,
               message: 'error',
+              value: /^[0-9A-Za-z!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]+$/,
             },
-            minLength: {
-              value: 6,
-              message: 'Minimum number of characters 6',
+            required: {
+              message: 'This field is required',
+              value: true,
             },
           })}
         />
