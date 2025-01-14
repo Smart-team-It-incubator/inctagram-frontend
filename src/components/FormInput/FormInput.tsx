@@ -43,7 +43,6 @@ export const FormInput = ({
     rules,
   })
 
-
   const value = field.value ?? ''
 
   const handleBlur = () => {

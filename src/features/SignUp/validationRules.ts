@@ -1,5 +1,3 @@
-
-
 export const validationRules = {
   email: {
     pattern: { message: 'The email must match the format example@example.com', value: /@/ },
