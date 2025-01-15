@@ -1,28 +1,25 @@
 .icon {
- 
   color: white;
-  
+
   background: gray;
   border-radius: 2px;
- 
+
   &.disabled {
     color: var(--dark-100);
     cursor: not-allowed;
 
-        &:hover {
-          color: var(--dark-100);
-        
-        }
+    &:hover {
+      color: var(--dark-100);
+    }
   }
 
   .iconImage {
-    
     svg {
-   
-    path {
-      fill: currentColor; // Используем текущий цвет текста
+      path {
+        fill: currentColor; // Используем текущий цвет текста
+      }
     }
-  }}
+  }
 
   &:hover {
     color: var(--primary-500);

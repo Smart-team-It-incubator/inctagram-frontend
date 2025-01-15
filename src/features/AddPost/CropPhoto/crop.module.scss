@@ -1,19 +1,4 @@
-.iconContainer {
-  background-color: var(--dark-500);
-  opacity: 80%;
-  border-radius: 2px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  .icon {
-    &:hover {
-      color: var(--primary-500);
-    }
-  }
-}
 
 .cropContainer {
   background-color: azure;
@@ -52,6 +37,18 @@
   padding: 15px;
 
   .imageList {
+    display: flex;
+    column-gap: 12px;
+
+    .imageBlock {
+      position: relative;
+
+      .closeBtn {
+        position: absolute;
+        top: 2px;
+        right: 5px;
+      }
+    }
     img {
       width: 80px;
       height: 80px;
@@ -64,5 +61,25 @@
     display: flex;
     justify-content: flex-start;
     margin-left: 15px;
+  }
+}
+
+
+.iconContainer {
+  background-color: var(--dark-500);
+  opacity: 80%;
+  border-radius: 2px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // border: 1px solid white;
+
+  .icon {
+    &:hover {
+      color: var(--primary-500);
+      cursor: pointer;
+    }
   }
 }

@@ -1,3 +1,4 @@
+export { default as CloseOutline } from './CloseOutline'
 export { default as ExpandOutline } from './ExpandOutline'
 export { default as Expand } from './Expand'
 export { default as ImageOutline } from './ImageOutline'

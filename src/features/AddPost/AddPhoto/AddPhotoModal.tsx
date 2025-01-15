@@ -51,7 +51,11 @@ export const AddPhotoModal = () => {
         </div>
       </div>
 
-      {showCropForm ? <Crop uploadPhoto={uploadPhoto} images={images} /> : <UploadPhoto uploadPhoto={uploadPhoto} />}
+      {showCropForm ? (
+        <Crop uploadPhoto={uploadPhoto} images={images} />
+      ) : (
+        <UploadPhoto uploadPhoto={uploadPhoto} />
+      )}
     </>
   )
 }

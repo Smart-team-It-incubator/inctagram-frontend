@@ -4,13 +4,13 @@ import Cropper, { Area, Point } from 'react-easy-crop'
 import styles from './crop.module.scss'
 import { type ImageType } from '../AddPhoto/AddPhotoModal'
 
-import { Expand, Image, Maximize, PlusCircleOutline } from '@/components/icons'
+import { CloseOutline, Expand, Image, Maximize, PlusCircleOutline } from '@/components/icons'
 
 const URL =
   'https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
 
 type Props = {
-  images: ImageType[],
+  images: ImageType[]
   uploadPhoto: Function
 }
 
@@ -45,7 +45,7 @@ export const Crop = ({ images, uploadPhoto }: Props) => {
               </div>
             </div>
 
-            <ImageListTooltip images={images} uploadPhoto={uploadPhoto}/>
+            <ImageListTooltip images={images} uploadPhoto={uploadPhoto} />
 
             <div className={styles.iconContainer}>
               <Image width={24} height={24} className={styles.icon} onClick={openImageList} />
@@ -63,17 +63,28 @@ const ImageListTooltip = ({ images, uploadPhoto }: Props) => {
       <div className={styles.imageList}>
         {images?.map(image => {
           return (
-            <div>
+            <div className={styles.imageBlock}>
               <img
                 src={image.croppedImageUrl ? image.croppedImageUrl : image.imageUrl}
                 alt="image"
               />
+
+              <div className={styles.iconContainer}>
+                <CloseOutline className={`${styles.icon} ${styles.closeBtn}`} onClick={() => {}} />
+              </div>
             </div>
           )
         })}
       </div>
       <div className={styles.tooltipControls}>
-        <PlusCircleOutline onClick={() => {uploadPhoto()} }/>
+        <div className={styles.iconContainer}>
+          <PlusCircleOutline
+            className={styles.icon}
+            onClick={() => {
+              uploadPhoto()
+            }}
+          />
+        </div>
       </div>
     </div>
   )

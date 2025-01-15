@@ -4,9 +4,6 @@ import React, { useRef, useEffect, useState } from 'react'
 import { ImageButton, ImageIcon } from './ImageIcon'
 import { Button } from '@/components/Button'
 
-
-
-
 export function PreviousValueTracker() {
   const [value, setValue] = useState<string>('') // Указываем тип состояния
   const prevValue = useRef<string | undefined>(undefined) // Типизация useRef
@@ -16,11 +13,7 @@ export function PreviousValueTracker() {
     console.log('Start use Effect')
   }, [value])
 
-  return (
-    
-     <ImageButton />
-    
-  )
+  return <ImageButton />
 }
 
 export default PreviousValueTracker
