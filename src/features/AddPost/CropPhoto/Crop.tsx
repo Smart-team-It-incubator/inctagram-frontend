@@ -6,17 +6,19 @@ import { type ImageType } from '../AddPhoto/AddPhotoModal'
 
 import { CloseOutline, Expand, Image, Maximize, PlusCircleOutline } from '@/components/icons'
 
+import { IconButton } from '@radix-ui/themes'
+
 const URL =
   'https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
 
-type Props = {
+type CropProps = {
   images: ImageType[]
   uploadPhoto: Function
 }
 
-export const Crop = ({ images, uploadPhoto }: Props) => {
+export const Crop = ({ images, uploadPhoto }: CropProps) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
-  const [selectedImage, setSelectedImage] = useState<number | null>(null)
+  const [selectedImage, setSelectedImage] = useState<number>(0)
   const cropChange = (crop: Point) => {
     setCrop(crop)
   }
@@ -45,7 +47,12 @@ export const Crop = ({ images, uploadPhoto }: Props) => {
               </div>
             </div>
 
-            <ImageListTooltip images={images} uploadPhoto={uploadPhoto} />
+            <ImageListTooltip
+              images={images}
+              uploadPhoto={uploadPhoto}
+              setSelectedImage={setSelectedImage}
+              selectedImage={selectedImage}
+            />
 
             <div className={styles.iconContainer}>
               <Image width={24} height={24} className={styles.icon} onClick={openImageList} />
@@ -57,7 +64,25 @@ export const Crop = ({ images, uploadPhoto }: Props) => {
   )
 }
 
-const ImageListTooltip = ({ images, uploadPhoto }: Props) => {
+type TooltipProps = {
+  images: ImageType[]
+  uploadPhoto: Function
+  setSelectedImage: Function
+  selectedImage: number
+}
+
+const ImageListTooltip = ({
+  images,
+  uploadPhoto,
+  setSelectedImage,
+  selectedImage,
+}: TooltipProps) => {
+  const  addImage = async ()=> {
+    await uploadPhoto()
+    setSelectedImage((prev: number) => prev + 1)
+    console.log(images)
+  }
+
   return (
     <div className={styles.imagesTooltip}>
       <div className={styles.imageList}>
@@ -68,22 +93,27 @@ const ImageListTooltip = ({ images, uploadPhoto }: Props) => {
                 src={image.croppedImageUrl ? image.croppedImageUrl : image.imageUrl}
                 alt="image"
               />
-
-              <div className={styles.iconContainer}>
-                <CloseOutline className={`${styles.icon} ${styles.closeBtn}`} onClick={() => {}} />
+              <div className={styles.closeBtn}>
+                <div className={`${styles.iconContainer}`}>
+                  <CloseOutline className={styles.icon} width={12} height={12} onClick={() => {}} />
+                  {/* <IconButton style={{backgroundColor: "darkgray"}}>
+                  <CloseOutline
+                    className={styles.icon}
+                    width={12}
+                    height={12}
+                    onClick={() => {}}
+                  />
+</IconButton> */}
+                </div>
               </div>
             </div>
           )
         })}
       </div>
+
       <div className={styles.tooltipControls}>
         <div className={styles.iconContainer}>
-          <PlusCircleOutline
-            className={styles.icon}
-            onClick={() => {
-              uploadPhoto()
-            }}
-          />
+          <PlusCircleOutline className={styles.icon} onClick={addImage} />
         </div>
       </div>
     </div>

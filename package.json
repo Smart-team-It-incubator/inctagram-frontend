@@ -13,7 +13,7 @@
     "test:watch": "jest --watch",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "generate-icons" : "npx @svgr/cli --out-dir src/components/icons  --jsx-runtime automatic --typescript --ref --memo --replace-attr-values '#000=currentColor' --replace-attr-values '#fff=currentColor' -- public/add-post"
+    "generate-icons": "npx @svgr/cli --out-dir src/components/icons  --jsx-runtime automatic --typescript --ref --memo --replace-attr-values '#000=currentColor' --replace-attr-values '#fff=currentColor' -- public/add-post"
   },
   "dependencies": {
     "@fontsource/inter": "^5.1.0",
@@ -24,6 +24,7 @@
     "@radix-ui/react-popover": "^1.1.4",
     "@radix-ui/react-radio-group": "^1.2.2",
     "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/themes": "^3.1.6",
     "@reduxjs/toolkit": "^2.4.0",
     "clsx": "^2.1.1",
     "next": "15.0.4",

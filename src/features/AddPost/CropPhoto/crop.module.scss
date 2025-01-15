@@ -1,4 +1,21 @@
+.iconContainer {
+  background-color: var(--dark-500);
+  opacity: 80%;
+  border-radius: 2px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // border: 1px solid white;
 
+  .icon {
+    &:hover {
+      color: var(--primary-500);
+      cursor: pointer;
+    }
+  }
+}
 
 .cropContainer {
   background-color: azure;
@@ -45,41 +62,39 @@
 
       .closeBtn {
         position: absolute;
+        
         top: 2px;
         right: 5px;
+        
+        .iconContainer {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+         
+
+          .icon {
+          
+            // border: 1px solid white;
+             width: 20px;
+          height: 20px;
+            
+          }
+          
+        }
       }
     }
-    img {
-      width: 80px;
-      height: 80px;
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-  }
 
+    
+  }
+  img {
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
   .tooltipControls {
     display: flex;
     justify-content: flex-start;
     margin-left: 15px;
-  }
-}
-
-
-.iconContainer {
-  background-color: var(--dark-500);
-  opacity: 80%;
-  border-radius: 2px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  // border: 1px solid white;
-
-  .icon {
-    &:hover {
-      color: var(--primary-500);
-      cursor: pointer;
-    }
   }
 }
