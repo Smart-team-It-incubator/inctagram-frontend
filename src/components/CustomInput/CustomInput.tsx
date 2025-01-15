@@ -1,6 +1,6 @@
 'use client'
 
-import React, {ChangeEvent, FocusEvent, useState, useRef, useEffect} from 'react'
+import React, { ChangeEvent, FocusEvent, useState, useRef, useEffect } from 'react'
 import { EyeIcon, SearchIcon } from '../../../public/icons'
 import styles from './CustomInput.module.scss'
 import Image from 'next/image'
@@ -25,7 +25,7 @@ export const CustomInput = ({
   disabled = false,
   type = 'text',
   icon = '',
-  errorMessage= '',
+  errorMessage = '',
   autoComplete,
   className,
   ...rest
@@ -33,7 +33,7 @@ export const CustomInput = ({
   const [active, setActive] = useState(false)
   const [customType, setCustomType] = useState(type)
   const [focus, setFocus] = useState(false)
-  const [error, setError] = useState(errorMessage || '');
+  const [error, setError] = useState<string | undefined>(errorMessage || '')
 
   useEffect(() => {
     setError(errorMessage || '')
