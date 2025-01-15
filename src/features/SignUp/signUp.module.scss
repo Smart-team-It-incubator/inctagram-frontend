@@ -36,6 +36,19 @@
   margin: 0 auto;
 }
 
+.titleCheckbox {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-xxs);
+  line-height: var(--line-height-xs);
+  color: var(--light-100);
+}
+
+.titleCheckboxLink {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--primary-300);
+}
+
 .signUpButton {
   width: 100%;
 }

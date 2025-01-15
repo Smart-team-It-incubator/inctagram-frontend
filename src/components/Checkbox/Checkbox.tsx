@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 
 import { CheckBoxProps } from '@/components/Checkbox/types'
@@ -7,12 +9,12 @@ import { CheckIcon } from '@radix-ui/react-icons'
 import styles from './checkbox.module.scss'
 
 export const Checkbox = ({ data }: CheckBoxProps) => (
-  <form>
+  <div>
     {!data || !data.length ? (
       <div>There is not data</div>
     ) : (
       data?.map(el => {
-        const { disabled, id, title } = el
+        const { className = '', disabled, id, title } = el
         const indicatorDisabled = disabled
           ? `${styles.checkbox_indicator} + ${styles.checkbox_indicator_disabled}`
           : styles.checkbox_indicator
@@ -29,12 +31,12 @@ export const Checkbox = ({ data }: CheckBoxProps) => (
                 </CheckboxDemo.Indicator>
               </CheckboxDemo.Root>
             </div>
-            <label className={labelDisabled} htmlFor={id}>
+            <label className={`${labelDisabled} ${className}`} htmlFor={id}>
               {title}
             </label>
           </div>
         )
       })
     )}
-  </form>
+  </div>
 )
