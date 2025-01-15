@@ -4,7 +4,7 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Button } from '@/components/Button'
-import { Checkbox } from '@/components/Checkbox'
+import { FormCheckbox } from '@/components/FormCheckbox/FormCheckbox'
 import { FormInput } from '@/components/FormInput/FormInput'
 import { validationRules } from '@/features/SignUp/validationRules'
 import Link from 'next/link'
@@ -16,6 +16,7 @@ import { GithubIcon } from '../../../public/icons/GithubIcon'
 import { GoogleIcon } from '../../../public/icons/GoogleIcon'
 
 type FormValue = {
+  checkboxTerms: boolean
   email: string
   password: string
   passwordConfirmation: string
@@ -108,8 +109,7 @@ export const SignUp = () => {
           trigger={trigger}
           type={'password'}
         />
-
-        <Checkbox data={[{ disabled: false, id: 'checkboxTerms', title: titleCheckbox() }]} />
+        <FormCheckbox control={control} name={'checkboxTerms'} title={titleCheckbox()} />
         <Button
           className={styles.signUpButton}
           disabled={!isValid}

@@ -1,7 +1,9 @@
 export type Data = {
+  checked: boolean
   className?: string
   disabled?: boolean
   id: string
+  onChange: (event: any) => void
   title: any
 }
 
