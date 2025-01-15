@@ -10,10 +10,11 @@ const URL =
   'https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
 
 type Props = {
-  images: ImageType[]
+  images: ImageType[],
+  uploadPhoto: Function
 }
 
-export const Crop = ({ images }: Props) => {
+export const Crop = ({ images, uploadPhoto }: Props) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
   const cropChange = (crop: Point) => {
@@ -44,7 +45,8 @@ export const Crop = ({ images }: Props) => {
               </div>
             </div>
 
-            <ImageListTooltip images={images} />
+            <ImageListTooltip images={images} uploadPhoto={uploadPhoto}/>
+
             <div className={styles.iconContainer}>
               <Image width={24} height={24} className={styles.icon} onClick={openImageList} />
             </div>
@@ -55,7 +57,7 @@ export const Crop = ({ images }: Props) => {
   )
 }
 
-const ImageListTooltip = ({ images }: Props) => {
+const ImageListTooltip = ({ images, uploadPhoto }: Props) => {
   return (
     <div className={styles.imagesTooltip}>
       <div className={styles.imageList}>
@@ -71,7 +73,7 @@ const ImageListTooltip = ({ images }: Props) => {
         })}
       </div>
       <div className={styles.tooltipControls}>
-        <PlusCircleOutline />
+        <PlusCircleOutline onClick={() => {uploadPhoto()} }/>
       </div>
     </div>
   )
