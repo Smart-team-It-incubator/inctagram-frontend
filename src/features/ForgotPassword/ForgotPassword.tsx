@@ -7,17 +7,18 @@ import Link from 'next/link'
 import { ChangeEvent, useEffect, useState } from 'react'
 import s from './ForgotPassword.module.scss'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
-import { forgotPasswordApi } from '@/app/common/api/forgotPasswordApi'
 import { FormEvent } from 'react'
+import { authApi } from '@/app/common/api/authApi'
 
 export const ForgotPassword = () => {
   const [textInput, setTextInput] = useState<string>('')
   const [isDataAndCaptchaValid, setIsDataAndCaptchaValid] = useState<boolean>(false)
   const [isEmailSent, setIsEmailSent] = useState<boolean>(false)
+  const [isErrorMessage, setIsErrorMessage] = useState<string>('')
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [toggleRecaptcha, setToggleRecaptcha] = useState<boolean>(false)
   const [componentLoaded, setComponentLoaded] = useState<boolean>(false)
-  const isCaptcha = true
+  const [isCaptcha, setIsCaptcha] = useState<boolean>(false)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTextInput(e.currentTarget.value)
@@ -65,8 +66,25 @@ export const ForgotPassword = () => {
 
   const sendMail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    forgotPasswordApi.sendingMail(textInput)
+    authApi
+      .sendingMail(textInput)
+      .then(res => {
+        onClickHandler()
+      })
+      .catch(err => {
+        setIsErrorMessage("User with this email doesn't exist")
+      })
   }
+
+  const callBackCaptchaHandler = (captcha: boolean) => {
+    setIsCaptcha(captcha)
+  }
+
+  useEffect(() => {
+    if (isOpenModal) {
+      setIsEmailSent(true)
+    }
+  }, [isOpenModal])
 
   return (
     <div className={s.ground}>
@@ -78,7 +96,7 @@ export const ForgotPassword = () => {
             title="Email"
             textPlaceholder="Epam@epam.com"
             type="email"
-            errorMessage=""
+            errorMessage={isErrorMessage}
             required
           />
 
@@ -95,7 +113,7 @@ export const ForgotPassword = () => {
 
           {componentLoaded && !isEmailSent && toggleRecaptcha && (
             <div className={`${s.recaptcha} ${s.recaptcha_mob}`}>
-              <Recaptcha />
+              <Recaptcha callBack={callBackCaptchaHandler} />
             </div>
           )}
 
@@ -113,12 +131,17 @@ export const ForgotPassword = () => {
 
         {componentLoaded && !isEmailSent && !toggleRecaptcha && (
           <div className={s.recaptcha}>
-            <Recaptcha />
+            <Recaptcha callBack={callBackCaptchaHandler} />
           </div>
         )}
       </div>
       <div style={{ position: 'relative' }}>
-        <MessageModal title="Email sent" open={isOpenModal} callback={onClickHandler} />
+        <MessageModal
+          title="Email sent"
+          open={isOpenModal}
+          callback={onClickHandler}
+          email={textInput}
+        />
       </div>
     </div>
   )

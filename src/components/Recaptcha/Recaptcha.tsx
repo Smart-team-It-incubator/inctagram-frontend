@@ -5,9 +5,13 @@ import { RecaptchaIcon } from './RecaptchaIcon'
 
 import styles from './Recaptcha.module.scss'
 
+type Props = {
+  callBack?: (state: boolean) => void
+}
+
 type RecaptchaState = 'default' | 'hover' | 'checked' | 'loading' | 'error' | 'expired'
 
-export const Recaptcha = () => {
+export const Recaptcha = ({ callBack }: Props) => {
   const [captchaState, setCaptchaState] = useState<RecaptchaState>('default')
 
   const handleCheckboxChange = () => {
@@ -15,10 +19,12 @@ export const Recaptcha = () => {
 
     if (captchaState === 'checked') {
       setCaptchaState('default')
+      callBack && callBack(false)
     } else {
       setCaptchaState('loading')
       setTimeout(() => {
         setCaptchaState('checked')
+        callBack && callBack(true)
       }, 500)
     }
   }

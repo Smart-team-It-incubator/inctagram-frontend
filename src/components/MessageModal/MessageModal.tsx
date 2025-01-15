@@ -4,10 +4,11 @@ import { Button } from '@/components/Button'
 type Props = {
   title: string
   open?: boolean
+  email?: string
   callback: () => void
 }
 
-export const MessageModal = ({ title, open = true, callback }: Props) => {
+export const MessageModal = ({ title, email, open = true, callback }: Props) => {
   return (
     <>
       {open && (
@@ -22,7 +23,7 @@ export const MessageModal = ({ title, open = true, callback }: Props) => {
             </div>
 
             <div className={s.body}>
-              <p className={s.text}>We have sent a link to confirm your email to epam@epam.com</p>
+              <p className={s.text}>We have sent a link to confirm your email to {email}</p>
               <div className={s.btn}>
                 <Button children="ОК" onClick={callback} />
               </div>

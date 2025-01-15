@@ -1,11 +1,17 @@
 import axios from 'axios'
 
-export const instance = axios.create({
+export const instanceAuthAndGithub = axios.create({
   baseURL: 'https://auth.smart-reg.org.ru',
-  withCredentials: false,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-// baseURL: 'https://auth.smart-reg.org.ru/',
+export const instance = axios.create({
+  baseURL: 'https://smart-reg.org.ru',
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
