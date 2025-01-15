@@ -4,8 +4,10 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Button } from '@/components/Button'
+import { Checkbox } from '@/components/Checkbox'
 import { FormInput } from '@/components/FormInput/FormInput'
 import { validationRules } from '@/features/SignUp/validationRules'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import styles from './signUp.module.scss'
@@ -28,6 +30,21 @@ export const SignUp = () => {
     handleSubmit,
     trigger,
   } = useForm<FormValue>({ mode: 'onChange' })
+
+  const titleCheckbox = () => {
+    return (
+      <p className={styles.titleCheckbox}>
+        I agree to the{' '}
+        <Link className={styles.titleCheckboxLink} href={'signUp/termsOfService'}>
+          Terms of Service
+        </Link>{' '}
+        and{' '}
+        <Link className={styles.titleCheckboxLink} href={'signUp/privacyPolicy'}>
+          Privacy Policy
+        </Link>
+      </p>
+    )
+  }
 
   const onSubmit: SubmitHandler<FormValue> = data => {
     if (getValues('password') === getValues('passwordConfirmation')) {
@@ -92,7 +109,7 @@ export const SignUp = () => {
           type={'password'}
         />
 
-        {/*Checkbox*/}
+        <Checkbox data={[{ disabled: false, id: 'checkboxTerms', title: titleCheckbox() }]} />
         <Button
           className={styles.signUpButton}
           disabled={!isValid}

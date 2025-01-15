@@ -1,7 +1,8 @@
 export type Data = {
-  disabled: boolean
+  className?: string
+  disabled?: boolean
   id: string
-  title: string
+  title: any
 }
 
 export type CheckBoxProps = {
