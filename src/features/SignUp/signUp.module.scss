@@ -52,3 +52,33 @@
 .signUpButton {
   width: 100%;
 }
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalDesctiprion {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var(--light-100);
+
+  & p {
+    margin: 0;
+  }
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.closeModalBtn {
+  display: flex;
+  width: 96px;
+}
