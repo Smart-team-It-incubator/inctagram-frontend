@@ -14,7 +14,7 @@ export const Checkbox = ({ data }: CheckBoxProps) => (
       <div>There is not data</div>
     ) : (
       data?.map(el => {
-        const { className = '', disabled, id, title } = el
+        const { className = '', disabled, id, title,checked, onChange} = el
         const indicatorDisabled = disabled
           ? `${styles.checkbox_indicator} + ${styles.checkbox_indicator_disabled}`
           : styles.checkbox_indicator
@@ -25,8 +25,8 @@ export const Checkbox = ({ data }: CheckBoxProps) => (
         return (
           <div className={styles.checkbox_wrapper} key={id}>
             <div className={styles.checkbox}>
-              <CheckboxDemo.Root className={styles.checkbox_root} disabled={disabled} id={id}>
-                <CheckboxDemo.Indicator className={indicatorDisabled}>
+              <CheckboxDemo.Root className={styles.checkbox_root} disabled={disabled} id={id} onCheckedChange={onChange} checked={checked}>
+                <CheckboxDemo.Indicator className={indicatorDisabled}  >
                   <CheckIcon />
                 </CheckboxDemo.Indicator>
               </CheckboxDemo.Root>
