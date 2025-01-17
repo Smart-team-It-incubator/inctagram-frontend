@@ -64,7 +64,8 @@ export const SignUp = () => {
         username: data.username,
       }
 
-      registration(formData).then(() => {
+      registration(formData).then(data => {
+        console.log('c сервера:', data)
         setShowModal(true)
       })
     }
