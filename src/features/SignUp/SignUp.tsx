@@ -3,11 +3,7 @@
 import React, {useState} from 'react'
 import {SubmitHandler, useForm} from 'react-hook-form'
 
-import { useRegistrationMutation } from '@/common/api/authApi'
-import { Button } from '@/components/Button'
-import { Checkbox } from '@/components/Checkbox'
-import { FormInput } from '@/components/FormInput/FormInput'
-import { validationRules } from '@/features/SignUp/validationRules'
+import {useRegistrationMutation} from '@/common/api/authApi'
 import {Button} from '@/components/Button'
 import {FormInput} from '@/components/FormInput/FormInput'
 import {validationRules} from '@/features/SignUp/validationRules'
@@ -27,19 +23,12 @@ type FormValue = {
     password: string
     passwordConfirmation: string
     username: string
-    checkboxTerms:boolean
+    checkboxTerms: boolean
 }
 
 export const SignUp = () => {
-  const [registration] = useRegistrationMutation()
+    const [registration] = useRegistrationMutation()
 
-  const {
-    control,
-    formState: { errors, isValid },
-    getValues,
-    handleSubmit,
-    trigger,
-  } = useForm<FormValue>({ mode: 'onChange' })
     const {
         control,
         formState: {errors, isValid},
@@ -47,37 +36,41 @@ export const SignUp = () => {
         handleSubmit,
         trigger,
     } = useForm<FormValue>({mode: 'onChange'})
+
     const [showModal, setShowModal] = useState(false)
-    /*console.log("isValid", isValid)*/
-    console.log('Form Values:', getValues());
+    const [email, setEmail]=useState<string>('')
 
-  const titleCheckbox = () => {
-    return (
-      <p className={styles.titleCheckbox}>
-        I agree to the{' '}
-        <Link className={styles.titleCheckboxLink} href={'signUp/termsOfService'}>
-          Terms of Service
-        </Link>{' '}
-        and{' '}
-        <Link className={styles.titleCheckboxLink} href={'signUp/privacyPolicy'}>
-          Privacy Policy
-        </Link>
-      </p>
-    )
-  }
 
-  const onSubmit: SubmitHandler<FormValue> = data => {
-    if (getValues('password') === getValues('passwordConfirmation')) {
-      const formData = {
-        email: data.email,
-        password: data.password,
-        username: data.username,
-      }
-
-      registration(formData).then(data => console.log('с сервера пришло', data))
+    const titleCheckbox = () => {
+        return (
+            <p className={styles.titleCheckbox}>
+                I agree to the{' '}
+                <Link className={styles.titleCheckboxLink} href={'signUp/termsOfService'}>
+                    Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link className={styles.titleCheckboxLink} href={'signUp/privacyPolicy'}>
+                    Privacy Policy
+                </Link>
+            </p>
+        )
     }
-  }
-  const router = useRouter()
+
+    const onSubmit: SubmitHandler<FormValue> = data => {
+        if (getValues('password') === getValues('passwordConfirmation')) {
+            setEmail(data.email)
+            const formData = {
+                email: data.email,
+                password: data.password,
+                username: data.username,
+            }
+
+            registration(formData).then(() => {
+                setShowModal(true)
+            })
+        }
+    }
+    const router = useRouter()
 
     return (
         <>
@@ -86,7 +79,7 @@ export const SignUp = () => {
                     <div className={styles.modalBody}>
                         <Divider color={'#4c4c4c'} style={{marginBottom: '30px'}}/>
                         <div className={styles.modalDesctiprion}>
-                            <p>We have sent a link to confirm your email to epam@epam.com</p>
+                            <p>We have sent a link to confirm your email to {email}</p>
                             <div className={styles.btnContainer}>
                                 <Button onClick={() => setShowModal(false)} className={styles.closeModalBtn}>OK</Button>
                             </div>
@@ -149,7 +142,7 @@ export const SignUp = () => {
                         trigger={trigger}
                         type={'password'}
                     />
-                    <FormCheckbox control={control} name={'checkboxTerms'} title={titleCheckbox()} />
+                    <FormCheckbox control={control} name={'checkboxTerms'} title={titleCheckbox()}/>
                     <Button
                         className={styles.signUpButton}
                         disabled={!isValid}
