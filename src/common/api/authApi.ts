@@ -1,12 +1,12 @@
 'use client'
 
-import { SignUpData, SignUpDataResponse } from '@/common/api/auth.types'
+import { SignUpData, SignUpDataSuccess } from '@/common/api/auth.types'
 import { baseApi } from '@/common/api/baseApi'
 import { instanceAuthAndGithub } from '@/common/instance/instance'
 
 export const authApi2 = baseApi.injectEndpoints({
   endpoints: build => ({
-    registration: build.mutation<SignUpDataResponse, SignUpData>({
+    registration: build.mutation<SignUpDataSuccess, SignUpData>({
       query: data => {
         return {
           body: data,

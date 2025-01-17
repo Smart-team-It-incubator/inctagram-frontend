@@ -3,7 +3,7 @@ export type SignUpData = {
   password: string
   username: string
 }
-export type SignUpDataResponse = {
+export type SignUpDataSuccess = {
   city: null | string
   country: null | string
   dateOfBirthday: null | string
@@ -12,4 +12,15 @@ export type SignUpDataResponse = {
   id: string
   lastName: null | string
   username: string
+}
+
+export type ErrorResponse = {
+  error: {
+    data: {
+      message: string
+      statusCode: number
+    }
+    status: number
+  }
+  meta: any
 }
