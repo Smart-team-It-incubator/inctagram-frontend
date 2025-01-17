@@ -8,7 +8,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import s from './ForgotPassword.module.scss'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { FormEvent } from 'react'
-import { authApi } from '@/app/common/api/authApi'
+import { authApi } from '@/common/api/authApi'
 
 export const ForgotPassword = () => {
   const [textInput, setTextInput] = useState<string>('')

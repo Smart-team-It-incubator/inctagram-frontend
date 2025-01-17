@@ -3,6 +3,7 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { useRegistrationMutation } from '@/common/api/authApi'
 import { Button } from '@/components/Button'
 import { Checkbox } from '@/components/Checkbox'
 import { FormInput } from '@/components/FormInput/FormInput'
@@ -23,6 +24,8 @@ type FormValue = {
 }
 
 export const SignUp = () => {
+  const [registration] = useRegistrationMutation()
+
   const {
     control,
     formState: { errors, isValid },
@@ -48,9 +51,14 @@ export const SignUp = () => {
 
   const onSubmit: SubmitHandler<FormValue> = data => {
     if (getValues('password') === getValues('passwordConfirmation')) {
-      // пойдет запрос на сервер
+      const formData = {
+        email: data.email,
+        password: data.password,
+        username: data.username,
+      }
+
+      registration(formData).then(data => console.log('с сервера пришло', data))
     }
-    console.log(data)
   }
   const router = useRouter()
 
@@ -103,6 +111,7 @@ export const SignUp = () => {
           errorMessage={errors?.passwordConfirmation?.message}
           icon={'eye'}
           name={'passwordConfirmation'}
+          rules={validationRules.password}
           textPlaceholder={'******************'}
           title={'Password confirmation'}
           trigger={trigger}
@@ -129,4 +138,4 @@ export const SignUp = () => {
   )
 }
 
-// sI6ltOjVpKOz
+// sI6ltOjVpKOz!

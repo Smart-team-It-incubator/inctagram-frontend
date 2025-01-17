@@ -1,5 +1,8 @@
-import { ReactNode } from 'react'
 import type { Metadata } from 'next'
+
+import { ReactNode } from 'react'
+
+import ClientProvider from '@/components/ClientProvider/ClientProvider'
 import { Header } from '@/components/Header'
 
 import './../styles/index.scss'
@@ -16,10 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={'en'}>
-      <body>
-        <Header />
-        {children}
-      </body>
+      <ClientProvider>
+        <body>
+          <Header />
+          {children}
+        </body>
+      </ClientProvider>
     </html>
   )
 }
