@@ -1,19 +1,15 @@
 'use client'
-import { useGitAuthQuery, useRecoveryRequestMutation } from '@/common/api/authApi'
-import { useState } from 'react'
 
-export const GitAuth = () => {
-  const {data} = useGitAuthQuery();
-  
-  // const [skip, setSkip] = useState<boolean>(true)
+import { GitAuth } from '@/features/GitAuth'
 
-  console.log('githQuery-data: ', data)
 
+const Git = () => {
   return (
-    <>
-      <div >
-        <img src="github.svg" alt="" />
-      </div>
-    </>
+
+    <GitAuth />
+    
   )
 }
+
+
+export default Git

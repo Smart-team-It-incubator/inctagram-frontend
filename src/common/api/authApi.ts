@@ -40,9 +40,9 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
       query: () => {
         return {
           url: '/api/v1/auth/github/',
-          mode: 'no-cors'
+          mode: 'no-cors',
         }
-        }
+      }
     }),
   }),
 })
