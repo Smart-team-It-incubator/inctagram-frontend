@@ -8,6 +8,7 @@ import { GithubIcon } from '../../../public/icons/GithubIcon'
 import { GoogleIcon } from '../../../public/icons/GoogleIcon'
 
 import styles from './SignIn.module.scss'
+import Link from 'next/link'
 
 type FormValue = {
   email: string
@@ -93,7 +94,9 @@ export const SignIn = () => {
           <p className={styles.error}>{errors.password?.message || errors.email?.message}</p>
         ) : null}
 
-        <p style={{ fontSize: 14, textAlign: 'end', color: '#8d9094' }}>Forgot Password</p>
+        <p style={{ fontSize: 14, textAlign: 'end', color: '#8d9094' }}>
+          <Link href="/auth/forgotPassword">Forgot Password</Link>
+        </p>
 
         <Button
           className={styles.signInButton}

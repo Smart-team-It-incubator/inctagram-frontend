@@ -24,3 +24,11 @@ export type ErrorResponse = {
   }
   meta: any
 }
+
+export type ForgotPasswordArgs = {
+  email: string
+}
+
+export type ForgotPasswordData = {
+  message: string
+}

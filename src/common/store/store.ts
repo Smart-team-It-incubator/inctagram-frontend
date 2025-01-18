@@ -1,11 +1,13 @@
-import { baseApi } from '@/common/api/baseApi'
+import { baseApi, baseApiAuthAndGithub } from '@/common/api/baseApi'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
 export const store = configureStore({
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(baseApi.middleware, baseApiAuthAndGithub.middleware),
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
+    [baseApiAuthAndGithub.reducerPath]: baseApiAuthAndGithub.reducer,
   },
 })
 

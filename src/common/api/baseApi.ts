@@ -1,7 +1,16 @@
 'use client'
 
 import { ErrorResponse } from '@/common/api/auth.types'
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  createApi,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react'
+
+// Для методов auth и github с https://smart-reg.org.ru/api/v1/swagger#/ базовый url https://auth.smart-reg.org.ru,
+// для всех остальных https:/smart-reg.org.ru
 
 export const baseApi = createApi({
   baseQuery: async (args, api, extraOptions) => {
@@ -31,4 +40,13 @@ export const baseApi = createApi({
   endpoints: () => ({}),
   reducerPath: 'auth',
   tagTypes: ['auth'],
+})
+
+export const baseApiAuthAndGithub = createApi({
+  reducerPath: 'authAndGithub',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://auth.smart-reg.org.ru',
+  }),
+  endpoints: () => ({}),
+  tagTypes: [],
 })

@@ -8,7 +8,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import s from './ForgotPassword.module.scss'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { FormEvent } from 'react'
-import { authApi } from '@/common/api/authApi'
+import { useRecoveryRequestMutation } from '@/common/api/authApi'
 
 export const ForgotPassword = () => {
   const [textInput, setTextInput] = useState<string>('')
@@ -19,6 +19,8 @@ export const ForgotPassword = () => {
   const [toggleRecaptcha, setToggleRecaptcha] = useState<boolean>(false)
   const [componentLoaded, setComponentLoaded] = useState<boolean>(false)
   const [isCaptcha, setIsCaptcha] = useState<boolean>(false)
+
+  const [recoveryRequest] = useRecoveryRequestMutation()
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTextInput(e.currentTarget.value)
@@ -64,16 +66,19 @@ export const ForgotPassword = () => {
     }
   }, [])
 
-  const sendMail = (e: FormEvent<HTMLFormElement>) => {
+  const sendMail = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    authApi
-      .sendingMail(textInput)
-      .then(res => {
-        onClickHandler()
-      })
-      .catch(err => {
-        setIsErrorMessage("User with this email doesn't exist")
-      })
+
+    try {
+      const res = await recoveryRequest({ email: textInput })
+      if (res.error) {
+        throw res.error
+      }
+
+      onClickHandler()
+    } catch (err) {
+      setIsErrorMessage("User with this email doesn't exist")
+    }
   }
 
   const callBackCaptchaHandler = (captcha: boolean) => {
