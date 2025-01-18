@@ -36,16 +36,13 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
       },
     }),
 
-    gitAuth: build.mutation<any, void>({
-      query: data => {
+    gitAuth: build.query<string, void>({
+      query: () => {
         return {
-          body: data,
-          method: 'GET',
-          url: '/api/v1/auth/github/',
+          url: '/api/v1/auth/github/'}
         }
-      },
     }),
   }),
 })
 
-export const { useRecoveryRequestMutation } = authAndGithubApi
+export const { useRecoveryRequestMutation, useGitAuthQuery } = authAndGithubApi
