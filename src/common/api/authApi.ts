@@ -35,6 +35,16 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
         }
       },
     }),
+
+    gitAuth: build.mutation<any, void>({
+      query: data => {
+        return {
+          body: data,
+          method: 'GET',
+          url: '/api/v1/auth/github/',
+        }
+      },
+    }),
   }),
 })
 
