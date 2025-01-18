@@ -33,7 +33,7 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
         className={styles.cropContainer}
         style={{ position: 'relative', width: '100%', height: '100%' }}
       >
-        <Cropper image={URL} zoom={1} crop={crop} aspect={4 / 3} onCropChange={cropChange} />
+        <Cropper image={images[selectedImage].imageUrl} zoom={1} crop={crop} aspect={4 / 3} onCropChange={cropChange} />
 
         <div className={styles.controls}>
           <div className={styles.buttons}>
@@ -77,10 +77,15 @@ const ImageListTooltip = ({
   setSelectedImage,
   selectedImage,
 }: TooltipProps) => {
+  
   const  addImage = async ()=> {
     await uploadPhoto()
     setSelectedImage((prev: number) => prev + 1)
     console.log(images)
+  }
+
+  const selectImageFromTooltip = (id: string) => {
+
   }
 
   return (
@@ -88,10 +93,11 @@ const ImageListTooltip = ({
       <div className={styles.imageList}>
         {images?.map(image => {
           return (
-            <div className={styles.imageBlock}>
+            <div className={styles.imageBlock} key={image.id}>
               <img
                 src={image.croppedImageUrl ? image.croppedImageUrl : image.imageUrl}
                 alt="image"
+                onClick={() => selectImageFromTooltip(image.id)}
               />
               <div className={styles.closeBtn}>
                 <div className={`${styles.iconContainer}`}>
