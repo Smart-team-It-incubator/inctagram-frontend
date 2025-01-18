@@ -39,7 +39,9 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
     gitAuth: build.query<string, void>({
       query: () => {
         return {
-          url: '/api/v1/auth/github/'}
+          url: '/api/v1/auth/github/',
+          mode: 'no-cors'
+        }
         }
     }),
   }),
