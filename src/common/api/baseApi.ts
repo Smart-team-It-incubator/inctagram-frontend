@@ -1,15 +1,9 @@
 'use client'
 
 import { ErrorResponse } from '@/common/api/auth.types'
-import {
-  BaseQueryFn,
-  FetchArgs,
-  FetchBaseQueryError,
-  createApi,
-  fetchBaseQuery,
-} from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-// Для методов auth и github с https://smart-reg.org.ru/api/v1/swagger#/ базовый url https://auth.smart-reg.org.ru,
+// Для методов auth и github в https://smart-reg.org.ru/api/v1/swagger#/ базовый url https://auth.smart-reg.org.ru,
 // для всех остальных https:/smart-reg.org.ru
 
 export const baseApi = createApi({

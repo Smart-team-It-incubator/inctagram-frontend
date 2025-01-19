@@ -2,7 +2,7 @@
 
 import {
   ForgotPasswordArgs,
-  ForgotPasswordData,
+  RecoveryConfirmArgs,
   SignUpData,
   SignUpDataSuccess,
 } from '@/common/api/auth.types'
@@ -35,7 +35,16 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
         }
       },
     }),
+    recoveryConfirm: build.mutation<any, RecoveryConfirmArgs>({
+      query: data => {
+        return {
+          body: data,
+          method: 'POST',
+          url: '/api/v1/auth/password-reset/confirm',
+        }
+      },
+    }),
   }),
 })
 
-export const { useRecoveryRequestMutation } = authAndGithubApi
+export const { useRecoveryRequestMutation, useRecoveryConfirmMutation } = authAndGithubApi

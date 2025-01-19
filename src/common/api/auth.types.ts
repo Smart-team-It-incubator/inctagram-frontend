@@ -29,6 +29,7 @@ export type ForgotPasswordArgs = {
   email: string
 }
 
-export type ForgotPasswordData = {
-  message: string
+export type RecoveryConfirmArgs = {
+  recoveryCode: string | null
+  newPassword: string
 }
