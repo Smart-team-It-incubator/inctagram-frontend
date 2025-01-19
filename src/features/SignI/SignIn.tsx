@@ -9,6 +9,7 @@ import { GoogleIcon } from '../../../public/icons/GoogleIcon'
 
 import styles from './SignIn.module.scss'
 import Link from 'next/link'
+import { GitAuth } from '../GitAuth'
 
 type FormValue = {
   email: string
@@ -56,7 +57,7 @@ export const SignIn = () => {
       <h1 className={styles.title}>Sign In</h1>
       <div className={styles.iconsContainer}>
         <GoogleIcon />
-        <GithubIcon />
+        <GitAuth />
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
