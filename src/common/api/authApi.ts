@@ -36,15 +36,26 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
       },
     }),
 
-    gitAuth: build.query<string, void>({
-      query: () => {
-        return {
-          url: '/api/v1/auth/github/',
-          mode: 'no-cors',
-        }
-      }
+    // gitAuth: build.query<string, void>({
+    //   query: () => {
+    //     return {
+    //       url: '/api/v1/auth/github/',
+    //       mode: 'no-cors',
+    //     }
+    //   }
+    // }),
+    getGithubAuthUrl: build.query<string, void>({
+      query: () => '/api/v1/auth/github', // Этот эндпоинт возвращает URL для редиректа
+    }),
+
+    exchangeGithubCode: build.mutation<string, { code: string }>({
+      query: ({ code }) => ({
+        url: '/api/v1/auth/github/callback',
+        method: 'POST',
+        body: { code },
+      }),
     }),
   }),
 })
 
-export const { useRecoveryRequestMutation, useGitAuthQuery } = authAndGithubApi
+export const { useRecoveryRequestMutation, useGetGithubAuthUrlQuery, useExchangeGithubCodeMutation } = authAndGithubApi

@@ -46,6 +46,8 @@ export const baseApiAuthAndGithub = createApi({
   reducerPath: 'authAndGithub',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://auth.smart-reg.org.ru',
+    credentials: 'include',
+    mode: 'no-cors'
   }),
   endpoints: () => ({}),
   tagTypes: [],
