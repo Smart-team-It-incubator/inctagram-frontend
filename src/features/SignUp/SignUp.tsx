@@ -95,7 +95,7 @@ export const SignUp = () => {
         <h1 className={styles.title}>Sign Up</h1>
         <div className={styles.iconsContainer}>
           <GoogleIcon />
-          <GitAuth />
+          {/* <GitAuth /> */}
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>

@@ -10,7 +10,7 @@ export const GitAuth = () => {
   const { data: authUrl } = useGetGithubAuthUrlQuery();
   const [exchangeCode] = useExchangeGithubCodeMutation();
   const searchParams = useSearchParams();
-debugger
+
   console.log('searchParams', searchParams)
   console.log('authUrl', authUrl)
   console.log('exchangeCode', exchangeCode)

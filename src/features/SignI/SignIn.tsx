@@ -27,13 +27,15 @@ export const SignIn = () => {
   } = useForm<FormValue>()
 
   const onSubmit: SubmitHandler<FormValue> = async data => {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
     try {
-      const response = await fetch('/api/v1/auth/login', {
+      const response = await fetch(`${baseUrl}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        credentials: 'include'
       })
 
       if (response.ok) {
@@ -84,10 +86,10 @@ export const SignIn = () => {
             icon={'eye'}
             {...register('password', {
               required: true,
-              pattern: {
-                value: /^[a-z0-9]{6,}$/i,
-                message: 'The email or password are incorrect. Try again please',
-              },
+              // pattern: {
+              //   value: /^[a-z0-9]{6,}$/i,
+              //   message: 'The email or password are incorrect. Try again please',
+              // },
             })}
           />
         </div>

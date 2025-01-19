@@ -16,6 +16,7 @@ export const baseApi = createApi({
   baseQuery: async (args, api, extraOptions) => {
     const result = await fetchBaseQuery({
       baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+      // baseUrl: 'https://smart-reg.org.ru/api/v1',
       prepareHeaders: () => {},
     })(args, api, extraOptions)
 
