@@ -6,7 +6,8 @@ import { type ImageType } from '../AddPhoto/AddPhotoModal'
 
 import { CloseOutline, Expand, Image, Maximize, PlusCircleOutline } from '@/components/icons'
 
-import { IconButton } from '@radix-ui/themes'
+import { IconButton, Slider } from '@radix-ui/themes'
+import { CustomSlider } from '../Slider/Slider'
 
 const URL =
   'https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
@@ -33,7 +34,13 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
         className={styles.cropContainer}
         style={{ position: 'relative', width: '100%', height: '100%' }}
       >
-        <Cropper image={images[selectedImage].imageUrl} zoom={1} crop={crop} aspect={4 / 3} onCropChange={cropChange} />
+        <Cropper
+          image={images[selectedImage].imageUrl}
+          zoom={1}
+          crop={crop}
+          aspect={4 / 3}
+          onCropChange={cropChange}
+        />
 
         <div className={styles.controls}>
           <div className={styles.buttons}>
@@ -45,6 +52,7 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
               <div className={styles.iconContainer}>
                 <Maximize width={24} height={24} className={styles.icon} />
               </div>
+              <CustomSlider />
             </div>
 
             <ImageListTooltip
@@ -77,19 +85,17 @@ const ImageListTooltip = ({
   setSelectedImage,
   selectedImage,
 }: TooltipProps) => {
-  
-  const  addImage = async ()=> {
+  const addImage = async () => {
     await uploadPhoto()
     setSelectedImage((prev: number) => prev + 1)
     console.log(images)
   }
 
-  const selectImageFromTooltip = (id: string) => {
-
-  }
+  const selectImageFromTooltip = (id: string) => {}
 
   return (
     <div className={styles.imagesTooltip}>
+      <Slider defaultValue={[50]} />
       <div className={styles.imageList}>
         {images?.map(image => {
           return (

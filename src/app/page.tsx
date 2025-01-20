@@ -1,3 +1,4 @@
+'use client'
 import { Maximize } from '@/components/icons'
 import { AddPhotoModal } from '@/features/AddPost/AddPhoto/AddPhotoModal'
 import { Crop } from '@/features/AddPost/CropPhoto/Crop'
