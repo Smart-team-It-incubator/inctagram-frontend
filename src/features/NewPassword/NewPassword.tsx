@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, Suspense, useEffect, useState } from 'react'
 import s from './NewPassword.module.scss'
 import { CustomInput } from '@/components/CustomInput'
 import { Button } from '@/components/Button'
@@ -109,7 +109,7 @@ export const NewPassword = () => {
     }
   }
 
-  return <>{htmlContent()}</>
+  return <Suspense fallback={<div>Loading...</div>}>{htmlContent()}</Suspense>
 }
 
 // если пароль не совпадает The passwords must match
