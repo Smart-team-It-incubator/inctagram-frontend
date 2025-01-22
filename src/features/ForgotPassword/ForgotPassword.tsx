@@ -118,7 +118,7 @@ export const ForgotPassword = () => {
 
           {componentLoaded && !isEmailSent && toggleRecaptcha && (
             <div className={`${s.recaptcha} ${s.recaptcha_mob}`}>
-              <Recaptcha callBack={callBackCaptchaHandler} />
+              <Recaptcha callback={callBackCaptchaHandler} />
             </div>
           )}
 
@@ -136,7 +136,7 @@ export const ForgotPassword = () => {
 
         {componentLoaded && !isEmailSent && !toggleRecaptcha && (
           <div className={s.recaptcha}>
-            <Recaptcha callBack={callBackCaptchaHandler} />
+            <Recaptcha callback={callBackCaptchaHandler} />
           </div>
         )}
       </div>
