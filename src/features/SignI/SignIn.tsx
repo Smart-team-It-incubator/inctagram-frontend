@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/Button'
 import { CustomInput } from '@/components/CustomInput'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { GithubIcon } from '../../../public/icons/GithubIcon'
 import { GoogleIcon } from '../../../public/icons/GoogleIcon'
 
 import styles from './SignIn.module.scss'
