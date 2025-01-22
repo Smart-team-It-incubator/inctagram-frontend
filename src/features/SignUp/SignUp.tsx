@@ -15,7 +15,6 @@ import { useRouter } from 'next/navigation'
 
 import styles from './signUp.module.scss'
 
-import { GithubIcon } from '../../../public/icons/GithubIcon'
 import { GoogleIcon } from '../../../public/icons/GoogleIcon'
 import { GitAuth } from '../GitAuth'
 
