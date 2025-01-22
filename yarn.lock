@@ -6999,11 +6999,6 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-recaptcha@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/next-recaptcha/-/next-recaptcha-0.0.1.tgz#b14ac43230d16658e441a47788f0f3448f782dab"
-  integrity sha512-OvX4+um1/levna/jlvmRz/WuNbNnvD3oLJ5zrOnJXTFYssx4IE5ZO+lo5H2G7eqMc4y5U2sxu7V3rZ4GsHLOVg==
-
 next@15.0.4:
   version "15.0.4"
   resolved "https://registry.yarnpkg.com/next/-/next-15.0.4.tgz#7ddad7299204f16c132d7e524cf903f1a513588e"
