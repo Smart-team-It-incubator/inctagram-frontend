@@ -1,0 +1,21 @@
+.text {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-l);
+  text-align: center;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    display: flex;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xm);
+    line-height: var(--line-height-xl);
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+  }
+}
