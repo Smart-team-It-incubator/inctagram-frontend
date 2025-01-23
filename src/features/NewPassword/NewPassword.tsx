@@ -19,11 +19,9 @@ export const NewPassword = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false)
 
   const [recoveryConfirm] = useRecoveryConfirmMutation()
-
   const router = useRouter()
-
   const searchParams = useSearchParams()
-  const recoveryCode = searchParams.get('recoveryCode')
+  const recoveryCode = searchParams?.get('recoveryCode') || ''
 
   const getFirstPass = (e: ChangeEvent<HTMLInputElement>) => {
     setFirstPassword(e.currentTarget.value)
@@ -39,7 +37,10 @@ export const NewPassword = () => {
 
     setErrorMessage(errorMessage)
 
-    !errorMessage && firstPassword !== secondPassword && setIsPasswordMatch(false)
+    if (!errorMessage && firstPassword !== secondPassword) {
+      setIsPasswordMatch(false)
+      return
+    }
 
     if (!errorMessage && passwordLength > 0 && firstPassword === secondPassword) {
       try {
@@ -61,56 +62,59 @@ export const NewPassword = () => {
     setIsPasswordMatch(null)
   }, [firstPassword, secondPassword])
 
-  const htmlContent = () => {
+  const renderContent = () => {
     if (isLinkExpired) {
       return <LinkExpired />
-    } else {
-      return recoveryCode ? (
-        <div className={s.ground}>
-          <div className={s.wrapper}>
-            <h2 className={s.title}>Create New Password</h2>
-            <form onSubmit={e => passwordMathHandler(e)}>
-              <div className={s.inputs}>
-                <CustomInput
-                  onChange={getFirstPass}
-                  title="New password"
-                  textPlaceholder="•••••••••••••••••"
-                  type="password"
-                  errorMessage={errorMessage}
-                  icon="eye"
-                />
-
-                <CustomInput
-                  onChange={getSecondPass}
-                  title="Password confirmation"
-                  textPlaceholder="•••••••••••••••••"
-                  type="password"
-                  errorMessage={isPasswordMatch === false ? 'The passwords must match' : ''}
-                  icon="eye"
-                />
-              </div>
-
-              <p className={s.text}>Your password must be between 6 and 20 characters</p>
-
-              <Button
-                children="Create new password"
-                type="submit"
-                className={s.btn}
-                disabled={isButtonDisabled}
-              />
-            </form>
-          </div>
-        </div>
-      ) : (
+    }
+    if (!recoveryCode) {
+      return (
         <div className={s.err404}>
           <h2>404</h2>
         </div>
       )
     }
+    return (
+      <div className={s.ground}>
+        <div className={s.wrapper}>
+          <h2 className={s.title}>Create New Password</h2>
+          <form onSubmit={passwordMathHandler}>
+            <div className={s.inputs}>
+              <CustomInput
+                onChange={getFirstPass}
+                title="New password"
+                textPlaceholder="•••••••••••••••••"
+                type="password"
+                errorMessage={errorMessage}
+                icon="eye"
+              />
+
+              <CustomInput
+                onChange={getSecondPass}
+                title="Password confirmation"
+                textPlaceholder="•••••••••••••••••"
+                type="password"
+                errorMessage={isPasswordMatch === false ? 'The passwords must match' : ''}
+                icon="eye"
+              />
+            </div>
+
+            <p className={s.text}>Your password must be between 6 and 20 characters</p>
+
+            <Button
+              children="Create new password"
+              type="submit"
+              className={s.btn}
+              disabled={isButtonDisabled}
+            />
+          </form>
+        </div>
+      </div>
+    )
   }
 
+<<<<<<< HEAD
   return <>{htmlContent()}</>
+=======
+  return <Suspense fallback={<div>Loading...</div>}>{renderContent()}</Suspense>
+>>>>>>> 47a234e801c8b8c082e4e59817af77c17b90d787
 }
-
-// если пароль не совпадает The passwords must match
-// StrongPassword123!
