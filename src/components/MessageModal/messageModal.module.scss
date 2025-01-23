@@ -1,5 +1,4 @@
 .modal {
-  // display: none; /* Скрыть модальное окно по умолчанию */
   position: fixed;
   z-index: 10;
   left: 0;
@@ -16,7 +15,6 @@
   top: 250px;
   transform: translateX(-50%);
   background-color: #333333;
-  // padding: 0 24px 36px 24px;
   border: 1px solid #4c4c4c;
   border-radius: 2px;
   width: 380px;
