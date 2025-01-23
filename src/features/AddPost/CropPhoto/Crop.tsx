@@ -33,6 +33,7 @@ const initToolsVisibility = {
 
 export const Crop = ({ images, uploadPhoto }: CropProps) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
+  const [zoom, setZoom] = useState<number>(1)
   const [selectedImage, setSelectedImage] = useState<number>(0)
   
 
@@ -61,10 +62,11 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
       >
         <Cropper
           image={images[selectedImage].imageUrl}
-          zoom={1}
+          zoom={zoom}
           crop={crop}
           aspect={4 / 3}
           onCropChange={cropChange}
+          onZoomChange={setZoom}
         />
 
         <div className={styles.controls}>
@@ -80,7 +82,7 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
                 <Maximize width={24} height={24} className={styles.icon} onClick={() => showTooltipHandle('zoom')}/>
               </div>
 
-              {showTooltip['zoom'] && <CustomSlider />}
+              {showTooltip['zoom'] && <CustomSlider setValue={setZoom} />}
 
             </div>
 
@@ -89,6 +91,7 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
               uploadPhoto={uploadPhoto}
               setSelectedImage={setSelectedImage}
               selectedImage={selectedImage}
+              setZoom={setZoom}
             />}
 
             <div className={styles.iconContainer} onClick={() => showTooltipHandle('image')}>
@@ -105,7 +108,8 @@ type TooltipProps = {
   images: ImageType[]
   uploadPhoto: Function
   setSelectedImage: Function
-  selectedImage: number
+  selectedImage: number,
+  setZoom?: Function
 }
 
 const ImageListTooltip = ({
@@ -113,11 +117,13 @@ const ImageListTooltip = ({
   uploadPhoto,
   setSelectedImage,
   selectedImage,
+  setZoom
 }: TooltipProps) => {
   const addImage = async () => {
     await uploadPhoto()
     setSelectedImage((prev: number) => prev + 1)
     console.log(images)
+    setZoom && setZoom(1)
   }
 
   const selectImageFromTooltip = (id: string) => {}
