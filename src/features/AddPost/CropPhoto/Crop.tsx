@@ -17,15 +17,40 @@ type CropProps = {
   uploadPhoto: Function
 }
 
+type Tools = 'zoom' | 'aspect' | 'image'
+
+type ToolsVisibility = {
+  'zoom': boolean 
+  'aspect': boolean
+  'image': boolean
+}
+
+const initToolsVisibility = {
+  'zoom': false, 
+  'aspect': false,
+  'image': false,
+}
+
 export const Crop = ({ images, uploadPhoto }: CropProps) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [selectedImage, setSelectedImage] = useState<number>(0)
+  
+
+  const [showTooltip, setShowTooltip] = useState<ToolsVisibility>(initToolsVisibility)
+  
   const cropChange = (crop: Point) => {
     setCrop(crop)
   }
 
   const openImageList = () => {
     setSelectedImage(0)
+  }
+
+  const showTooltipHandle = (sourse: Tools): void => {
+    console.log('sourse: ', sourse)
+    console.log('showTooltip: ', showTooltip)
+    console.log('!showTooltip[sourse]}: ', !showTooltip[sourse])
+    setShowTooltip({...showTooltip, [sourse]: !showTooltip[sourse]})
   }
 
   return (
@@ -46,23 +71,27 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
           <div className={styles.buttons}>
             <div className={styles.buttonsLeft}>
               <div className={styles.iconContainer}>
-                <Expand width={24} height={24} className={styles.icon} />
+                <Expand width={24} height={24} className={styles.icon} onClick={() => showTooltipHandle('aspect')}/>
               </div>
+
+              {showTooltip['aspect'] && <div className="aspect">Aspect</div> }
 
               <div className={styles.iconContainer}>
-                <Maximize width={24} height={24} className={styles.icon} />
+                <Maximize width={24} height={24} className={styles.icon} onClick={() => showTooltipHandle('zoom')}/>
               </div>
-              <CustomSlider />
+
+              {showTooltip['zoom'] && <CustomSlider />}
+
             </div>
 
-            <ImageListTooltip
+            {showTooltip['image'] && <ImageListTooltip
               images={images}
               uploadPhoto={uploadPhoto}
               setSelectedImage={setSelectedImage}
               selectedImage={selectedImage}
-            />
+            />}
 
-            <div className={styles.iconContainer}>
+            <div className={styles.iconContainer} onClick={() => showTooltipHandle('image')}>
               <Image width={24} height={24} className={styles.icon} onClick={openImageList} />
             </div>
           </div>
