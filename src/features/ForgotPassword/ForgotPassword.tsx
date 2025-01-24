@@ -130,7 +130,7 @@ export const ForgotPassword = () => {
           />
         </form>
 
-        <Link href="/auth" className={s.link_back}>
+        <Link href="/auth/signIn" className={s.link_back}>
           Back to Sign In
         </Link>
 
