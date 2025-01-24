@@ -29,19 +29,16 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
     recoveryRequest: build.mutation<any, ForgotPasswordArgs>({
       query: data => {
         return {
-          body: JSON.stringify(data),
+          body: data,
           method: 'POST',
           url: '/api/v1/auth/password-reset/request',
-          headers: {
-            'Content-Type': 'application/json',
-          },
         }
       },
     }),
     recoveryConfirm: build.mutation<any, RecoveryConfirmArgs>({
       query: data => {
         return {
-          body: JSON.stringify(data),
+          body: data,
           method: 'POST',
           url: '/api/v1/auth/password-reset/confirm',
           headers: {
