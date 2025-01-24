@@ -42,7 +42,7 @@ export const baseApiAuthAndGithub = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://auth.smart-reg.org.ru',
     credentials: 'include',
-    mode: 'no-cors'
+    mode: 'no-cors',
   }),
   endpoints: () => ({}),
   tagTypes: [],
