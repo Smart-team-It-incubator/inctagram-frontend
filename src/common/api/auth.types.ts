@@ -1,4 +1,4 @@
-export type SignUpData = {
+export type SignUpArgs = {
   email: string
   password: string
   username: string
@@ -17,12 +17,15 @@ export type SignUpDataSuccess = {
 export type ErrorResponse = {
   error: {
     data: {
+      field: string
       message: string
+      path: string
       statusCode: number
+      timestamp: string
     }
     status: number
   }
-  meta: any
+  meta?: any
 }
 
 export type ForgotPasswordArgs = {
@@ -32,4 +35,19 @@ export type ForgotPasswordArgs = {
 export type RecoveryConfirmArgs = {
   recoveryCode: string | null
   newPassword: string
+}
+
+export type FormFields = keyof SignUpArgs
+
+export type EmailConfirmationArgs = {
+  code: string
+}
+
+export type ResendConfirmCodeArgs = {
+  email: string
+}
+
+export type BaseResponse = {
+  message: string
+  statusCode?: number
 }

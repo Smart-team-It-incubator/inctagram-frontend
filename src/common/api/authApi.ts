@@ -1,21 +1,40 @@
 'use client'
 
 import {
+  BaseResponse, EmailConfirmationArgs,
   ForgotPasswordArgs,
-  RecoveryConfirmArgs,
-  SignUpData,
+  RecoveryConfirmArgs, ResendConfirmCodeArgs,
+  SignUpArgs,
   SignUpDataSuccess,
 } from '@/common/api/auth.types'
 import { baseApi, baseApiAuthAndGithub } from '@/common/api/baseApi'
 
 export const authApi2 = baseApi.injectEndpoints({
   endpoints: build => ({
-    registration: build.mutation<SignUpDataSuccess, SignUpData>({
+    registration: build.mutation<SignUpDataSuccess, SignUpArgs>({
       query: data => {
         return {
           body: data,
           method: 'POST',
           url: '/users/registration',
+        }
+      },
+    }),
+    emailConfirmation: build.mutation<BaseResponse, EmailConfirmationArgs>({
+      query: data => {
+        return {
+          body: data,
+          method: 'POST',
+          url: `/users/emailConfirmation?code=${data.code}`,
+        }
+      },
+    }),
+    resendConfirmationCode: build.mutation<BaseResponse, ResendConfirmCodeArgs>({
+      query: data => {
+        return {
+          body: data,
+          method: 'POST',
+          url: '/users/resendConfirmationCode',
         }
       },
     }),
