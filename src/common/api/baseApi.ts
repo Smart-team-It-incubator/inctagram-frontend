@@ -10,7 +10,10 @@ export const baseApi = createApi({
     const result = await fetchBaseQuery({
       baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
       // baseUrl: 'https://smart-reg.org.ru/api/v1',
-      prepareHeaders: () => {},
+      prepareHeaders: (headers ) => {
+        headers.set('Content-Type', 'application/json')
+        return headers
+      },
     })(args, api, extraOptions)
 
     return result

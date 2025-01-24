@@ -7,5 +7,3 @@ export default function Privacypolicy() {
     </>
   )
 }
-
-// auth/signUp/privacyPolicy
