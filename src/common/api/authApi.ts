@@ -41,7 +41,7 @@ export const authApi2 = baseApi.injectEndpoints({
   }),
 })
 
-export const { useRegistrationMutation } = authApi2
+export const { useRegistrationMutation, useResendConfirmationCodeMutation, useEmailConfirmationMutation} = authApi2
 
 export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
   endpoints: build => ({
@@ -66,7 +66,25 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
         }
       },
     }),
+    terms: build.query<string,void>({
+      query: () => {
+        return {
+          method: 'GET',
+          url: '/api/v1/auth/terms',
+          responseHandler: (response) => response.text()
+        }
+      }
+    }),
+    private: build.query<string,void>({
+        query: () => {
+          return {
+            method: 'GET',
+            url: '/api/v1/auth/private',
+            responseHandler: (response) => response.text()
+          }
+        }
+    }),
   }),
 })
 
-export const { useRecoveryRequestMutation, useRecoveryConfirmMutation } = authAndGithubApi
+export const { useRecoveryRequestMutation, useRecoveryConfirmMutation, useTermsQuery, usePrivateQuery } = authAndGithubApi

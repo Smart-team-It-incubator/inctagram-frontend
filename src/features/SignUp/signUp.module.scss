@@ -82,3 +82,9 @@
   display: flex;
   width: 96px;
 }
+
+.signInButton{
+  &:focus {
+    outline: none;
+  }
+}

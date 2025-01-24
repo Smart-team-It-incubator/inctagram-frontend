@@ -7,8 +7,6 @@ import { useRegistrationMutation } from '@/common/api/authApi'
 import { Button } from '@/components/Button'
 import { FormCheckbox } from '@/components/FormCheckbox/FormCheckbox'
 import { FormInput } from '@/components/FormInput/FormInput'
-import { ModalRadix } from '@/components/ModalRadix/ModalRadix'
-import { Divider } from '@/components/shared/Divider'
 import { validationRules } from '@/features/SignUp/validationRules'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -18,6 +16,7 @@ import styles from './signUp.module.scss'
 import { GoogleIcon } from '../../../public/icons/GoogleIcon'
 import { GitAuth } from '../GitAuth'
 import {FormFields} from '@/common/api/auth.types';
+import {ModalSentEmail} from '@/features/ModalSentEmail';
 
 type FormValue = {
   checkboxTerms: boolean
@@ -26,6 +25,8 @@ type FormValue = {
   passwordConfirmation: string
   username: string
 }
+
+// sI6ltOjVpKOz! pass
 
 export const SignUp = () => {
   const [registration] = useRegistrationMutation()
@@ -101,20 +102,7 @@ export const SignUp = () => {
 
   return (
     <>
-      {showModal && (
-        <ModalRadix onClose={() => setShowModal(false)} open title={'Email sent'}>
-          <div className={styles.modalBody}>
-            <Divider color={'#4c4c4c'} style={{ marginBottom: '30px' }} />
-            <div className={styles.modalDesctiprion}>
-              <p>We have sent a link to confirm your email to {email}</p>
-              <div className={styles.btnContainer}>
-                <Button className={styles.closeModalBtn} onClick={() => setShowModal(false)}>
-                  OK
-                </Button>
-              </div>
-            </div>
-          </div>
-        </ModalRadix>
+      {showModal && (<ModalSentEmail email={email} closeHandler={() => setShowModal(false)}/>
       )}
 
       <div className={styles.container}>
@@ -184,12 +172,10 @@ export const SignUp = () => {
         </form>
 
         <p className={styles.text}>Do you have an account?</p>
-        <Button onClick={() => router.push('/auth/signIn')} variant={'link'}>
+        <Button onClick={() => router.push('/auth/signIn')} variant={'link'} className={styles.signInButton}>
           Sign In
         </Button>
       </div>
     </>
   )
 }
-
-// sI6ltOjVpKOz!
