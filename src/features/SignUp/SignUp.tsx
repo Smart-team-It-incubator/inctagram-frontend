@@ -17,6 +17,7 @@ import { GoogleIcon } from '../../../public/icons/GoogleIcon'
 import { GitAuth } from '../GitAuth'
 import {FormFields} from '@/common/api/auth.types';
 import {ModalSentEmail} from '@/features/ModalSentEmail';
+import {toast, ToastContainer} from 'react-toastify';
 
 type FormValue = {
   checkboxTerms: boolean
@@ -91,7 +92,7 @@ export const SignUp = () => {
                 type: 'manual',
               })
             } else {
-
+              toast.error('network error')
             }
           })
     } else {
@@ -175,6 +176,8 @@ export const SignUp = () => {
         <Button onClick={() => router.push('/auth/signIn')} variant={'link'} className={styles.signInButton}>
           Sign In
         </Button>
+
+        <ToastContainer autoClose={2000} position={'bottom-center'} />
       </div>
     </>
   )
