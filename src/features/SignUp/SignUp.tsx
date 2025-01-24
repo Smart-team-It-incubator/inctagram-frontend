@@ -17,6 +17,7 @@ import styles from './signUp.module.scss'
 
 import { GoogleIcon } from '../../../public/icons/GoogleIcon'
 import { GitAuth } from '../GitAuth'
+import {FormFields} from '@/common/api/auth.types';
 
 type FormValue = {
   checkboxTerms: boolean
@@ -34,8 +35,16 @@ export const SignUp = () => {
     formState: { errors, isValid },
     getValues,
     handleSubmit,
+    reset,
+    setError,
     trigger,
-  } = useForm<FormValue>({ mode: 'onChange' })
+  } = useForm<FormValue>({defaultValues: {
+      checkboxTerms: false,
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      username: '',
+    }})
 
   const [showModal, setShowModal] = useState(false)
   const [email, setEmail] = useState<string>('')
@@ -58,16 +67,34 @@ export const SignUp = () => {
   const onSubmit: SubmitHandler<FormValue> = data => {
     if (getValues('password') === getValues('passwordConfirmation')) {
       setEmail(data.email)
+
       const formData = {
         email: data.email,
         password: data.password,
         username: data.username,
       }
 
-      registration(formData).then(data => {
-        console.log('c сервера:', data)
-        setShowModal(true)
-      })
+      registration(formData)
+          .unwrap()
+          .then(() => {
+            reset()
+            setShowModal(true)
+          })
+          .catch(error => {
+            if (error.status === 409) {
+              const field = error.data.field as FormFields
+              const message = error.data.message
+
+              setError(field, {
+                message,
+                type: 'manual',
+              })
+            } else {
+
+            }
+          })
+    } else {
+      setError('passwordConfirmation', { message: 'Password must match', type: 'manual' })
     }
   }
   const router = useRouter()
