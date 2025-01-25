@@ -45,8 +45,8 @@ export const FormInput = ({
 
   const value = field.value ?? ''
 
-  const handleBlur = () => {
-    trigger(name)
+  const handleBlur = async () => {
+    await trigger(name)
   }
 
   return (

@@ -7,8 +7,6 @@ import { useRegistrationMutation } from '@/common/api/authApi'
 import { Button } from '@/components/Button'
 import { FormCheckbox } from '@/components/FormCheckbox/FormCheckbox'
 import { FormInput } from '@/components/FormInput/FormInput'
-import { ModalRadix } from '@/components/ModalRadix/ModalRadix'
-import { Divider } from '@/components/shared/Divider'
 import { validationRules } from '@/features/SignUp/validationRules'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -17,6 +15,8 @@ import styles from './signUp.module.scss'
 
 import { GoogleIcon } from '../../../public/icons/GoogleIcon'
 import { GitAuth } from '../GitAuth'
+import {FormFields} from '@/common/api/auth.types';
+import {ModalSentEmail} from '@/features/ModalSentEmail';
 
 type FormValue = {
   checkboxTerms: boolean
@@ -26,6 +26,8 @@ type FormValue = {
   username: string
 }
 
+// sI6ltOjVpKOz! pass
+
 export const SignUp = () => {
   const [registration] = useRegistrationMutation()
 
@@ -34,8 +36,16 @@ export const SignUp = () => {
     formState: { errors, isValid },
     getValues,
     handleSubmit,
+    reset,
+    setError,
     trigger,
-  } = useForm<FormValue>({ mode: 'onChange' })
+  } = useForm<FormValue>({defaultValues: {
+      checkboxTerms: false,
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      username: '',
+    }})
 
   const [showModal, setShowModal] = useState(false)
   const [email, setEmail] = useState<string>('')
@@ -58,36 +68,41 @@ export const SignUp = () => {
   const onSubmit: SubmitHandler<FormValue> = data => {
     if (getValues('password') === getValues('passwordConfirmation')) {
       setEmail(data.email)
+
       const formData = {
         email: data.email,
         password: data.password,
         username: data.username,
       }
 
-      registration(formData).then(data => {
-        console.log('c сервера:', data)
-        setShowModal(true)
-      })
+      registration(formData)
+          .unwrap()
+          .then(() => {
+            reset()
+            setShowModal(true)
+          })
+          .catch(error => {
+            if (error.status === 409) {
+              const field = error.data.field as FormFields
+              const message = error.data.message
+
+              setError(field, {
+                message,
+                type: 'manual',
+              })
+            } else {
+
+            }
+          })
+    } else {
+      setError('passwordConfirmation', { message: 'Password must match', type: 'manual' })
     }
   }
   const router = useRouter()
 
   return (
     <>
-      {showModal && (
-        <ModalRadix onClose={() => setShowModal(false)} open title={'Email sent'}>
-          <div className={styles.modalBody}>
-            <Divider color={'#4c4c4c'} style={{ marginBottom: '30px' }} />
-            <div className={styles.modalDesctiprion}>
-              <p>We have sent a link to confirm your email to {email}</p>
-              <div className={styles.btnContainer}>
-                <Button className={styles.closeModalBtn} onClick={() => setShowModal(false)}>
-                  OK
-                </Button>
-              </div>
-            </div>
-          </div>
-        </ModalRadix>
+      {showModal && (<ModalSentEmail email={email} closeHandler={() => setShowModal(false)}/>
       )}
 
       <div className={styles.container}>
@@ -157,12 +172,10 @@ export const SignUp = () => {
         </form>
 
         <p className={styles.text}>Do you have an account?</p>
-        <Button onClick={() => router.push('/auth/signIn')} variant={'link'}>
+        <Button onClick={() => router.push('/auth/signIn')} variant={'link'} className={styles.signInButton}>
           Sign In
         </Button>
       </div>
     </>
   )
 }
-
-// sI6ltOjVpKOz!

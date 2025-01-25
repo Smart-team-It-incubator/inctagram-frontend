@@ -4,16 +4,14 @@
   justify-content: center;
 
   background: var(--primary-500);
-  /* width: 182px;
-    height: 36px;*/
   padding: 6px 24px;
   border-radius: 2px;
   border: none;
 
   font-family: var(--font-family-primary) sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
   text-align: center;
   color: var(--light-100);
   cursor: pointer;
