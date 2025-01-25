@@ -14,6 +14,7 @@ import {GitAuth} from '../GitAuth'
 import {ModalSentEmail} from '@/features/ModalSentEmail';
 import {ToastContainer} from 'react-toastify';
 import {useSignUp} from '@/features/SignUp/useSignUp';
+import {Container} from '@/components/shared/Container';
 
 export type FormValue = {
     checkboxTerms: boolean
@@ -30,11 +31,11 @@ export const SignUp = () => {
     const router = useRouter()
 
     return (
-        <>
+        <Container className={styles.container}>
             {showModal && (<ModalSentEmail email={email} closeHandler={closeHandler}/>
             )}
 
-            <div className={styles.container}>
+            <div className={styles.wrapper}>
                 <h1 className={styles.title}>Sign Up</h1>
                 <div className={styles.iconsContainer}>
                     <GoogleIcon/>
@@ -107,6 +108,6 @@ export const SignUp = () => {
 
                 <ToastContainer autoClose={2000} position={'bottom-center'}/>
             </div>
-        </>
+        </Container>
     )
 }

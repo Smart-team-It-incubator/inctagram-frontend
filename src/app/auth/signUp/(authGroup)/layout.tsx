@@ -18,12 +18,12 @@ export default function AuthGroupLayout({
   const router = useRouter()
 
   return (
-    <Container style={{ padding: '24px 2px' }}>
-      <Button className={styles.button} onClick={() => router.push('/auth/signUp')} variant={'withIcon'}>
-        <ArrowBack className={styles.iconArrow} />
-        <div className={styles.text}>Back to Sign Up</div>
-      </Button>
-      {children}
+    <Container className={styles.container}>
+            <Button className={styles.button} onClick={() => router.push('/auth/signUp')} variant={'withIcon'}>
+                <ArrowBack className={styles.iconArrow} />
+                <div className={styles.text}>Back to Sign Up</div>
+            </Button>
+            {children}
     </Container>
   )
 }
