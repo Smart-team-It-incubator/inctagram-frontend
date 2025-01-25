@@ -7,9 +7,10 @@ type Props = {
   style?: CSSProperties
   maxWidth?: string
   margin?: string
+  className?:string
 }
 
-export const Container = ({ style, maxWidth = '865px', margin = '0 auto', children }: Props) => {
+export const Container = ({ style, maxWidth = '865px', margin = '0 auto', children, className }: Props) => {
   const [dynamicMaxWidth, setDynamicMaxWidth] = useState(maxWidth)
 
   useEffect(() => {
@@ -25,5 +26,5 @@ export const Container = ({ style, maxWidth = '865px', margin = '0 auto', childr
     }
   }, [maxWidth])
 
-  return <div style={{ maxWidth: dynamicMaxWidth, margin, ...style }}>{children}</div>
+  return <div style={{ maxWidth: dynamicMaxWidth, margin, ...style }} className={className}>{children}</div>
 }

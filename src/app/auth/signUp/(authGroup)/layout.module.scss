@@ -1,12 +1,16 @@
+.container{
+  padding: 24px 2px;
+}
+
 .button {
-  background-color: transparent;
+  background-color: transparent !important;
   padding: 6px 0;
   display: flex;
   align-items: center;
   gap: 10px;
 
   &:hover {
-    background-color: transparent;
+    background: transparent;
     color: var(--primary-100);
   }
 
@@ -14,16 +18,13 @@
   &:focus {
     border: none;
     outline: none;
+    background: transparent;
   }
 
   svg {
     color: currentColor;
     width: 14px;
     height: 16px;
-
-    &:hover {
-      color: var(--primary-100);
-    }
   }
 }
 
@@ -32,4 +33,35 @@
   font-size: var(--font-size-xs);
   line-height: var(--line-height-l);
   text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .container{
+    margin:0;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .button{
+    position: absolute;
+    background: transparent;
+
+    &:hover,
+    &:active,
+    &:focus{
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+
+    svg{
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .text{
+    display: none;
+  }
 }
