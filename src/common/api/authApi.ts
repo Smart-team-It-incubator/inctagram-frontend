@@ -1,9 +1,11 @@
 'use client'
 
 import {
-  BaseResponse, EmailConfirmationArgs,
+  BaseResponse,
+  EmailConfirmationArgs,
   ForgotPasswordArgs,
-  RecoveryConfirmArgs, ResendConfirmCodeArgs,
+  RecoveryConfirmArgs,
+  ResendConfirmCodeArgs,
   SignUpArgs,
   SignUpDataSuccess,
 } from '@/common/api/auth.types'
@@ -41,10 +43,21 @@ export const authApi2 = baseApi.injectEndpoints({
   }),
 })
 
-export const { useRegistrationMutation, useResendConfirmationCodeMutation, useEmailConfirmationMutation} = authApi2
+export const {
+  useRegistrationMutation,
+  useResendConfirmationCodeMutation,
+  useEmailConfirmationMutation,
+} = authApi2
 
 export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
   endpoints: build => ({
+    login: build.mutation<{ accessToken: string }, { email: string; password: string }>({
+      query: data => ({
+        url: '/api/v1/auth/login',
+        method: 'POST',
+        body: data,
+      }),
+    }),
     recoveryRequest: build.mutation<any, ForgotPasswordArgs>({
       query: data => {
         return {
@@ -54,6 +67,7 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
         }
       },
     }),
+
     recoveryConfirm: build.mutation<any, RecoveryConfirmArgs>({
       query: data => {
         return {
@@ -63,25 +77,31 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
         }
       },
     }),
-    terms: build.query<string,void>({
+    terms: build.query<string, void>({
       query: () => {
         return {
           method: 'GET',
           url: '/api/v1/auth/terms',
-          responseHandler: (response) => response.text()
+          responseHandler: response => response.text(),
         }
-      }
+      },
     }),
-    private: build.query<string,void>({
-        query: () => {
-          return {
-            method: 'GET',
-            url: '/api/v1/auth/private',
-            responseHandler: (response) => response.text()
-          }
+    private: build.query<string, void>({
+      query: () => {
+        return {
+          method: 'GET',
+          url: '/api/v1/auth/private',
+          responseHandler: response => response.text(),
         }
+      },
     }),
   }),
 })
 
-export const { useRecoveryRequestMutation, useRecoveryConfirmMutation, useTermsQuery, usePrivateQuery } = authAndGithubApi
+export const {
+  useLoginMutation,
+  useRecoveryRequestMutation,
+  useRecoveryConfirmMutation,
+  useTermsQuery,
+  usePrivateQuery,
+} = authAndGithubApi

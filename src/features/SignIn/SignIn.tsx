@@ -1,14 +1,16 @@
 'use client'
 
+import Link from 'next/link'
+import { GitAuth } from '../GitAuth'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/Button'
 import { CustomInput } from '@/components/CustomInput'
+import { useLoginMutation } from '@/common/api/authApi'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { GoogleIcon } from '../../../public/icons/GoogleIcon'
+import { emailValidation, passwordValidation } from './validators'
 
 import styles from './SignIn.module.scss'
-import Link from 'next/link'
-import { GitAuth } from '../GitAuth'
 
 type FormValue = {
   email: string
@@ -18,6 +20,7 @@ type FormValue = {
 
 export const SignIn = () => {
   const router = useRouter()
+  const [login] = useLoginMutation()
 
   const {
     handleSubmit,
@@ -25,31 +28,30 @@ export const SignIn = () => {
     formState: { errors },
   } = useForm<FormValue>()
 
-  const onSubmit: SubmitHandler<FormValue> = async data => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-    try {
-      const response = await fetch(`${baseUrl}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        credentials: 'include'
-      })
+  const isApiError = (err: unknown): err is { status: number; data: { message?: string } } => {
+    return typeof err === 'object' && err !== null && 'status' in err
+  }
 
-      if (response.ok) {
-        const result = await response.json()
-        console.log('AccessToken:', result.accessToken)
-        // router.push('/auth/profile')
-      } else if (response.status === 401) {
-        console.error('Неверный логин или пароль.')
-      } else if (response.status === 409) {
-        console.error('Сессия уже существует для этого устройства.')
+  const onSubmit: SubmitHandler<FormValue> = async data => {
+    try {
+      const response = await login(data).unwrap()
+      localStorage.setItem('accessToken', response.accessToken)
+      router.push('/home')
+    } catch (err) {
+      if (isApiError(err)) {
+        const { status, data } = err
+        if (status === 401) {
+          alert('Неверный логин или пароль. Попробуйте снова.')
+        } else if (status === 409) {
+          alert('Сессия уже существует для этого устройства.')
+        } else {
+          alert(data?.message || 'Произошла ошибка. Попробуйте позже.')
+        }
+      } else if (err instanceof Error) {
+        console.error('Произошла ошибка:', err.message)
       } else {
-        console.error('Произошла ошибка. Попробуйте снова позже.')
+        console.error('Неизвестная ошибка:', err)
       }
-    } catch (error) {
-      console.error('Ошибка сети или сервера:', error)
     }
   }
 
@@ -67,14 +69,7 @@ export const SignIn = () => {
           textPlaceholder={'Epam@epam.com'}
           title={'Email'}
           type={'text'}
-          {...register('email', {
-            required: true,
-            pattern: {
-              value:
-                /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu,
-              message: 'The email or password are incorrect. Try again please',
-            },
-          })}
+          {...register('email', emailValidation)}
         />
         <div className={styles.inputWrap}>
           <CustomInput
@@ -83,20 +78,15 @@ export const SignIn = () => {
             title={'Password'}
             type={'password'}
             icon={'eye'}
-            {...register('password', {
-              required: true,
-              // pattern: {
-              //   value: /^[a-z0-9]{6,}$/i,
-              //   message: 'The email or password are incorrect. Try again please',
-              // },
-            })}
+            {...register('password', passwordValidation)}
           />
         </div>
-        {errors.password?.message || errors.email?.message ? (
-          <p className={styles.error}>{errors.password?.message || errors.email?.message}</p>
-        ) : null}
 
-        <p style={{ fontSize: 14, textAlign: 'end', color: '#8d9094' }}>
+        {(errors.password || errors.email) && (
+          <p className={styles.error}>{errors.password?.message || errors.email?.message}</p>
+        )}
+
+        <p className={styles.forgotPassword}>
           <Link href="/auth/forgotPassword">Forgot Password</Link>
         </p>
 
