@@ -41,9 +41,6 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
           body: data,
           method: 'POST',
           url: '/api/v1/auth/password-reset/confirm',
-          headers: {
-            'Content-Type': 'application/json',
-          },
         }
       },
     }),

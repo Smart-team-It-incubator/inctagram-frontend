@@ -43,7 +43,6 @@ export const baseApiAuthAndGithub = createApi({
     baseUrl: 'https://auth.smart-reg.org.ru',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
-      // Добавляем заголовок 'Content-Type': 'application/json' ко всем запросам
       headers.set('Content-Type', 'application/json')
       return headers
     },

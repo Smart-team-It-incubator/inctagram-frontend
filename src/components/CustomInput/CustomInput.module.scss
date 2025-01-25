@@ -38,6 +38,15 @@
   &::placeholder {
     color: #8d9094;
   }
+  &:-webkit-autofill {
+    -webkit-text-fill-color: white;
+    background-color: transparent;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  &:-webkit-autofill:hover {
+    background-color: transparent;
+  }
 }
 
 .disabled {
@@ -103,6 +112,6 @@
     background-color: #0d0d0d;
   }
   .input {
-    background-color: #0d0d0d;
+    background-color: #0d0d0d !important;
   }
 }
