@@ -49,7 +49,7 @@ export const NewPassword = () => {
         if (res.error) {
           throw res.error
         }
-        router.push('/auth/signUp')
+        router.push('/auth/signIn')
       } catch (err) {
         router.replace('/auth/newPassword')
         setIsLinkExpired(true)
@@ -111,7 +111,6 @@ export const NewPassword = () => {
       </div>
     )
   }
-
 
   return <Suspense fallback={<div>Loading...</div>}>{renderContent()}</Suspense>
 }

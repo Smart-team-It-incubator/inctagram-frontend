@@ -70,6 +70,7 @@ export const ForgotPassword = () => {
     e.preventDefault()
 
     try {
+      setIsDataAndCaptchaValid(false)
       const res = await recoveryRequest({ email: textInput })
       if (res.error) {
         throw res.error
@@ -78,6 +79,8 @@ export const ForgotPassword = () => {
       onClickHandler()
     } catch (err) {
       setIsErrorMessage("User with this email doesn't exist")
+    } finally {
+      setIsDataAndCaptchaValid(true)
     }
   }
 
@@ -101,8 +104,10 @@ export const ForgotPassword = () => {
             title="Email"
             textPlaceholder="Epam@epam.com"
             type="email"
+            name="email"
             errorMessage={isErrorMessage}
             required
+            autoComplete="on"
           />
 
           <p className={s.text}>
@@ -130,7 +135,7 @@ export const ForgotPassword = () => {
           />
         </form>
 
-        <Link href="/auth" className={s.link_back}>
+        <Link href="/auth/signIn" className={s.link_back}>
           Back to Sign In
         </Link>
 

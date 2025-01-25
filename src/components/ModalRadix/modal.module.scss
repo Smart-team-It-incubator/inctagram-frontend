@@ -1,7 +1,8 @@
 .overlay {
-  background: var(--dark-900);
+  background: var(--dark-700);
   position: absolute;
   inset: 0;
+  height: 100%;
 }
 
 .content {
@@ -23,7 +24,7 @@
   font-family: var(--font-family), sans-serif;
   font-weight: 700;
   font-size: 20px;
-line-height: 180%;
+  line-height: var(--line-height-xl);
   color: var(--light-100);
 }
 
@@ -54,5 +55,4 @@ line-height: 180%;
   &:focus-visible {
     outline: none;
   }
-
 }

@@ -27,7 +27,6 @@ export const FormCheckbox = ({ control, disabled = false, name, title }: FormChe
       title,
     },
   ]
-  console.log("checkboxData = ", value )
 
   return <Checkbox data={checkboxData} />
 }
