@@ -1,4 +1,4 @@
-import { SignIn } from '@/features/SignI'
+import { SignIn } from '@/features/SignIn'
 import { Container } from '@/components/shared/Container'
 
 export default function Auth() {
