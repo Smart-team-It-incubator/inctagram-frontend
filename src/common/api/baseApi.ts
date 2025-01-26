@@ -8,7 +8,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const baseApi = createApi({
   baseQuery: async (args, api, extraOptions) => {
     const result = await fetchBaseQuery({
-      baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+/*      baseUrl: process.env.NEXT_PUBLIC_BASE_URL,*/
+      baseUrl:'https://smart-reg.org.ru/api/v1',
       // baseUrl: 'https://smart-reg.org.ru/api/v1',
       prepareHeaders: headers => {
         headers.set('Content-Type', 'application/json')

@@ -44,7 +44,7 @@ export default function EmailExpired() {
             {showModal ? (
                 <ModalSentEmail
                     email={email}
-                    closeHandler={setShowModal}
+                    closeHandler={()=>setShowModal(false)}
                 />
             ) : (
                 <EmailLinkExpired>
