@@ -8,10 +8,13 @@ import { Modal } from '@/components/Modal/Modal'
 import s from './Modal.module.scss'
 
 type Props = {
-  email: string
+  email: string,
+  showModal: boolean,
+  setShowModal: Function
+
 }
-export const LogOut = ({ email }: Props) => {
-  const [showModal, setShowModal] = useState<boolean>(false)
+export const LogOut = ({ email, showModal, setShowModal }: Props) => {
+  
   const logout = () => {
     alert('You is Log Out')
     setShowModal(false)
