@@ -24,15 +24,16 @@ export const authSlice = createSlice({
     },
   },
 
-  selectors: {
-    isAuthSelector: state => state.isAuth,
-    showLogoutModal: state => state.showLogoutModal,
-  },
+//   selectors: {
+//     isAuthSelector: state => state.isAuth,
+//     showLogoutModal: state => state.showLogoutModal,
+//   },
   
 })
 
 export const authActions = authSlice.actions
 export const authReducers = authSlice.reducer
+// export const authSelectors = authSlice.selectors
 
 // export const selectIsAuth = (state: RootState) => state.authSlice.isAuth
 

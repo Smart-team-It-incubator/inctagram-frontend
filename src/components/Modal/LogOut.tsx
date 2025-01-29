@@ -1,20 +1,25 @@
 'use client'
 
-import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
+import { authActions } from '@/common/store/slices'
+// import { useState } from 'react'
 
 import { Button } from '@/components/Button'
-import { Modal } from '@/components/Modal/Modal'
+// import { Modal } from '@/components/Modal/Modal'
 
-import s from './Modal.module.scss'
+// import s from './Modal.module.scss'
 
 type Props = {
-  email: string,
-  showModal: boolean,
-  setShowModal: Function
-
+  email?: string
+  showModal?: boolean
+  setShowModal?: Function
 }
-export const LogOut = ({ email, showModal, setShowModal }: Props) => {
-  
+export const LogOut = ({ email, showModal = false, setShowModal = () => {} }: Props) => {
+  const isAuth = useAppSelector(state => state.authSlice.isAuth)
+  const dispatch = useAppDispatch()
+
+  console.log('isAuth', isAuth)
+
   const logout = () => {
     alert('You is Log Out')
     setShowModal(false)
@@ -22,8 +27,8 @@ export const LogOut = ({ email, showModal, setShowModal }: Props) => {
 
   return (
     <>
-      <Button onClick={() => setShowModal(true)}>LogOut</Button>
-      {
+      <Button onClick={() => dispatch(authActions.setIsAuth(true))}>LogOut</Button>
+      {/* {
         <Modal
           modalTitle={'LogOut'}
           onClose={() => {
@@ -47,7 +52,7 @@ export const LogOut = ({ email, showModal, setShowModal }: Props) => {
             </Button>
           </div>
         </Modal>
-      }
+      } */}
     </>
   )
 }
