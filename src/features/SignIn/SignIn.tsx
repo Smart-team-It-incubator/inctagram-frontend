@@ -36,7 +36,7 @@ export const SignIn = () => {
     try {
       const response = await login(data).unwrap()
       localStorage.setItem('accessToken', response.accessToken)
-      router.push('/home')
+      router.push('/')
     } catch (err) {
       if (isApiError(err)) {
         const { status, data } = err
