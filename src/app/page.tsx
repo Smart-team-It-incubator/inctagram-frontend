@@ -1,7 +1,10 @@
-import { LogOut } from "@/components/Modal/LogOut";
+import { SidebarWrapper } from '@/components/Menu/Sidebar/SidebarWrapper'
 
 export default function Home() {
-  return <div>ГЛАВНАЯ СТРАНИЦА
-    <LogOut  />
-  </div>
+  return (
+    <div>
+      ГЛАВНАЯ СТРАНИЦА
+      <SidebarWrapper />
+    </div>
+  )
 }

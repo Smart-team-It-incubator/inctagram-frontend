@@ -3,12 +3,14 @@ import { RootState } from '../store'
 
 type AuthStateType = {
   isAuth: boolean
-  showLogoutModal: boolean
+  showLogoutModal: boolean,
+  email: string | null
 }
 
 const initialState: AuthStateType = {
   isAuth: false,
   showLogoutModal: false,
+  email: null
 }
 
 export const authSlice = createSlice({

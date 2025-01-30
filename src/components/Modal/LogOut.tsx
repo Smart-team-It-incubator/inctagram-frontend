@@ -2,37 +2,35 @@
 
 import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
 import { authActions } from '@/common/store/slices'
-// import { useState } from 'react'
 
 import { Button } from '@/components/Button'
-// import { Modal } from '@/components/Modal/Modal'
+import { Modal } from './Modal'
 
-// import s from './Modal.module.scss'
+import s from './Modal.module.scss'
 
-type Props = {
-  email?: string
-  showModal?: boolean
-  setShowModal?: Function
-}
-export const LogOut = ({ email, showModal = false, setShowModal = () => {} }: Props) => {
-  const isAuth = useAppSelector(state => state.authSlice.isAuth)
+export const LogOut = () => {
+  // const isAuth = useAppSelector(state => state.authSlice.isAuth)
+  const showModal = useAppSelector(state => state.authSlice.showLogoutModal)
+  const email = useAppSelector(state => state.authSlice.email)
   const dispatch = useAppDispatch()
 
-  console.log('isAuth', isAuth)
+  const modalHandle = (visible: boolean) => {
+    dispatch(authActions.setIsAuth(visible))
+  }
 
   const logout = () => {
     alert('You is Log Out')
-    setShowModal(false)
+    // Request to LogOut and redirect to HomePage
   }
-
+  debugger
   return (
     <>
       <Button onClick={() => dispatch(authActions.setIsAuth(true))}>LogOut</Button>
-      {/* {
+      {
         <Modal
           modalTitle={'LogOut'}
           onClose={() => {
-            setShowModal(false)
+            modalHandle(false)
           }}
           open={showModal}
         >
@@ -45,14 +43,14 @@ export const LogOut = ({ email, showModal = false, setShowModal = () => {} }: Pr
             </Button>
             <Button
               className={s.buttonStyle}
-              onClick={() => setShowModal(false)}
+              onClick={() => modalHandle(false)}
               variant={'primary'}
             >
               No
             </Button>
           </div>
         </Modal>
-      } */}
+      }
     </>
   )
 }
