@@ -25,8 +25,6 @@ export const LogOut = () => {
   debugger
   return (
     <>
-      <Button onClick={() => dispatch(authActions.setIsAuth(true))}>LogOut</Button>
-      {
         <Modal
           modalTitle={'LogOut'}
           onClose={() => {
@@ -50,7 +48,6 @@ export const LogOut = () => {
             </Button>
           </div>
         </Modal>
-      }
     </>
   )
 }
