@@ -1,3 +1,5 @@
+import {PublicPage} from '@/features/publicPage/PublicPage';
+
 export default function Home() {
-  return <div>ГЛАВНАЯ СТРАНИЦА</div>
+  return <PublicPage/>
 }

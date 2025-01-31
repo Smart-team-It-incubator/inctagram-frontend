@@ -3,6 +3,7 @@
 import { Suspense, useEffect } from 'react'
 import { useEmailConfirmationMutation } from '@/common/api/authApi'
 import { useRouter, useSearchParams } from 'next/navigation'
+import {ROUTES} from '@/common/routes/routes';
 
 function EmailConfirm() {
   const router = useRouter()
@@ -14,10 +15,10 @@ function EmailConfirm() {
       emailConfirmation({ code: code })
         .unwrap()
         .then(() => {
-          router.push('/auth/signUp/congratulations')
+          router.push(ROUTES.CONGRATULATIONS)
         })
         .catch(() => {
-          router.push('/auth/signUp/emailExpired')
+          router.push(ROUTES.EMAIL_EXPIRED)
         })
     }
   }, [])

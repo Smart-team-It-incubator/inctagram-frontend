@@ -7,5 +7,3 @@ export default function Termsofservice() {
     </>
   )
 }
-
-// /auth/signUp/termsOfService
