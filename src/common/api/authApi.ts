@@ -1,13 +1,19 @@
 'use client'
 
 import {
-  BaseResponse, EmailConfirmationArgs,
+  BaseResponse,
+  EmailConfirmationArgs,
   ForgotPasswordArgs,
-  RecoveryConfirmArgs, ResendConfirmCodeArgs,
+  RecoveryConfirmArgs,
+  ResendConfirmCodeArgs,
   SignUpArgs,
   SignUpDataSuccess,
 } from '@/common/api/auth.types'
 import { baseApi, baseApiAuthAndGithub } from '@/common/api/baseApi'
+import {API_URLS} from '@/common/api/apiURLs';
+
+
+
 
 export const authApi2 = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -16,16 +22,17 @@ export const authApi2 = baseApi.injectEndpoints({
         return {
           body: data,
           method: 'POST',
-          url: '/users/registration',
+          url:API_URLS.AUTH.REGISTRATION
         }
       },
     }),
     emailConfirmation: build.mutation<BaseResponse, EmailConfirmationArgs>({
+
       query: data => {
         return {
           body: data,
           method: 'POST',
-          url: `/users/emailConfirmation?code=${data.code}`,
+          url:`${API_URLS.AUTH.EMAIL_CONFIRMATION}${data.code}`
         }
       },
     }),
@@ -34,54 +41,72 @@ export const authApi2 = baseApi.injectEndpoints({
         return {
           body: data,
           method: 'POST',
-          url: '/users/resendConfirmationCode',
+          url: API_URLS.AUTH.RESEND_CONFIRMATION_CODE
         }
       },
     }),
   }),
 })
 
-export const { useRegistrationMutation, useResendConfirmationCodeMutation, useEmailConfirmationMutation} = authApi2
+export const {
+  useRegistrationMutation,
+  useResendConfirmationCodeMutation,
+  useEmailConfirmationMutation,
+} = authApi2
 
 export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
   endpoints: build => ({
+    login: build.mutation<{ accessToken: string }, { email: string; password: string }>({
+      query: data => ({
+        url:API_URLS.AUTH.LOGIN,
+        method: 'POST',
+        body: data,
+      }),
+    }),
     recoveryRequest: build.mutation<any, ForgotPasswordArgs>({
       query: data => {
         return {
           body: data,
           method: 'POST',
-          url: '/api/v1/auth/password-reset/request',
+          url: API_URLS.AUTH.RECOVERY_REQUEST,
         }
       },
     }),
+
     recoveryConfirm: build.mutation<any, RecoveryConfirmArgs>({
       query: data => {
         return {
           body: data,
           method: 'POST',
-          url: '/api/v1/auth/password-reset/confirm',
+          url: API_URLS.AUTH.RECOVERY_CONFIRM,
         }
       },
     }),
-    terms: build.query<string,void>({
+    terms: build.query<string, void>({
       query: () => {
         return {
           method: 'GET',
-          url: '/api/v1/auth/terms',
-          responseHandler: (response) => response.text()
+          url:API_URLS.AUTH.TERMS,
+          responseHandler: response => response.text(),
         }
-      }
+      },
     }),
-    private: build.query<string,void>({
-        query: () => {
-          return {
-            method: 'GET',
-            url: '/api/v1/auth/private',
-            responseHandler: (response) => response.text()
-          }
+    private: build.query<string, void>({
+      query: () => {
+        return {
+          method: 'GET',
+          url: API_URLS.AUTH.PRIVATE,
+          responseHandler: response => response.text(),
         }
+      },
     }),
   }),
 })
 
-export const { useRecoveryRequestMutation, useRecoveryConfirmMutation, useTermsQuery, usePrivateQuery } = authAndGithubApi
+export const {
+  useLoginMutation,
+  useRecoveryRequestMutation,
+  useRecoveryConfirmMutation,
+  useTermsQuery,
+  usePrivateQuery,
+} = authAndGithubApi

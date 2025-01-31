@@ -11,7 +11,7 @@ import { validationRules } from '@/features/SignUp/validationRules'
 
 import styles from './emailExpired.module.scss'
 
-import { ModalSentEmail } from '../../../../features/ModalSentEmail'
+import { ModalSentEmail } from '../../../../features/ModalSentEmail/index'
 
 type FormValue = {
     email: string
@@ -44,7 +44,7 @@ export default function EmailExpired() {
             {showModal ? (
                 <ModalSentEmail
                     email={email}
-                    closeHandler={setShowModal}
+                    closeHandler={()=>setShowModal(false)}
                 />
             ) : (
                 <EmailLinkExpired>

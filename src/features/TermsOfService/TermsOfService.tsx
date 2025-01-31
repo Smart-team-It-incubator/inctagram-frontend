@@ -13,7 +13,7 @@ export const TermsOfService = () => {
         <h1 className={styles.title}>Terms of service</h1>
         <p className={styles.text}>
           {termsOfService}
-        </p>
+      </p>
       </div>
     </>
   )

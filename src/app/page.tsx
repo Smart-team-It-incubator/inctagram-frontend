@@ -1,5 +1,5 @@
-import {redirect} from 'next/navigation';
+import {PublicPage} from '@/features/publicPage/PublicPage';
 
 export default function Home() {
-  redirect('/auth/signUp')
+  return <PublicPage/>
 }
