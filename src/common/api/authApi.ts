@@ -10,6 +10,10 @@ import {
   SignUpDataSuccess,
 } from '@/common/api/auth.types'
 import { baseApi, baseApiAuthAndGithub } from '@/common/api/baseApi'
+import {API_URLS} from '@/common/api/apiURLs';
+
+
+
 
 export const authApi2 = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -18,16 +22,17 @@ export const authApi2 = baseApi.injectEndpoints({
         return {
           body: data,
           method: 'POST',
-          url: '/users/registration',
+          url:API_URLS.AUTH.REGISTRATION
         }
       },
     }),
     emailConfirmation: build.mutation<BaseResponse, EmailConfirmationArgs>({
+
       query: data => {
         return {
           body: data,
           method: 'POST',
-          url: `/users/emailConfirmation?code=${data.code}`,
+          url:`${API_URLS.AUTH.EMAIL_CONFIRMATION}${data.code}`
         }
       },
     }),
@@ -36,7 +41,7 @@ export const authApi2 = baseApi.injectEndpoints({
         return {
           body: data,
           method: 'POST',
-          url: '/users/resendConfirmationCode',
+          url: API_URLS.AUTH.RESEND_CONFIRMATION_CODE
         }
       },
     }),
@@ -53,7 +58,7 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
   endpoints: build => ({
     login: build.mutation<{ accessToken: string }, { email: string; password: string }>({
       query: data => ({
-        url: '/api/v1/auth/login',
+        url:API_URLS.AUTH.LOGIN,
         method: 'POST',
         body: data,
       }),
@@ -63,7 +68,7 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
         return {
           body: data,
           method: 'POST',
-          url: '/api/v1/auth/password-reset/request',
+          url: API_URLS.AUTH.RECOVERY_REQUEST,
         }
       },
     }),
@@ -73,7 +78,7 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
         return {
           body: data,
           method: 'POST',
-          url: '/api/v1/auth/password-reset/confirm',
+          url: API_URLS.AUTH.RECOVERY_CONFIRM,
         }
       },
     }),
@@ -81,7 +86,7 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
       query: () => {
         return {
           method: 'GET',
-          url: '/api/v1/auth/terms',
+          url:API_URLS.AUTH.TERMS,
           responseHandler: response => response.text(),
         }
       },
@@ -90,7 +95,7 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
       query: () => {
         return {
           method: 'GET',
-          url: '/api/v1/auth/private',
+          url: API_URLS.AUTH.PRIVATE,
           responseHandler: response => response.text(),
         }
       },

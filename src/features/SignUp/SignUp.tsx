@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, {useState} from 'react'
 import {Button} from '@/components/Button'
 import {FormCheckbox} from '@/components/FormCheckbox/FormCheckbox'
 import {FormInput} from '@/components/FormInput/FormInput'
@@ -12,9 +12,13 @@ import styles from './signUp.module.scss'
 import {GoogleIcon} from '../../../public/icons/GoogleIcon'
 import {GitAuth} from '../GitAuth'
 import {ModalSentEmail} from '@/features/ModalSentEmail';
-import {ToastContainer} from 'react-toastify';
-import {useSignUp} from '@/features/SignUp/useSignUp';
+import {toast, ToastContainer} from 'react-toastify';
 import {Container} from '@/components/shared/Container';
+import {ROUTES} from '@/common/routes/routes';
+import {useRegistrationMutation} from '@/common/api/authApi';
+import {SubmitHandler, useForm} from 'react-hook-form';
+import Link from 'next/link';
+import {FormFields} from '@/common/api/auth.types';
 
 export type FormValue = {
     checkboxTerms: boolean
@@ -27,7 +31,81 @@ export type FormValue = {
 // sI6ltOjVpKOz! pass
 
 export const SignUp = () => {
-    const {showModal, email, control, errors, trigger, titleCheckbox, isValid, onSubmit, closeHandler, handleSubmit,} = useSignUp()
+
+    const [registration] = useRegistrationMutation()
+
+
+    const {
+        control,
+        formState: {errors, isValid},
+        getValues,
+        reset,
+        setError,
+        trigger,
+        handleSubmit,
+    } = useForm<FormValue>()
+
+    const [showModal, setShowModal] = useState(false)
+    const [email, setEmail] = useState<string>('')
+    let isPasswordsMatch = getValues('password') === getValues('passwordConfirmation')
+
+    const titleCheckbox = () => {
+        return (
+            <p className={styles.titleCheckbox}>
+                I agree to the{' '}
+                <Link className={styles.titleCheckboxLink} href={ROUTES.TERMS_OF_SERVICE}>
+                    Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link className={styles.titleCheckboxLink} href={ROUTES.PRIVACY_POLICY}>
+                    Privacy Policy
+                </Link>
+            </p>
+        )
+    }
+
+    const closeHandler = () => {
+        setShowModal(false)
+    }
+
+    const onSubmit: SubmitHandler<FormValue> = data => {
+
+        if (isPasswordsMatch) {
+            setEmail(data.email)
+
+            const formData = {
+                email: data.email,
+                password: data.password,
+                username: data.username,
+            }
+
+            registration(formData)
+                .unwrap()
+                .then(() => {
+                    reset()
+                    setShowModal(true)
+                })
+                .catch(error => {
+                    if (error.status === 409) {
+                        const field = error.data.field as FormFields
+                        const message = error.data.message
+
+                        setError(field, {
+                            message,
+                            type: 'manual',
+                        })
+                    }
+                    else {
+                        toast.error('network error')
+                    }
+                })
+        }
+        else {
+            setError('passwordConfirmation', {message: 'Password must match', type: 'manual'})
+        }
+    }
+
+
     const router = useRouter()
 
     return (
@@ -102,7 +180,7 @@ export const SignUp = () => {
                 </form>
 
                 <p className={styles.text}>Do you have an account?</p>
-                <Button onClick={() => router.push('/auth/signIn')} variant={'link'} className={styles.signInButton}>
+                <Button onClick={() => router.push(ROUTES.SIGN_IN)} variant={'link'} className={styles.signInButton}>
                     Sign In
                 </Button>
 

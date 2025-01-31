@@ -9,6 +9,7 @@ import s from './ForgotPassword.module.scss'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { FormEvent } from 'react'
 import { useRecoveryRequestMutation } from '@/common/api/authApi'
+import {ROUTES} from '@/common/routes/routes';
 
 export const ForgotPassword = () => {
   const [textInput, setTextInput] = useState<string>('')
@@ -135,7 +136,7 @@ export const ForgotPassword = () => {
           />
         </form>
 
-        <Link href="/auth/signIn" className={s.link_back}>
+        <Link href={ROUTES.SIGN_IN} className={s.link_back}>
           Back to Sign In
         </Link>
 
