@@ -63,6 +63,13 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
         body: data,
       }),
     }),
+
+    logout: build.mutation<void, void>({
+       query: () => ({
+           url: API_URLS.AUTH.LOGOUT,
+           method: 'POST'
+       })
+    }),
     recoveryRequest: build.mutation<any, ForgotPasswordArgs>({
       query: data => {
         return {
