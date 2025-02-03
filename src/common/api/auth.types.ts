@@ -3,7 +3,7 @@ export type SignUpArgs = {
   password: string
   username: string
 }
-export type SignUpDataSuccess = {
+export type User = {
   city: null | string
   country: null | string
   dateOfBirthday: null | string

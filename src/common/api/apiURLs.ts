@@ -11,5 +11,8 @@ export const API_URLS = {
         TERMS: '/api/v1/auth/terms',
         PRIVATE: '/api/v1/auth/private',
         REFRESH_TOKEN: '/api/v1/auth/refresh-token',
+    },
+    USER:{
+        GET_ALL_USERS: '/users',
     }
 }

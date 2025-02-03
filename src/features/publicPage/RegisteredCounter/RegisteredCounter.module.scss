@@ -1,0 +1,32 @@
+.registeredBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+  background-color: var(--dark-500)
+}
+
+.countContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: var(--dark-700);
+  border: 1px solid var(--dark-300);
+}
+
+.numberContainer {
+  display: flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-right: 1px solid var(--dark-300);
+  background: var(--dark-700);
+
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 133%;
+  text-align: center;
+  color: var(--light-100);
+}
