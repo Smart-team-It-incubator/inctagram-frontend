@@ -7,7 +7,7 @@ import {
   RecoveryConfirmArgs,
   ResendConfirmCodeArgs,
   SignUpArgs,
-  SignUpDataSuccess,
+  User,
 } from '@/common/api/auth.types'
 import { baseApi, baseApiAuthAndGithub } from '@/common/api/baseApi'
 import {API_URLS} from '@/common/api/apiURLs';
@@ -17,7 +17,7 @@ import {API_URLS} from '@/common/api/apiURLs';
 
 export const authApi2 = baseApi.injectEndpoints({
   endpoints: build => ({
-    registration: build.mutation<SignUpDataSuccess, SignUpArgs>({
+    registration: build.mutation<User, SignUpArgs>({
       query: data => {
         return {
           body: data,

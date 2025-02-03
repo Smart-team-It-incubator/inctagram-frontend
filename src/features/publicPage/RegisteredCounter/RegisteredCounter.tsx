@@ -1,20 +1,24 @@
-import styles from '@/features/publicPage/PublicPage.module.scss';
+import styles from './RegisteredCounter.module.scss';
 import React from 'react';
 
 type Props={
-    totalUsersCount: number
+    totalUsers: number
 }
 
 export const RegisteredCounter = (props:Props)=>{
 
     // Клиентская компон, РТК Квери перезапрашивает каждую минуту новый список юзеров и обновл тоталКаунт
 
-    const {totalUsersCount}=props
+    const {totalUsers}=props
+    const totalUsersCount = totalUsers?.toString().padStart(6, '0').split('') || []
+        const mappedCount= totalUsersCount.map((count, index) => (
+            <div className={styles.numberContainer} key={index}>{count}</div>
+        ))
 
     return (
         <div className={styles.registeredBlock}>
             <p>Registered users:</p>
-            <div>1 2 3 4 5 6</div>
+            <div className={styles.countContainer}>{mappedCount}</div>
         </div>
     )
 }
