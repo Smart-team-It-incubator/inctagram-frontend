@@ -1,5 +1,5 @@
 import {PublicPage} from '@/features/publicPage/PublicPage';
 
-export default function Home() {
-  return <PublicPage/>
+export default async function Home() {
+  return await PublicPage();
 }

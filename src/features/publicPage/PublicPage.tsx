@@ -1,8 +1,8 @@
 import {Container} from '@/components/shared/Container';
 import styles from './PublicPage.module.scss';
-import {CardsList} from '@/features/publicPage/CardsList';
 import React from 'react';
 import {RegisteredCounter} from '@/features/publicPage/RegisteredCounter';
+
 
 
 export const PublicPage = async() => {
@@ -15,7 +15,6 @@ export const PublicPage = async() => {
     return (
         <Container className={styles.container}>
             <RegisteredCounter totalUsers={totalUsers}/>
-            <CardsList/>
         </Container>
     )
 }
