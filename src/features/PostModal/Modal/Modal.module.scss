@@ -1,0 +1,136 @@
+// ModalClient.module.scss
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.container {
+  position: relative;
+  top: -24px;
+  background: var(--dark-300);
+
+  max-width: 972px;
+  width: 100%;
+  max-height: 564px;
+  height: 100%;
+  // aspect-ratio: 972 / 564; /* Сохранение пропорций */
+
+  border: 1px solid var(--dark-100);
+  border-radius: 1px;
+}
+
+.close {
+  width: 24px;
+  height: 24px;
+  top: -36px;
+  right: -42px;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+}
+
+.body {
+  display: flex;
+  height: 100%;
+}
+
+.slider {
+  width: 50.5%;
+}
+
+.discussion {
+  width: 49.5%;
+  font-family: var(--font-family-primary);
+}
+
+.header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--dark-100);
+  padding-left: 24px;
+  h3 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.comments {
+  height: 420px;
+  overflow: auto;
+  padding: 19px 44px 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+// /????????????????????????
+
+.comments::-webkit-scrollbar {
+  background-color: transparent;
+  width: 4px;
+}
+
+.comments::-webkit-scrollbar-thumb {
+  background-color: var(--dark-300);
+  border-radius: 3px;
+}
+
+.comments::-webkit-scrollbar-thumb:hover {
+  background-color: var(--light-900);
+}
+
+// .comments::-webkit-scrollbar-track {
+//   background-color: var(--light-100);
+// } // background прокрутки
+
+.footer {
+  border-top: 1px solid var(--dark-100);
+  padding: 12px 0 0 24px;
+}
+
+.liked {
+  position: relative;
+  img {
+    width: 24px;
+    height: 24px;
+
+    position: absolute;
+    &:first-child {
+      z-index: 3;
+    }
+    &:nth-child(2) {
+      left: 14px;
+      z-index: 2;
+    }
+    &:last-child {
+      left: 28px;
+    }
+  }
+}
+
+.like {
+  padding-left: 66px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+
+  span {
+    font-weight: 700;
+  }
+}
+
+.date {
+  display: block;
+  padding-top: 8px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--light-900);
+}
