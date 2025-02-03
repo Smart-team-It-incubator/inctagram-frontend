@@ -14,5 +14,8 @@ export const API_URLS = {
     },
     USER:{
         GET_ALL_USERS: '/users',
+    },
+    POST:{
+        CREATE_POST:'/posts'
     }
 }
