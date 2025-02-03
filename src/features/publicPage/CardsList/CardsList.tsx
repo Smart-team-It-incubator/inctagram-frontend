@@ -1,5 +1,3 @@
-import {Card} from '@/features/publicPage/CardsList/Card';
-
 
 
 export const CardsList = async()=>{
