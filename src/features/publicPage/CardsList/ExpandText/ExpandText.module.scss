@@ -1,0 +1,14 @@
+.descriptionPhoto{
+  font-family: var(--font-family), sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-l);
+  color: var(--light-100);
+}
+
+.showMore{
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--primary-500);
+  cursor: pointer;
+}
