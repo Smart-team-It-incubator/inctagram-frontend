@@ -1,14 +1,54 @@
-.cardContainer {
-  max-width: 234px;
-  height: auto;
+.cardContainer{
+  display: flex;
+  flex-direction: column;
+  gap:12px;
 }
 
-.photo {
-  width: 234px;
-  height: 240px;
-  background: #0a6638;
+.photo{
+  cursor: pointer;
 }
 
-.userBlock {
+.userLink{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap:12px;
+  cursor: pointer;
+}
 
+.avatarUser {
+  background-color: #4c8dff;
+  border-radius: 50%;
+}
+
+.userName{
+  font-family: var(--font-family), sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-ss);
+  line-height: var(--line-height-m);
+  color: var(--light-100);
+}
+
+.wasTimeAgo{
+  font-family: var(--font-family), sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-xxs);
+  line-height: var(--line-height-xs);
+  color: var(--light-900);
+}
+
+.descriptionPhoto{
+  font-family: var(--font-family), sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-l);
+  color: var(--light-100);
+}
+
+.clampedText {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; // покажет первые 3 строки текста
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
