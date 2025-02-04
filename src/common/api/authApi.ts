@@ -15,6 +15,7 @@ import {API_URLS} from '@/common/api/apiURLs';
 
 
 
+
 export const authApi2 = baseApi.injectEndpoints({
   endpoints: build => ({
     registration: build.mutation<SignUpDataSuccess, SignUpArgs>({
@@ -53,6 +54,10 @@ export const {
   useResendConfirmationCodeMutation,
   useEmailConfirmationMutation,
 } = authApi2
+
+
+
+
 
 export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
   endpoints: build => ({
@@ -116,4 +121,5 @@ export const {
   useRecoveryConfirmMutation,
   useTermsQuery,
   usePrivateQuery,
+  useLogoutMutation
 } = authAndGithubApi
