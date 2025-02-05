@@ -7,26 +7,26 @@ import {ExpandText} from '@/features/publicPage/CardsList/ExpandText';
 import {useRouter} from 'next/navigation';
 
 
+
 type Props = {
     post: Post
 }
 
 export const Card = ({post}: Props) => {
-const router=useRouter()
 
     const suitableLength= 99
     const lengthPhotoDescription = post.text.length
+    const router=useRouter()
 
-    const handleImageClick=()=>{
-    console.log("handleImageClick")
-        router.push(`/profile/${post.userId}`)
+    const handleClick=()=>{
+        router.push(`/profile/${post.userId}?post=${post.id}`);
     }
 
     return (
         <div className={styles.cardContainer}>
             <Image src={post.photos[0].url} width={234} height={240} alt={post.photos[0].photoDescription}
-                   className={styles.photo} onClick={handleImageClick}/>
-            <Link href={`/`} className={styles.userLink}>
+                   className={styles.photo} onClick={handleClick}/>
+            <Link href={`/profile/${post.userId}`} className={styles.userLink}>
                 <Image width={36} height={36} src={'/img/defaultAvatar.jpg'} className={styles.avatarUser} alt={''}/>
                 <div className={styles.userName}>URL user name</div>
             </Link>
