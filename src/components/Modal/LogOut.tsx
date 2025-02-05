@@ -3,6 +3,7 @@
 
 import { Button } from '@/components/Button'
 import { Modal } from './Modal'
+import { Modal } from './Modal'
 
 import s from './Modal.module.scss'
 import {useAppDispatch, useAppSelector} from "@/common/store/hooks/hooks";
