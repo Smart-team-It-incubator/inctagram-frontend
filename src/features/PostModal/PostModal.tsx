@@ -1,4 +1,5 @@
-import { notFound } from 'next/navigation'
+// import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 import { Modal } from './Modal/Modal'
 
 type Props = {
@@ -14,7 +15,6 @@ const fetchPost = async (postId: string) => {
 
 export const PostModal = async ({ params }: Props) => {
   const post: PostType = await fetchPost(params.postId)
-  console.log(post)
 
   // if (!post) return notFound()
 
