@@ -122,8 +122,11 @@
   font-size: 14px;
   line-height: 24px;
 
-  span {
+  button {
+    background-color: transparent;
     font-weight: 700;
+    border: none;
+    cursor: pointer;
   }
 }
 

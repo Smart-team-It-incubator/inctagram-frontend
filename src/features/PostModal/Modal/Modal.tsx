@@ -1,17 +1,23 @@
 'use client'
 import { useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import s from './Modal.module.scss' // Подключаем SCSS
+import s from './Modal.module.scss'
 import { CloseIcon } from '../../../../public/icons'
 import Slider from '@/features/Slider/Slider'
 import { Comment } from '@/features/PostModal/Comment/Comment'
 import { Avatar } from '../Avatar/Avatar'
+import { PostType } from '../PostModal'
+import { format } from 'date-fns'
 
 interface ModalProps {
-  postId: string
+  post: PostType
 }
 
-export const Modal = ({ postId }: ModalProps) => {
+export const Modal = ({ post }: ModalProps) => {
+  const { createdAt, id, location, photos, text, userId } = post
+
+  const datePublication = formatDate(createdAt)
+
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -38,7 +44,7 @@ export const Modal = ({ postId }: ModalProps) => {
 
         <div className={s.body}>
           <div className={s.slider}>
-            <Slider />
+            <Slider photos={photos} />
           </div>
           {/* right side start*/}
           <div className={s.discussion}>
@@ -60,10 +66,10 @@ export const Modal = ({ postId }: ModalProps) => {
                   <Avatar src="https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg" />
                 </div>
                 <div className={s.like}>
-                  2 243 <span>"Like"</span>
+                  2 243 <button>"Like"</button>
                 </div>
               </>
-              <span className={s.date}>July 3, 2021</span>
+              <span className={s.date}>{datePublication}</span>
             </div>
           </div>
           {/* right side end*/}
@@ -71,4 +77,8 @@ export const Modal = ({ postId }: ModalProps) => {
       </div>
     </div>
   )
+}
+
+const formatDate = (isoString: string) => {
+  return format(new Date(isoString), 'MMMM d, yyyy')
 }

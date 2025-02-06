@@ -45,11 +45,13 @@
 
 .dots {
   position: absolute;
+  height: 24px;
   bottom: 12px;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: var(--dark-300);
   padding: 7px;
   gap: 12px;
@@ -57,8 +59,8 @@
 
 .dot,
 .activeDot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s ease;
