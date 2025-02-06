@@ -23,7 +23,7 @@ export const Modal = ({ post }: ModalProps) => {
 
   const closeModal = () => {
     const params = new URLSearchParams(searchParams.toString())
-    params.delete('postId')
+    params.delete('post')
     router.push(`?${params.toString()}`, { scroll: false })
   }
 
