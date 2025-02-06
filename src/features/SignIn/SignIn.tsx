@@ -11,6 +11,7 @@ import { GoogleIcon } from '../../../public/icons/GoogleIcon'
 import { emailValidation, passwordValidation } from './validators'
 
 import styles from './SignIn.module.scss'
+import {ROUTES} from '@/common/routes/routes';
 
 type FormValue = {
   email: string
@@ -87,7 +88,7 @@ export const SignIn = () => {
         )}
 
         <p className={styles.forgotPassword}>
-          <Link href="/auth/forgotPassword">Forgot Password</Link>
+          <Link href={ROUTES.FORGOT_PASSWORD}>Forgot Password</Link>
         </p>
 
         <Button
@@ -101,7 +102,7 @@ export const SignIn = () => {
       </form>
 
       <p className={styles.text}>Don’t have an account?</p>
-      <Button onClick={() => router.push('/auth/signUp')} variant={'link'}>
+      <Button onClick={() => router.push(ROUTES.SIGN_UP)} variant={'link'}>
         Sign Up
       </Button>
     </div>

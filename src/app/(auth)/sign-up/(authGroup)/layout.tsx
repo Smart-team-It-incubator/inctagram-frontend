@@ -8,7 +8,8 @@ import { useRouter } from 'next/navigation'
 
 import styles from './layout.module.scss'
 
-import { ArrowBack } from '../../../../../public/icons/ArrowBack'
+import { ArrowBack } from '../../../../../public/icons/index'
+import {ROUTES} from '@/common/routes/routes';
 
 export default function AuthGroupLayout({
   children,
@@ -19,7 +20,7 @@ export default function AuthGroupLayout({
 
   return (
     <Container className={styles.container}>
-            <Button className={styles.button} onClick={() => router.push('/auth/signUp')} variant={'withIcon'}>
+            <Button className={styles.button} onClick={() => router.push(ROUTES.SIGN_UP)} variant={'withIcon'}>
                 <ArrowBack className={styles.iconArrow} />
                 <div className={styles.text}>Back to Sign Up</div>
             </Button>

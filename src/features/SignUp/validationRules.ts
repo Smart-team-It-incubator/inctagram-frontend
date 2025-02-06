@@ -12,8 +12,8 @@ export const validationRules = {
       value: 6,
     },
     pattern: {
-      message: 'error',
-      value: /^[0-9A-Za-z!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]+$/,
+      message: 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+      value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
     },
     required: {
       message: 'This field is required',

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
  
 const DynamicComponentWithNoSSR = dynamic(
   async () => {
-    const module = await import('../../../features/NewPassword/NewPassword');
+    const module = await import('../../../../src/features/NewPassword/NewPassword');
     return module.NewPassword;
   },
 

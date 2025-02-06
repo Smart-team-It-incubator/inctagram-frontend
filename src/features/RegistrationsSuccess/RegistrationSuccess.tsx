@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import styles from './RegistrationSuccess.module.scss'
 
 import { CongratulationsSignUp } from '../../../public/icons/CongratulationsSignUp'
+import {ROUTES} from '@/common/routes/routes';
 
 export const RegistrationSuccess = () => {
     const router = useRouter()
@@ -17,7 +18,7 @@ export const RegistrationSuccess = () => {
                 <p className={styles.description}>Your email has been confirmed</p>
                 <Button
                     className={styles.signInBtn}
-                    onClick={() => router.push('/auth/signIn')}
+                    onClick={() => router.push(ROUTES.SIGN_IN)}
                     variant={'primary'}
                 >
                     Sign In
