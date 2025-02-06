@@ -1,15 +1,19 @@
-"use client";
-
-import {PublicProfile} from '@/features/publicProfile';
+import {PostModal} from '@/features/PostModal/PostModal';
 
 type Props = {
-    params: { id: string };
-};
+    userId: string
+    searchParams?: { post?: string }
+}
 
-export default function PublicProfilePage({ params }: Props) {
-    const { id } = params;
+export default async function PublicProfilePage(props:Props) {
+    const {userId, searchParams} = props
+
+    const postId = searchParams?.post
 
     return (
-        <PublicProfile userId={id}/>
-    );
+        <div>
+            <h1>Публичный профиль пользователя {userId}</h1>
+            {postId && <>{await PostModal({ params: { postId } })}</>}
+        </div>
+    )
 }
