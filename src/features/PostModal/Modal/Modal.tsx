@@ -11,9 +11,10 @@ import { format } from 'date-fns'
 
 interface ModalProps {
   post: PostType
+  user: any
 }
 
-export const Modal = ({ post }: ModalProps) => {
+export const Modal = ({ post, user }: ModalProps) => {
   const { createdAt, id, location, photos, text, userId } = post
 
   const datePublication = formatDate(createdAt)
@@ -49,8 +50,8 @@ export const Modal = ({ post }: ModalProps) => {
           {/* right side start*/}
           <div className={s.discussion}>
             <div className={s.header}>
-              <Avatar src="https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg" />
-              <h3>URLProfiele</h3>
+              <Avatar src={user.profileImageUrl} />
+              <h3>{user.username}</h3>
             </div>
             <div className={s.comments}>
               <Comment />
