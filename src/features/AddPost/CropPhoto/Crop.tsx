@@ -10,8 +10,8 @@ import { IconButton, Slider } from '@radix-ui/themes'
 import { CustomSlider } from '../Slider/Slider'
 import getCroppedImg from './cropImage'
 
-const URL =
-  'https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
+//Expample with upload and showresult Crop from react-easy-crop: 
+// https://codesandbox.io/p/sandbox/y09komm059?file=%2Fsrc%2Findex.js%3A49%2C31
 
 type CropProps = {
   images: ImageType[]

@@ -40,6 +40,10 @@ export const AddPhotoModal = () => {
     }
   }
 
+  const nextButtonHandle = () => {
+
+  }
+  
   return (
     <>
       <div className={styles.header}>
@@ -47,7 +51,7 @@ export const AddPhotoModal = () => {
           <h1 className={styles.title}>Add Photo</h1>
         </div>
         <div className={styles.header_button}>
-          <Button variant={'withIcon'}>x</Button>
+          <Button variant={'link'} onClick={nextButtonHandle}>Next</Button>
         </div>
       </div>
 
