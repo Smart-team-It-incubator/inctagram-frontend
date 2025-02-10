@@ -12,3 +12,8 @@ export type PostType = {
 }
 
 export type UserPosts = PostType[]
+
+export type UpdatePostImageActionPayload = {
+    id: string,
+    croppedImageUrl: string
+}

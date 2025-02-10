@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 import styles from './crop.module.scss'
 
@@ -8,14 +8,15 @@ import { CloseOutline, Expand, Image, Maximize, PlusCircleOutline } from '@/comp
 import { Slider } from '@radix-ui/themes'
 import { CustomSlider } from '../Slider/Slider'
 import getCroppedImg from './cropImage'
-import { PostImage } from '@/common/store/types'
+import { PostImage, UpdatePostImageActionPayload } from '@/common/store/types'
 import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
 
 //Expample with upload and showresult Crop from react-easy-crop:
 // https://codesandbox.io/p/sandbox/y09komm059?file=%2Fsrc%2Findex.js%3A49%2C31
 
 type CropProps = {
-  uploadPhoto: Function
+  uploadPhoto: Function,
+  setCurrentPostImage: Function
 }
 
 type Tools = 'zoom' | 'aspect' | 'image'
@@ -32,8 +33,8 @@ const initToolsVisibility = {
   image: false,
 }
 
-export const Crop = ({ uploadPhoto }: CropProps) => {
-  
+export const Crop = ({ uploadPhoto, setCurrentPostImage }: CropProps) => {
+ 
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [zoom, setZoom] = useState<number>(1)
@@ -47,6 +48,11 @@ export const Crop = ({ uploadPhoto }: CropProps) => {
   const images = newPost.images
   const dispatch = useAppDispatch()
 
+  useEffect(() => {
+    setCurrentPostImage(images[0])
+  }, [])
+  
+
 
   const cropChange = (crop: Point) => {
     setCrop(crop)
@@ -54,6 +60,7 @@ export const Crop = ({ uploadPhoto }: CropProps) => {
 
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
+    
   }
 
   const cropImage = async (image: string, croppedAreaPixels: Area) => {
@@ -65,10 +72,18 @@ export const Crop = ({ uploadPhoto }: CropProps) => {
       console.log('donee', { croppedImage })
 
       setCroppedImage(croppedImage)
+
+      setCurrentPostImage((prev: UpdatePostImageActionPayload) => ({
+        ...prev,
+        croppedImageUrl:  croppedImage
+       
+      }));
+    
     } catch (e) {
       console.error(e)
     }
   }
+
   const openImageList = () => {
     setSelectedImage(0)
   }
@@ -91,6 +106,7 @@ export const Crop = ({ uploadPhoto }: CropProps) => {
           onCropChange={cropChange}
           onCropComplete={onCropComplete}
           onZoomChange={setZoom}
+          
         />
 
         <div className={styles.controls}>

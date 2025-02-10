@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { v1 } from 'uuid'
 import { openUploadFileWindow } from './openUploadFileWindow'
 import { Maximize } from '@/components/icons'
-import { PostImage, PostImages } from '@/common/store/types'
+import { PostImage, PostImages, PostType, UpdatePostImageActionPayload } from '@/common/store/types'
 import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
 import { postActions, postReducers } from '@/common/store/slices/postSlice'
 
@@ -21,9 +21,10 @@ import { postActions, postReducers } from '@/common/store/slices/postSlice'
 export const AddPhotoModal = () => {
   // const [images, setImages] = useState<PostImages>([])
   const [showCropForm, setShowCropForm] = useState<boolean>(false)
-
+  const newPost = useAppSelector(state => state.postSlice.newPost)
   const dispatch = useAppDispatch()
 
+  const [currentPostImage, setCurrentPostImage] = useState<UpdatePostImageActionPayload | null >(null)
 
 
   const uploadPhoto = async () => {
@@ -37,7 +38,14 @@ export const AddPhotoModal = () => {
     }
   }
 
-  const nextButtonHandle = () => {}
+  const nextButtonHandle = () => {
+    const updatedImage: UpdatePostImageActionPayload = {
+      id: '1',
+      croppedImageUrl: ''
+    }
+    console.log('Befor dispatch', currentPostImage)
+    if (currentPostImage) dispatch(postActions.cropImage(currentPostImage))
+  }
 
   return (
     <>
@@ -53,7 +61,7 @@ export const AddPhotoModal = () => {
       </div>
 
       {showCropForm ? (
-        <Crop uploadPhoto={uploadPhoto} />
+        <Crop uploadPhoto={uploadPhoto} setCurrentPostImage = {setCurrentPostImage}/>
       ) : (
         <UploadPhoto uploadPhoto={uploadPhoto} />
       )}

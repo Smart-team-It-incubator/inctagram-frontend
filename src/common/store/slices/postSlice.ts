@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PostImage, PostImages, PostType, UserPosts } from '../types'
+import { PostType, UpdatePostImageActionPayload, UserPosts } from '../types'
 
 import { v1 } from 'uuid'
 
@@ -16,10 +16,7 @@ const initialState: PostInitialState = {
   }
 }
 
-type UpdatePostImages = {
-    id: string,
-    croppedImageUrl: string
-}
+
 export const postSlice = createSlice({
   initialState,
   name: 'postSlice',
@@ -35,7 +32,7 @@ export const postSlice = createSlice({
      state.newPost.images = newImage
     },
 
-    cropImage: (state, action: PayloadAction<UpdatePostImages>) => {
+    cropImage: (state, action: PayloadAction<UpdatePostImageActionPayload>) => {
         const updateImage = state.newPost.images.map(image => {
              if (image.id === action.payload.id) {
                 return {...image, croppedImageUrl: action.payload.croppedImageUrl }
