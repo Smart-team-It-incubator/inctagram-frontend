@@ -1,8 +1,8 @@
 #Устанавливаем зависимости
 FROM node:20.11-alpine as dependencies
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install
+COPY package*.json ./
+RUN npm install --force
 
 #Билдим приложение
 #Кэширование зависимостей — если файлы в проекте изменились,
@@ -11,7 +11,7 @@ FROM node:20.11-alpine as builder
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
-RUN yarn build:production
+RUN npm run build:production
 
 #Стейдж запуска
 FROM node:20.11-alpine as runner
@@ -19,4 +19,4 @@ WORKDIR /app
 ENV NODE_ENV production
 COPY --from=builder /app/ ./
 EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

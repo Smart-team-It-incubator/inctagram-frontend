@@ -1,7 +1,7 @@
 import { Logo } from '../shared/Logo'
+import { RightBlock } from './RightBlock'
 import { Divider } from '../shared/Divider'
 import { Container } from '../shared/Container'
-import { RightBlock } from './RightBlock/RightBlock'
 
 import styles from './Header.module.scss'
 

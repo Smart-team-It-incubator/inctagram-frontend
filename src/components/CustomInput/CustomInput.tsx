@@ -1,19 +1,21 @@
 'use client'
 
-import React, { ChangeEvent, FocusEvent, useState, useRef } from 'react'
+import React, { ChangeEvent, FocusEvent, useState, useRef, useEffect } from 'react'
 import { EyeIcon, SearchIcon } from '../../../public/icons'
 import styles from './CustomInput.module.scss'
+import Image from 'next/image'
 
-type inputTypes = 'text' | 'password' | 'email'
-
-interface Props {
+export type inputTypes = 'text' | 'password' | 'email'
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   title?: string
   textPlaceholder?: string
-  onChange: (value: string) => void
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
   disabled?: boolean
   type?: inputTypes
   icon?: 'search' | 'eye' | ''
   errorMessage?: string
+  autoComplete?: string
+  className?: string
 }
 
 export const CustomInput = ({
@@ -23,13 +25,19 @@ export const CustomInput = ({
   disabled = false,
   type = 'text',
   icon = '',
-  errorMessage,
+  errorMessage = '',
+  autoComplete,
+  className,
   ...rest
 }: Props) => {
   const [active, setActive] = useState(false)
   const [customType, setCustomType] = useState(type)
   const [focus, setFocus] = useState(false)
-  const [error, setError] = useState(errorMessage)
+  const [error, setError] = useState<string | undefined>(errorMessage || '')
+
+  useEffect(() => {
+    setError(errorMessage || '')
+  }, [errorMessage])
 
   const activateInput = () => {
     setActive(true)
@@ -49,7 +57,9 @@ export const CustomInput = ({
     if (error) {
       setError(undefined)
     }
-    onChange(e.currentTarget.value)
+    if (onChange) {
+      onChange(e)
+    }
   }
 
   const showPassword = () => {
@@ -91,17 +101,22 @@ export const CustomInput = ({
           </div>
         )}
         <input
-          onChange={e => onChangeHandle(e)}
+          onChange={onChangeHandle}
           placeholder={textPlaceholder}
           type={customType}
-          className={`${styles.input} ${disabled ? styles.disabled : ''}`}
+          className={`${styles.input} ${disabled ? styles.disabled : ''} ${className}`}
           ref={childInputRef}
+          autoComplete={autoComplete}
           {...rest}
           tabIndex={-1}
         />
         {icon === 'eye' && (
           <div className={styles.eye} onClick={showPassword}>
-            <EyeIcon fillColor={disabled ? '#4C4C4C' : ''} />
+            {customType === 'password' ? (
+              <Image src={'/eye-off.svg'} width={24} height={24} alt={'yey'} />
+            ) : (
+              <EyeIcon fillColor={disabled ? '#4C4C4C' : ''} />
+            )}
           </div>
         )}
       </label>
