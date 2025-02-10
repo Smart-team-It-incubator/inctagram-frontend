@@ -1,24 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { PostImage, PostImages, PostType, UserPosts } from '../types'
 
-type PostImage = {
-    id: string | null
-    imageUrl: string | null
-    croppedImageUrl: string | null
-}
+import { v1 } from 'uuid'
+
 type PostInitialState = {
-  id: string | null
-  images: PostImage[]
+  posts: UserPosts
 }
-const initialState: PostInitialState = {
-    id: null,
-    images: []
 
+const initialState: PostInitialState = {
+  posts: [],
 }
+
 export const postSlice = createSlice({
   initialState,
   name: 'postSlice',
   reducers: {
-   
+    postInit: (state, action: PayloadAction<string>) => {
+      const initPost = {
+        id: v1(),
+        images: [
+          {
+            id: v1(),
+            imageUrl: action.payload,
+            croppedImageUrl: null,
+          },
+        ],
+      }
+
+      state.posts.push(initPost)
+      
+    },
   },
 })
 

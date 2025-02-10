@@ -1,20 +1,21 @@
 'use client'
-import { useState, useCallback, DetailedHTMLProps, HTMLAttributes } from 'react'
+import { useState } from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 import styles from './crop.module.scss'
-import { type ImageType } from '../AddPhoto/AddPhotoModal'
+
 
 import { CloseOutline, Expand, Image, Maximize, PlusCircleOutline } from '@/components/icons'
 
-import { IconButton, Slider } from '@radix-ui/themes'
+import { Slider } from '@radix-ui/themes'
 import { CustomSlider } from '../Slider/Slider'
 import getCroppedImg from './cropImage'
+import { PostImage } from '@/common/store/types'
 
 //Expample with upload and showresult Crop from react-easy-crop: 
 // https://codesandbox.io/p/sandbox/y09komm059?file=%2Fsrc%2Findex.js%3A49%2C31
 
 type CropProps = {
-  images: ImageType[]
+  images: PostImage[]
   uploadPhoto: Function
 }
 
@@ -137,7 +138,7 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
 }
 
 type TooltipProps = {
-  images: ImageType[]
+  images: PostImage[]
   uploadPhoto: Function
   setSelectedImage: Function
   selectedImage: number

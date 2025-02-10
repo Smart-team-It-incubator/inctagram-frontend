@@ -9,41 +9,37 @@ import { useState } from 'react'
 import { v1 } from 'uuid'
 import { openUploadFileWindow } from './openUploadFileWindow'
 import { Maximize } from '@/components/icons'
+import { PostImage, PostImages } from '@/common/store/types'
+import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
+import { postReducers } from '@/common/store/slices/postSlice'
 
-const IMG_URL =
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/768px-Antu_insert-image.svg.png'
 
-type PropsType = {
-  title: string
-}
-
-export type ImageType = {
-  id: string
-  imageUrl: string
-  croppedImageUrl: string | null
-}
-
-export type Images = ImageType[]
+// type PropsType = {
+//   title: string
+// }
 
 export const AddPhotoModal = () => {
-  const [images, setImages] = useState<ImageType[]>([])
+  const [images, setImages] = useState<PostImages>([])
   const [showCropForm, setShowCropForm] = useState<boolean>(false)
 
+  const userPosts = useAppSelector(state => state.postSlice.posts)
+  const dispatch = useAppDispatch()
+
+
+
   const uploadPhoto = async () => {
-    // Вынести загрузку в отдельный хук
     const imageUrl = await openUploadFileWindow()
     if (imageUrl) {
-      const newImage: ImageType = { id: v1(), imageUrl: imageUrl, croppedImageUrl: null }
+      const newImage: PostImage = { id: v1(), imageUrl: imageUrl, croppedImageUrl: null }
       const newImages = images ? [...images, newImage] : [newImage]
-      setImages(newImages)
+      // setImages(newImages)
+      dispatch(postReducers.)
       setShowCropForm(true)
     }
   }
 
-  const nextButtonHandle = () => {
+  const nextButtonHandle = () => {}
 
-  }
-  
   return (
     <>
       <div className={styles.header}>
@@ -51,7 +47,9 @@ export const AddPhotoModal = () => {
           <h1 className={styles.title}>Add Photo</h1>
         </div>
         <div className={styles.header_button}>
-          <Button variant={'link'} onClick={nextButtonHandle}>Next</Button>
+          <Button variant={'link'} onClick={nextButtonHandle}>
+            Next
+          </Button>
         </div>
       </div>
 
