@@ -4,6 +4,7 @@ import { configureStore, ThunkAction } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { authReducers, authSlice } from '@/common/store/slices/authSlice'
 import { AnyAction } from 'redux'
+import {postReducers, postSlice} from "@/common/api/posts/postSlice";
 
 export const store = configureStore({
   middleware: getDefaultMiddleware =>
@@ -12,6 +13,7 @@ export const store = configureStore({
     [authSlice.reducerPath]: authReducers,
     [baseApi.reducerPath]: baseApi.reducer,
     [baseApiAuthAndGithub.reducerPath]: baseApiAuthAndGithub.reducer,
+    [postSlice.reducerPath]: postReducers,
   },
 })
 

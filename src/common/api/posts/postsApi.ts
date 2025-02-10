@@ -2,6 +2,7 @@ import {baseApi} from '@/common/api/baseApi';
 import {API_URLS} from '@/common/api/apiURLs';
 
 
+
 export const postApi = baseApi.injectEndpoints({
     endpoints: build => ({
         createPost: build.mutation<any, any>({
@@ -22,7 +23,17 @@ export const postApi = baseApi.injectEndpoints({
                 }
             },
         }),
-    }),
+        deletePostById:build.mutation<any, any>({
+            query:data=>{
+                return {
+                    body:data,
+                    method:"DELETE",
+                    url:`${API_URLS.POST.DELL_POST}${data.postId}`
+                }
+            }
+        })
+    })
 })
 
-export const {useCreatePostMutation} = postApi
+
+export const {useCreatePostMutation, useDeletePostByIdMutation} = postApi

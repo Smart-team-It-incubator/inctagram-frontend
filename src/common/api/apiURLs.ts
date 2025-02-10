@@ -17,5 +17,6 @@ export const API_URLS = {
   },
   POST: {
     CREATE_POST: '/posts',
+      DELL_POST: '/posts/'
   },
 }
