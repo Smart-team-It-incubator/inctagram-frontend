@@ -33,6 +33,8 @@ const initToolsVisibility = {
 }
 
 export const Crop = ({ images, uploadPhoto }: CropProps) => {
+  
+  const [imageSrc, setImageSrc] = useState<string | null>(null)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [zoom, setZoom] = useState<number>(1)
   const [selectedImage, setSelectedImage] = useState<number>(0)
@@ -50,6 +52,7 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
   }
 
   const cropImage = async (image: string, croppedAreaPixels: Area) => {
+    console.log('img=', image)
     console.log('crop')
     try {
       const croppedImage = await getCroppedImg(image, croppedAreaPixels)
@@ -66,12 +69,9 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
   }
 
   const showTooltipHandle = (sourse: Tools): void => {
-    // console.log('sourse: ', sourse)
-    // console.log('showTooltip: ', showTooltip)
-    // console.log('!showTooltip[sourse]}: ', !showTooltip[sourse])
     setShowTooltip({ ...showTooltip, [sourse]: !showTooltip[sourse] })
   }
-
+  
   return (
     <>
       <div
