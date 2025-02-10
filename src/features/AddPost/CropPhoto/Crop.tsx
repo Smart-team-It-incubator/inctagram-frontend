@@ -3,19 +3,18 @@ import { useState } from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 import styles from './crop.module.scss'
 
-
 import { CloseOutline, Expand, Image, Maximize, PlusCircleOutline } from '@/components/icons'
 
 import { Slider } from '@radix-ui/themes'
 import { CustomSlider } from '../Slider/Slider'
 import getCroppedImg from './cropImage'
 import { PostImage } from '@/common/store/types'
+import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
 
-//Expample with upload and showresult Crop from react-easy-crop: 
+//Expample with upload and showresult Crop from react-easy-crop:
 // https://codesandbox.io/p/sandbox/y09komm059?file=%2Fsrc%2Findex.js%3A49%2C31
 
 type CropProps = {
-  images: PostImage[]
   uploadPhoto: Function
 }
 
@@ -33,7 +32,7 @@ const initToolsVisibility = {
   image: false,
 }
 
-export const Crop = ({ images, uploadPhoto }: CropProps) => {
+export const Crop = ({ uploadPhoto }: CropProps) => {
   
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
@@ -43,6 +42,11 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
   const [croppedImage, setCroppedImage] = useState<string | null>(null)
 
   const [showTooltip, setShowTooltip] = useState<ToolsVisibility>(initToolsVisibility)
+
+  const newPost = useAppSelector(state => state.postSlice.newPost)
+  const images = newPost.images
+  const dispatch = useAppDispatch()
+
 
   const cropChange = (crop: Point) => {
     setCrop(crop)
@@ -72,7 +76,7 @@ export const Crop = ({ images, uploadPhoto }: CropProps) => {
   const showTooltipHandle = (sourse: Tools): void => {
     setShowTooltip({ ...showTooltip, [sourse]: !showTooltip[sourse] })
   }
-  
+
   return (
     <>
       <div

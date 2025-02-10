@@ -11,7 +11,7 @@ import { openUploadFileWindow } from './openUploadFileWindow'
 import { Maximize } from '@/components/icons'
 import { PostImage, PostImages } from '@/common/store/types'
 import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
-import { postReducers } from '@/common/store/slices/postSlice'
+import { postActions, postReducers } from '@/common/store/slices/postSlice'
 
 
 // type PropsType = {
@@ -19,10 +19,9 @@ import { postReducers } from '@/common/store/slices/postSlice'
 // }
 
 export const AddPhotoModal = () => {
-  const [images, setImages] = useState<PostImages>([])
+  // const [images, setImages] = useState<PostImages>([])
   const [showCropForm, setShowCropForm] = useState<boolean>(false)
 
-  const userPosts = useAppSelector(state => state.postSlice.posts)
   const dispatch = useAppDispatch()
 
 
@@ -30,10 +29,10 @@ export const AddPhotoModal = () => {
   const uploadPhoto = async () => {
     const imageUrl = await openUploadFileWindow()
     if (imageUrl) {
-      const newImage: PostImage = { id: v1(), imageUrl: imageUrl, croppedImageUrl: null }
-      const newImages = images ? [...images, newImage] : [newImage]
+      // const newImage: PostImage = { id: v1(), imageUrl: imageUrl, croppedImageUrl: null }
+      // const newImages = images ? [...images, newImage] : [newImage]
       // setImages(newImages)
-      dispatch(postReducers.)
+      dispatch(postActions.postInit(imageUrl))
       setShowCropForm(true)
     }
   }
@@ -54,7 +53,7 @@ export const AddPhotoModal = () => {
       </div>
 
       {showCropForm ? (
-        <Crop uploadPhoto={uploadPhoto} images={images} />
+        <Crop uploadPhoto={uploadPhoto} />
       ) : (
         <UploadPhoto uploadPhoto={uploadPhoto} />
       )}
