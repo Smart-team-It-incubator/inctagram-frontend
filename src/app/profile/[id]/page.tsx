@@ -1,12 +1,12 @@
 import {PostModal} from '@/features/PostModal/PostModal';
 
 type Props = {
-    userId: string
-    searchParams?: { post?: string }
+    params:any
+    searchParams:any
 }
 
-export default async function PublicProfilePage(props:Props) {
-    const {userId, searchParams} = props
+export default async function PublicProfilePage({params, searchParams}:Props) {
+    const {userId} = params
 
     const postId = searchParams?.post
 
