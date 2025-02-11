@@ -28,7 +28,7 @@ export const Card = ({post}: Props) => {
                    className={styles.photo} onClick={handleClick}/>
             <Link href={`/profile/${post.userId}`} className={styles.userLink}>
                 <Image width={36} height={36} src={'/img/defaultAvatar.jpg'} className={styles.avatarUser} alt={''}/>
-                <div className={styles.userName}>URL user name</div>
+                <div className={styles.userName}>{post.author}</div>
             </Link>
             <div className={styles.wasTimeAgo}>22 min ago</div>
             {lengthPhotoDescription<=suitableLength ? (<span>{post.text}</span>): <ExpandText text={post.text}/>}
