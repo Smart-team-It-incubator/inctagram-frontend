@@ -2,6 +2,7 @@ export type PublicPosts = Post[]
 
 export type Post = {
     id: string,
+    author: string,
     text: string,
     location: string,
     createdAt: string,
