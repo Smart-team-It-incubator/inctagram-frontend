@@ -47,6 +47,7 @@ export const SignUp = () => {
 
     const [showModal, setShowModal] = useState(false)
     const [email, setEmail] = useState<string>('')
+
     let isPasswordsMatch = getValues('password') === getValues('passwordConfirmation')
 
     const titleCheckbox = () => {
