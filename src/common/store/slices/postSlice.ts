@@ -32,6 +32,14 @@ export const postSlice = createSlice({
      state.newPost.images = newImage
     },
 
+    addImage: (state, action: PayloadAction<string>) => {
+      state.newPost.images.push({
+        id: v1(),
+        imageUrl: action.payload,
+        croppedImageUrl: ''
+      })
+    },
+
     cropImage: (state, action: PayloadAction<UpdatePostImageActionPayload>) => {
         const updateImage = state.newPost.images.map(image => {
              if (image.id === action.payload.id) {

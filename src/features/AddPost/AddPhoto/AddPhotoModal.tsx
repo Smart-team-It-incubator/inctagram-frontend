@@ -5,14 +5,15 @@ import { Icon } from '@/components/Menu/icon'
 import styles from './addPhotoModal.module.scss'
 import { Crop } from '../CropPhoto/Crop'
 import { UploadPhoto } from './UploadPhoto'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { v1 } from 'uuid'
 import { openUploadFileWindow } from './openUploadFileWindow'
 import { Maximize } from '@/components/icons'
 import { PostImage, PostImages, PostType, UpdatePostImageActionPayload } from '@/common/store/types'
 import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
 import { postActions, postReducers } from '@/common/store/slices/postSlice'
-
+import { Area } from 'react-easy-crop'
+import { cropImage } from '../utils/cropImage'
 
 // type PropsType = {
 //   title: string
@@ -21,30 +22,57 @@ import { postActions, postReducers } from '@/common/store/slices/postSlice'
 export const AddPhotoModal = () => {
   // const [images, setImages] = useState<PostImages>([])
   const [showCropForm, setShowCropForm] = useState<boolean>(false)
-  const newPost = useAppSelector(state => state.postSlice.newPost)
+  const [currentImageIdx, setCurrentImageIdx] = useState<number>(0)
+  const [currentImage, setCurrentImage] = useState<PostImage | null>(null)
+  const [newImage, setNewImage] = useState<PostImage | null>(null)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
+  const [croppedUrl, setCroppedUrl] = useState<string | null>(null)
+  const [showEditPost, setShowEditPost] = useState<boolean>(false)
+
+  const newPostImages = useAppSelector(state => state.postSlice.newPost.images)
   const dispatch = useAppDispatch()
 
-  const [currentPostImage, setCurrentPostImage] = useState<UpdatePostImageActionPayload | null >(null)
-
+  // const [currentPostImage, setCurrentPostImage] = useState<UpdatePostImageActionPayload | null>(
+  //   null
+  // )
 
   const uploadPhoto = async () => {
     const imageUrl = await openUploadFileWindow()
     if (imageUrl) {
-      // const newImage: PostImage = { id: v1(), imageUrl: imageUrl, croppedImageUrl: null }
       // const newImages = images ? [...images, newImage] : [newImage]
       // setImages(newImages)
+      const newImage: PostImage = { id: v1(), imageUrl: imageUrl, croppedImageUrl: null }
+      setCurrentImage(newImage)
       dispatch(postActions.postInit(imageUrl))
+      // setCurrentImage(newPostImages[currentImageIdx])
       setShowCropForm(true)
     }
   }
 
-  const nextButtonHandle = () => {
-    const updatedImage: UpdatePostImageActionPayload = {
-      id: '1',
-      croppedImageUrl: ''
+  useEffect(() => {}, [currentImage, croppedAreaPixels, croppedUrl, showEditPost])
+
+  const nextButtonHandle = async () => {
+    // const updatedImage: UpdatePostImageActionPayload = {
+    //   id: '1',
+    //   croppedImageUrl: ''
+    // }
+
+    if (currentImage && croppedAreaPixels) {
+      const croppedImageUrl = await cropImage(currentImage.imageUrl, croppedAreaPixels)
+
+      dispatch(
+        postActions.cropImage({
+          id: currentImage?.id,
+          croppedImageUrl: croppedImageUrl ? croppedImageUrl : '',
+        })
+      )
+      setCroppedUrl(croppedImageUrl)
+      setShowEditPost(true)
+      setShowCropForm(false)
+
+      console.log('newPost, ', newPostImages)
     }
-    console.log('Befor dispatch', currentPostImage)
-    if (currentPostImage) dispatch(postActions.cropImage(currentPostImage))
+    // if (currentPostImage) dispatch(postActions.cropImage(currentPostImage))
   }
 
   return (
@@ -61,10 +89,23 @@ export const AddPhotoModal = () => {
       </div>
 
       {showCropForm ? (
-        <Crop uploadPhoto={uploadPhoto} setCurrentPostImage = {setCurrentPostImage}/>
+        <Crop
+          images={newPostImages}
+          setCurrentImage={setCurrentImage}
+          currentImageIdx={currentImageIdx}
+          setCurrentImageIdx={setCurrentImageIdx}
+          uploadPhoto={uploadPhoto}
+          setCroppedAreaPixels={setCroppedAreaPixels}
+        />
+      ) : showEditPost ? (
+        <div>
+          <img src={croppedUrl ? croppedUrl : ''} alt="cropped" />
+        </div>
       ) : (
         <UploadPhoto uploadPhoto={uploadPhoto} />
       )}
+
+     
     </>
   )
 }

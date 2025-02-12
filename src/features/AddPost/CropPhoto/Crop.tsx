@@ -7,16 +7,21 @@ import { CloseOutline, Expand, Image, Maximize, PlusCircleOutline } from '@/comp
 
 import { Slider } from '@radix-ui/themes'
 import { CustomSlider } from '../Slider/Slider'
-import getCroppedImg from './cropImage'
-import { PostImage, UpdatePostImageActionPayload } from '@/common/store/types'
+import getCroppedImg from '../utils/cropImage'
+import { PostImage, PostImages, UpdatePostImageActionPayload } from '@/common/store/types'
 import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
 
 //Expample with upload and showresult Crop from react-easy-crop:
 // https://codesandbox.io/p/sandbox/y09komm059?file=%2Fsrc%2Findex.js%3A49%2C31
 
 type CropProps = {
-  uploadPhoto: Function,
-  setCurrentPostImage: Function
+  images: PostImages
+  uploadPhoto: Function
+  currentImageIdx: number
+  setCurrentImageIdx: Function
+
+  setCurrentImage: Function
+  setCroppedAreaPixels: Function
 }
 
 type Tools = 'zoom' | 'aspect' | 'image'
@@ -33,26 +38,27 @@ const initToolsVisibility = {
   image: false,
 }
 
-export const Crop = ({ uploadPhoto, setCurrentPostImage }: CropProps) => {
- 
-  const [imageSrc, setImageSrc] = useState<string | null>(null)
+export const Crop = ({
+  images,
+  currentImageIdx,
+  setCurrentImageIdx,
+  uploadPhoto,
+  setCroppedAreaPixels,
+}: CropProps) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [zoom, setZoom] = useState<number>(1)
-  const [selectedImage, setSelectedImage] = useState<number>(0)
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
-  const [croppedImage, setCroppedImage] = useState<string | null>(null)
+
+  // const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
+  // const [croppedImage, setCroppedImage] = useState<string | null>(null)
 
   const [showTooltip, setShowTooltip] = useState<ToolsVisibility>(initToolsVisibility)
 
   const newPost = useAppSelector(state => state.postSlice.newPost)
-  const images = newPost.images
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    setCurrentPostImage(images[0])
+    // setCurrentPostImage(images[0])
   }, [])
-  
-
 
   const cropChange = (crop: Point) => {
     setCrop(crop)
@@ -60,32 +66,31 @@ export const Crop = ({ uploadPhoto, setCurrentPostImage }: CropProps) => {
 
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
-    
+    // console.log('croppedAreaPixels_FROM CROP:', croppedAreaPixels)
   }
 
-  const cropImage = async (image: string, croppedAreaPixels: Area) => {
-    console.log('img=', image)
-    console.log('crop')
-    try {
-      const croppedImage = await getCroppedImg(image, croppedAreaPixels)
+  // const cropImage = async (image: string, croppedAreaPixels: Area) => {
 
-      console.log('donee', { croppedImage })
+  //   try {
+  //     const croppedImage = await getCroppedImg(image, croppedAreaPixels)
 
-      setCroppedImage(croppedImage)
+  //     console.log('donee', { croppedImage })
 
-      setCurrentPostImage((prev: UpdatePostImageActionPayload) => ({
-        ...prev,
-        croppedImageUrl:  croppedImage
-       
-      }));
-    
-    } catch (e) {
-      console.error(e)
-    }
-  }
+  //     setCroppedImage(croppedImage)
+
+  //     setCurrentPostImage((prev: UpdatePostImageActionPayload) => ({
+  //       ...prev,
+  //       croppedImageUrl:  croppedImage
+
+  //     }));
+
+  //   } catch (e) {
+  //     console.error(e)
+  //   }
+  // }
 
   const openImageList = () => {
-    setSelectedImage(0)
+    setCurrentImageIdx(0)
   }
 
   const showTooltipHandle = (sourse: Tools): void => {
@@ -99,14 +104,13 @@ export const Crop = ({ uploadPhoto, setCurrentPostImage }: CropProps) => {
         style={{ position: 'relative', width: '100%', height: '100%' }}
       >
         <Cropper
-          image={images[selectedImage].imageUrl}
+          image={images[currentImageIdx].imageUrl}
           zoom={zoom}
           crop={crop}
           aspect={4 / 3}
           onCropChange={cropChange}
           onCropComplete={onCropComplete}
           onZoomChange={setZoom}
-          
         />
 
         <div className={styles.controls}>
@@ -139,11 +143,11 @@ export const Crop = ({ uploadPhoto, setCurrentPostImage }: CropProps) => {
               <ImageListTooltip
                 images={images}
                 uploadPhoto={uploadPhoto}
-                setSelectedImage={setSelectedImage}
-                selectedImage={selectedImage}
+                setSelectedImage={setCurrentImageIdx}
+                selectedImage={currentImageIdx}
                 setZoom={setZoom}
-                cropImage={cropImage}
-                croppedAreaPixels={croppedAreaPixels}
+                // cropImage={cropImage}
+                // croppedAreaPixels={croppedAreaPixels}
               />
             )}
 
@@ -163,8 +167,8 @@ type TooltipProps = {
   setSelectedImage: Function
   selectedImage: number
   setZoom?: Function
-  cropImage: Function
-  croppedAreaPixels: Area | null
+  // cropImage: Function
+  // croppedAreaPixels: Area | null
 }
 
 const ImageListTooltip = ({
@@ -173,8 +177,8 @@ const ImageListTooltip = ({
   setSelectedImage,
   selectedImage,
   setZoom,
-  cropImage,
-  croppedAreaPixels,
+  // cropImage,
+  // croppedAreaPixels,
 }: TooltipProps) => {
   const [imageIndex, setImageIndex] = useState<number>(0)
 
@@ -222,12 +226,12 @@ const ImageListTooltip = ({
       <div className={styles.tooltipControls}>
         <div className={styles.iconContainer}>
           <PlusCircleOutline className={styles.icon} onClick={addImage} />
-          <div
+          {/* <div
             onClick={() => cropImage(images[imageIndex].imageUrl, croppedAreaPixels)}
             style={{ cursor: 'pointer' }}
           >
             V
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
