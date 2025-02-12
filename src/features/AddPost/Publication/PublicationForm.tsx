@@ -6,42 +6,39 @@ import styles from './publication.module.scss'
 import { useCreatePostMutation } from '@/common/api/posts/postsApi'
 import { useAppDispatch } from '@/common/store/hooks'
 import { postActions } from '@/common/store/slices/postSlice'
-
+import { blobUrlToFile } from '../utils/cropImage'
 
 type PublicationFormProps = {
-    image: string
+  image: string
 }
-export const PublicationForm = ({image}: PublicationFormProps) => {
+export const PublicationForm = ({ image }: PublicationFormProps) => {
   const [text, setText] = useState<string>('')
   const [location, setLocation] = useState<string>('Saint-Petersburg')
 
   const dispatch = useAppDispatch()
 
+  const [createPost] = useCreatePostMutation()
 
-  const [createPost, ] = useCreatePostMutation();
-
- 
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     await dispatch(postActions.addPostText(text))
     console.log('Data: ', text, '\n', location, '\n', image)
 
-    try {
-        await createPost({
-          text,
-          location,
-          files: [image]
-        }).unwrap();
+    const file = await blobUrlToFile(image, 'image.png', 'image/png')
     
-        console.log("Пост успешно создан!");
-      } catch (error) {
-        console.error("Ошибка при создании поста:", error);
-      }
-    };
 
-
-  
+    try {
+      await createPost({
+        text,
+        location,
+        files: [file],
+      }).unwrap()
+      console.log('Пост успешно создан!')
+    } catch (error) {
+      console.error('Ошибка при создании поста:', error)
+    }
+  }
 
   return (
     <div className={styles.form}>
@@ -52,7 +49,7 @@ export const PublicationForm = ({image}: PublicationFormProps) => {
             label="Add publication description"
             className={styles.formTextarea}
             value={text}
-            onChange={(value: string) => setText(value)}
+            onChange={(value: any) => setText(value)}
           />
 
           <div className={styles.formLocation}></div>

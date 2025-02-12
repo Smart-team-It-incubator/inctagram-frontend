@@ -1,12 +1,13 @@
 import {baseApi} from '@/common/api/baseApi';
 import {API_URLS} from '@/common/api/apiURLs';
+import { blob } from 'stream/consumers';
 
 
 export const postApi = baseApi.injectEndpoints({
     endpoints: build => ({
         createPost: build.mutation<any, any>({
             query: (data) => {
-                debugger
+                
                 const formData = new FormData();
 
                 formData.append('text', data.text);

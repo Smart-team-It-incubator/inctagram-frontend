@@ -1,5 +1,13 @@
-import { useState } from 'react'
 import { Area } from 'react-easy-crop'
+
+export const blobUrlToFile = async (blobUrl: string, fileName: string, mimeType: string) => {
+  const response = await fetch(blobUrl); 
+  const blob = await response.blob();
+  return new File([blob], fileName, { type: mimeType }); 
+};
+
+
+
 
 export const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
@@ -86,6 +94,9 @@ export default async function getCroppedImg(
   return new Promise((resolve, reject) => {
     croppedCanvas.toBlob(file => {
       if (file) {
+        console.log('URL: ', URL.createObjectURL(file))
+        console.log('file: ', file)
+        URL.revokeObjectURL
         resolve(URL.createObjectURL(file)) // Если file не null, возвращаем URL
       } else {
         reject(new Error('Failed to create blob from canvas')) // Обрабатываем случай null
