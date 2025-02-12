@@ -66,28 +66,7 @@ export const Crop = ({
 
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
-    // console.log('croppedAreaPixels_FROM CROP:', croppedAreaPixels)
   }
-
-  // const cropImage = async (image: string, croppedAreaPixels: Area) => {
-
-  //   try {
-  //     const croppedImage = await getCroppedImg(image, croppedAreaPixels)
-
-  //     console.log('donee', { croppedImage })
-
-  //     setCroppedImage(croppedImage)
-
-  //     setCurrentPostImage((prev: UpdatePostImageActionPayload) => ({
-  //       ...prev,
-  //       croppedImageUrl:  croppedImage
-
-  //     }));
-
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
-  // }
 
   const openImageList = () => {
     setCurrentImageIdx(0)
@@ -101,7 +80,7 @@ export const Crop = ({
     <>
       <div
         className={styles.cropContainer}
-        style={{ position: 'relative', width: '100%', height: '100%' }}
+        style={{  }}
       >
         <Cropper
           image={images[currentImageIdx].imageUrl}

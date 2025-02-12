@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import styles from './AddPhoto/addPhotoModal.module.scss'
+import styles from './modal.module.scss'
 
 type Props = {
   children?: ReactNode

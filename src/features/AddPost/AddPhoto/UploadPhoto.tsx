@@ -14,14 +14,16 @@ export const UploadPhoto = ({ uploadPhoto }: Props) => {
   }
 
   return (
-    <div className={styles.content}>
-      <div className={styles.droparea}>
-        <img alt={'upload'} src={IMG_URL} width={'222px'} />
+    <div className={styles.uploadWrapper}>
+      <div className={styles.uploadContent}>
+        <div className={styles.uploadDroparea}>
+          <img alt={'upload'} src={IMG_URL} width={'222px'} />
+        </div>
+        <Button style={{ marginBottom: '24px' }} variant={'primary'} onClick={uploadPhotoClick}>
+          Select from Computer
+        </Button>
+        <Button variant={'outline'}>Open Draft</Button>
       </div>
-      <Button style={{ marginBottom: '24px' }} variant={'primary'} onClick={uploadPhotoClick}>
-        Select from Computer
-      </Button>
-      <Button variant={'outline'}>Open Draft</Button>
     </div>
   )
 }

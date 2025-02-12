@@ -1,25 +1,42 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react'
 
 import styles from './AddPhoto/addPhotoModal.module.scss'
-import { Button } from "@/components/Button"
+import { Button } from '@/components/Button'
+import { CloseOutline } from '@/components/icons'
 
-export const CreatePostWrapper = ({ children }: {children: ReactNode}) => {
-    const nextButtonHandle = () => {}
-  
-    return (
-      <>
-        <div className={styles.header}>
-          <div>
-            <h1 className={styles.title}>Publication</h1>
-          </div>
-          <div className={styles.header_button}>
-            <Button variant={'link'} onClick={nextButtonHandle}>
-              Next
-            </Button>
-          </div>
+type WrapperProps = {
+  children: ReactNode
+  onApply?: () => void
+  title: string
+  buttonTitle?: string
+  className?: string
+}
+export const CreatePostWrapper = ({
+  children,
+  title,
+  buttonTitle,
+  onApply,
+  className,
+  ...rest
+}: WrapperProps) => {
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.header}>
+        <div>
+          <h1 className={styles.title}>{title}</h1>
         </div>
-  
-        {children}
-      </>
-    )
-  }
+        {buttonTitle ? (
+          <Button className={styles.headerButton} variant="link" onClick={onApply}>
+            {buttonTitle}
+          </Button>
+        ) : (
+          <Button className={styles.headerButton} variant="withIcon">
+            <CloseOutline />
+          </Button>
+        )}
+      </div>
+
+      {children}
+    </div>
+  )
+}

@@ -7,19 +7,21 @@ import styles from "./publication.module.scss"
 import { PublicationForm } from './PublicationForm'
 
 type PropsType = {
-  image: string
+  image: string,
+ 
 }
 export const Publication = ({ image }: PropsType) => {
   const nextButtonHandle = () => {}
 
   return (
     <div className={styles.publicationContent}>
+
       <div className={`${styles.block} ${styles.leftBlock}`}>
         <img src={image} alt='croppedImage' />
       </div>
+      
       <div className={`${styles.block} ${styles.rightBlock}`}>
-        Form
-        <PublicationForm image={image}/>
+        <PublicationForm image={image} />
       </div>
     </div>
   )

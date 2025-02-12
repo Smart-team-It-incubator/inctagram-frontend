@@ -1,32 +1,35 @@
 import { CustomInput } from '@/components/CustomInput'
-import { FormInput } from '@/components/FormInput/FormInput'
 import { Textarea } from '@/components/Textarea'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import styles from './publication.module.scss'
 import { useCreatePostMutation } from '@/common/api/posts/postsApi'
-import { useAppDispatch } from '@/common/store/hooks'
+import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
 import { postActions } from '@/common/store/slices/postSlice'
 import { blobUrlToFile } from '../utils/cropImage'
 
 type PublicationFormProps = {
-  image: string
+  image: string,
+  
 }
+
 export const PublicationForm = ({ image }: PublicationFormProps) => {
   const [text, setText] = useState<string>('')
   const [location, setLocation] = useState<string>('Saint-Petersburg')
+  const toPublish = useAppSelector(state => state.postSlice.toPublish)
 
   const dispatch = useAppDispatch()
 
   const [createPost] = useCreatePostMutation()
+  
 
-  const submitForm = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const submitForm = async () => {
+    
+    
 
-    await dispatch(postActions.addPostText(text))
+    dispatch(postActions.addPostInformation({ text, location }))
     console.log('Data: ', text, '\n', location, '\n', image)
 
     const file = await blobUrlToFile(image, 'image.png', 'image/png')
-    
 
     try {
       await createPost({
@@ -40,16 +43,27 @@ export const PublicationForm = ({ image }: PublicationFormProps) => {
     }
   }
 
+  useEffect(() => {
+    if (toPublish) {
+      console.log('useEffect')
+      submitForm()
+      dispatch(postActions.setToPublish(false))
+    }
+    return () => {}
+   
+  },[toPublish])
+
   return (
     <div className={styles.form}>
       <div className={styles.profileInfo}></div>
       <div className={styles.formContent}>
-        <form onSubmit={submitForm}>
+        <form >
           <Textarea
             label="Add publication description"
             className={styles.formTextarea}
             value={text}
             onChange={(value: any) => setText(value)}
+            required
           />
 
           <div className={styles.formLocation}></div>
@@ -62,7 +76,6 @@ export const PublicationForm = ({ image }: PublicationFormProps) => {
           />
           <h2>Location</h2>
           <p>{location}</p>
-          <button type="submit">YES</button>
         </form>
       </div>
     </div>
