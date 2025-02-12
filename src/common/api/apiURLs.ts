@@ -14,6 +14,7 @@ export const API_URLS = {
   },
   USER: {
     GET_ALL_USERS: '/users',
+    GET_PUBLIC_PROFILE_BY_USERNAME:'/users/get-public-profile/',
   },
   POST: {
     CREATE_POST: '/posts',
