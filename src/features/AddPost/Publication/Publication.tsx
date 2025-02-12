@@ -13,10 +13,10 @@ export const Publication = ({ image }: PropsType) => {
   const nextButtonHandle = () => {}
   return (
     <div className={styles.publicationContent}>
-      <div className={styles.leftBlock}>
-        <Image src={image} alt='croppedImage' width={100} height={100}/>
+      <div className={`${styles.block} ${styles.leftBlock}`}>
+        <img src={image} alt='croppedImage' />
       </div>
-      <div className={styles.rightBlock}>
+      <div className={`${styles.block} ${styles.rightBlock}`}>
         Form
         <PublicationForm />
       </div>
