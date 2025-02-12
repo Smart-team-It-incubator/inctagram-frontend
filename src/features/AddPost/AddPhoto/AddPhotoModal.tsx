@@ -14,6 +14,8 @@ import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
 import { postActions, postReducers } from '@/common/store/slices/postSlice'
 import { Area } from 'react-easy-crop'
 import { cropImage } from '../utils/cropImage'
+import { Publication } from '../Publication/Publication'
+import { CreatePostWrapper } from '../CreatePostWrapper'
 
 // type PropsType = {
 //   title: string
@@ -75,6 +77,14 @@ export const AddPhotoModal = () => {
     // if (currentPostImage) dispatch(postActions.cropImage(currentPostImage))
   }
 
+  if (showEditPost) {
+    return (
+      <CreatePostWrapper>
+        <Publication image={croppedUrl ? croppedUrl : ''} />
+      </CreatePostWrapper>
+    )
+  }
+
   return (
     <>
       <div className={styles.header}>
@@ -97,15 +107,9 @@ export const AddPhotoModal = () => {
           uploadPhoto={uploadPhoto}
           setCroppedAreaPixels={setCroppedAreaPixels}
         />
-      ) : showEditPost ? (
-        <div>
-          <img src={croppedUrl ? croppedUrl : ''} alt="cropped" />
-        </div>
       ) : (
         <UploadPhoto uploadPhoto={uploadPhoto} />
       )}
-
-     
     </>
   )
 }

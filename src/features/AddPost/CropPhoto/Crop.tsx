@@ -7,8 +7,8 @@ import { CloseOutline, Expand, Image, Maximize, PlusCircleOutline } from '@/comp
 
 import { Slider } from '@radix-ui/themes'
 import { CustomSlider } from '../Slider/Slider'
-import getCroppedImg from '../utils/cropImage'
-import { PostImage, PostImages, UpdatePostImageActionPayload } from '@/common/store/types'
+
+import { PostImage, PostImages } from '@/common/store/types'
 import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
 
 //Expample with upload and showresult Crop from react-easy-crop:
