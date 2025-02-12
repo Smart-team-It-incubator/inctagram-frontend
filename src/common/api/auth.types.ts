@@ -12,6 +12,7 @@ export type User = {
   id: string
   lastName: null | string
   username: string
+  profileImageUrl:string
 }
 
 export type ErrorResponse = {
