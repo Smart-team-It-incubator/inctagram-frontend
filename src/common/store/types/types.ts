@@ -8,7 +8,9 @@ export type PostImages = PostImage[]
 
 export type PostType = {
   id: string
-  images: PostImages
+  images: PostImages,
+  text: string,
+  location: string
 }
 
 export type UserPosts = PostType[]

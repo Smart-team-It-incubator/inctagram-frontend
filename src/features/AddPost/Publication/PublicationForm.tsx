@@ -3,17 +3,45 @@ import { FormInput } from '@/components/FormInput/FormInput'
 import { Textarea } from '@/components/Textarea'
 import { FormEvent, useState } from 'react'
 import styles from './publication.module.scss'
+import { useCreatePostMutation } from '@/common/api/posts/postsApi'
+import { useAppDispatch } from '@/common/store/hooks'
+import { postActions } from '@/common/store/slices/postSlice'
 
-export const PublicationForm = () => {
+
+type PublicationFormProps = {
+    image: string
+}
+export const PublicationForm = ({image}: PublicationFormProps) => {
   const [text, setText] = useState<string>('')
   const [location, setLocation] = useState<string>('Saint-Petersburg')
 
-  console.log('Text-', text)
+  const dispatch = useAppDispatch()
 
-  const submitForm = (e: FormEvent<HTMLFormElement>) => {
+
+  const [createPost, ] = useCreatePostMutation();
+
+ 
+  const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('Form:', e)
-  }
+
+    await dispatch(postActions.addPostText(text))
+    console.log('Data: ', text, '\n', location, '\n', image)
+
+    try {
+        await createPost({
+          text,
+          location,
+          files: [image]
+        }).unwrap();
+    
+        console.log("Пост успешно создан!");
+      } catch (error) {
+        console.error("Ошибка при создании поста:", error);
+      }
+    };
+
+
+  
 
   return (
     <div className={styles.form}>

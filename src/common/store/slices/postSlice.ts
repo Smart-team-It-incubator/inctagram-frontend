@@ -12,7 +12,9 @@ const initialState: PostInitialState = {
   posts: [],
   newPost: {
     id: v1(),
-    images: []
+    images: [],
+    text: '',
+    location: 'Saint-Petersburg'
   }
 }
 
@@ -52,6 +54,10 @@ export const postSlice = createSlice({
             ...state.newPost,
             images: updateImage
         }
+      },
+
+      addPostText: (state, action: PayloadAction<string>) => {
+        state.newPost.text = action.payload
       }
   },
 

@@ -11,6 +11,7 @@ type PropsType = {
 }
 export const Publication = ({ image }: PropsType) => {
   const nextButtonHandle = () => {}
+
   return (
     <div className={styles.publicationContent}>
       <div className={`${styles.block} ${styles.leftBlock}`}>
@@ -18,7 +19,7 @@ export const Publication = ({ image }: PropsType) => {
       </div>
       <div className={`${styles.block} ${styles.rightBlock}`}>
         Form
-        <PublicationForm />
+        <PublicationForm image={image}/>
       </div>
     </div>
   )
