@@ -24,20 +24,20 @@ export default function Slider({ photos }: Props) {
       )}
 
       <div className={styles.imageContainer}>
-        {photos.length > 0 ? (
-          <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="wait">
+          {photos.map(photo => (
             <motion.img
-              key={photos[index].id} // Используем индекс
-              src={photos[index].url}
-              alt={photos[index].photoDescription}
-              // initial={{ opacity: 0, x: 100 }}
-              // animate={{ opacity: 1, x: 0 }}
-              // exit={{ opacity: 0, x: -100 }}
-              // transition={{ duration: 0.5 }}
+              key={photo.id}
+              src={photo.url}
+              alt={photo.photoDescription}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
               className={styles.image}
             />
-          </AnimatePresence>
-        ) : null}
+          ))}
+        </AnimatePresence>
       </div>
       {photos.length > 1 && (
         <button className={styles.arrow} onClick={nextSlide}>

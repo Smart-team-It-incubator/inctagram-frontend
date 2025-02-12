@@ -15,8 +15,8 @@ interface ModalProps {
 }
 
 export const Modal = ({ post, user }: ModalProps) => {
-/*  const { createdAt, id, location, photos, text, userId } = post*/
-  const { createdAt, photos } = post
+  const { createdAt, id, location, photos, text, userId } = post
+
   const datePublication = formatDate(createdAt)
 
   const router = useRouter()

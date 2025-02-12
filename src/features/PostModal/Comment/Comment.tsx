@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Avatar } from '../Avatar/Avatar'
 import s from './Comment.module.scss'
 
-/*type Props = {}*/
+type Props = {}
 
 export const Comment = () => {
   const [isSubcomment, setIsSubcomment] = useState<boolean>(false)

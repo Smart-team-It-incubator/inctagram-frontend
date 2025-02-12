@@ -11,12 +11,8 @@ type Props = {
 }
 
 export const SidebarWrapper = ({disabledItems = []}: Props) => {
-
-    if(disabledItems.length > 0) {
-        console.log(disabledItems)
-    }
-
     return (
         <Sidebar icons={headerIcons} iconsMiddle={middleIcons} iconsFooter={footerIcons} />
+
     )
 }
