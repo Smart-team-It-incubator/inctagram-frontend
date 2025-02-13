@@ -80,7 +80,7 @@ export const Crop = ({
     <>
       <div
         className={styles.cropContainer}
-        
+        style={{  }}
       >
         <Cropper
           image={images[currentImageIdx].imageUrl}
