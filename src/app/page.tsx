@@ -1,16 +1,5 @@
-'use client'
-import { AddPhotoModal } from '@/features/AddPost/AddPhoto/AddPhotoModal'
+import { PublicPage } from '@/features/publicPage/PublicPage'
 
-
-import { ModalWindow } from '@/features/AddPost/ModalWindow'
-
-export default function Home() {
-  return (
-    <div>
-      main page
-      <ModalWindow>
-        <AddPhotoModal />
-      </ModalWindow>
-    </div>
-  )
+export default async function Home() {
+  return await PublicPage()
 }
