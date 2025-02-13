@@ -1,5 +1,9 @@
-import { PublicPage } from '@/features/publicPage/PublicPage'
+import PublicProfilePage from "@/components/Profile/PublicProfilePage";
 
 export default async function Home() {
-    return  <PublicPage/>
+    return (
+    <>
+        <PublicProfilePage params={""} searchParams={""}/>
+    </>
+    )
 }
