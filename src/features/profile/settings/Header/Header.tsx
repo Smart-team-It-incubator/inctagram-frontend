@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
+import s from './Header.module.scss'
 
 const tabs = [
   { name: 'General Information', href: '/profile/settings/general', segment: 'general' },
@@ -13,16 +14,12 @@ export const Header = () => {
   console.log(activeSegment)
 
   return (
-    <div className="flex space-x-6 border-b pb-2">
+    <div className={s.wrapper}>
       {tabs.map(tab => (
         <Link
           key={tab.href}
           href={tab.href}
-          className={`px-4 py-2 ${
-            activeSegment === tab.segment
-              ? 'text-white border-b-2 border-blue-500'
-              : 'text-gray-400'
-          }`}
+          className={`${s.item} ${activeSegment === tab.segment && s.active}`}
         >
           {tab.name}
         </Link>
