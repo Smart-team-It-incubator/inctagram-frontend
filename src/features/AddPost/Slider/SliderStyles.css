@@ -1,0 +1,39 @@
+.slider-root {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 20px;
+    user-select: none;
+  }
+  
+  .slider-track {
+    background-color: #ccc;
+    position: relative;
+    flex-grow: 1;
+    height: 4px;
+    border-radius: 9999px;
+  }
+  
+  .slider-range {
+    position: absolute;
+    background-color: #007bff;
+    border-radius: 9999px;
+    height: 100%;
+  }
+  
+  .slider-thumb {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: #007bff;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    cursor: grab;
+  }
+  
+  .slider-thumb:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #0056b3;
+  }
+  
