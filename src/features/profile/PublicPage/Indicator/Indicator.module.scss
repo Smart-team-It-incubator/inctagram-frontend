@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: var(--font-family-primary);
+  span {
+    font-weight: 400;
+  }
+}

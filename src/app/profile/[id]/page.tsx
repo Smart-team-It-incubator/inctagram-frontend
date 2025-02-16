@@ -1,19 +1,20 @@
-import {PostModal} from '@/features/PostModal/PostModal';
+import { PostModal } from '@/features/PostModal/PostModal'
+import { ProfilePage } from '@/features/profile/PublicPage/ProfilePage'
 
 type Props = {
-    params:any
-    searchParams:any
+  params: any
+  searchParams: any
 }
 
-export default async function PublicProfilePage({params, searchParams}:Props) {
-    const {userId} = params
+export default async function PublicProfilePage({ searchParams }: Props) {
+  //   const { id } = await params
 
-    const postId = searchParams?.post
+  const { post: postId } = await searchParams
 
-    return (
-        <div>
-            <h1>Публичный профиль пользователя {userId}</h1>
-            {postId && <>{await PostModal({ params: { postId } })}</>}
-        </div>
-    )
+  return (
+    <div>
+      {await ProfilePage()}
+      {postId && <>{await PostModal({ params: { postId } })}</>}
+    </div>
+  )
 }
