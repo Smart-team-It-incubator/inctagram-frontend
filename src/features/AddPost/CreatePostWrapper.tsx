@@ -16,11 +16,10 @@ export const CreatePostWrapper = ({
   title,
   buttonTitle,
   onApply,
-  className,
-  ...rest
+  className
 }: WrapperProps) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={className ? className : styles.wrapper}>
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>{title}</h1>
