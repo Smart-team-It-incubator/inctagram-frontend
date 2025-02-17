@@ -1,6 +1,6 @@
 import * as Slider from '@radix-ui/react-slider'
 import './SliderStyles.css'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 type Props = {
   setValue: Function,
@@ -9,7 +9,7 @@ type Props = {
   step?: number
 }
 export const CustomSlider = ({setValue, min=1, max=3, step=0.1}: Props) => {
-  const [sliderValue, setSliderValue] = useState(min)
+  // const [sliderValue, setSliderValue] = useState(min)
 
   useEffect(() => {
     setValue(min)
