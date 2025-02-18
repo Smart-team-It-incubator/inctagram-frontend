@@ -1,0 +1,20 @@
+.userLink{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap:12px;
+    cursor: pointer;
+}
+
+.avatarUser {
+    border-radius: 50%;
+}
+
+.userName{
+    font-family: var(--font-family), sans-serif;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-ss);
+    line-height: var(--line-height-m);
+    color: var(--light-100);
+}
