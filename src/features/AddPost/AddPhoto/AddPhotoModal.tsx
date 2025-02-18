@@ -55,8 +55,6 @@ export const AddPhotoModal = () => {
     }
   }
 
-  const [publish, setPublish] = useState<boolean>(false)
-
   const publishHandle = () => {
     dispatch(postActions.setToPublish(true))
   }

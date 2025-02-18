@@ -17,10 +17,12 @@
     height: 60px;
     border-bottom: 1px solid var(--dark-100);
   }
+}
 
-  .uploadWrapper {
-    width: 492px;
-  }
+.uploadWrapper {
+  width: 492px;
+  height: 564px;
+  background-color: var(--dark-300);
 
   .uploadContent {
     max-width: 222px;
@@ -32,9 +34,20 @@
       margin-bottom: 60px;
     }
   }
-  
+
+  h1 {
+    font-size: var(--font-size-xm);
+    font-weight: 700;
+    line-height: 36px;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    height: 60px;
+    border-bottom: 1px solid var(--dark-100);
+  }
 }
-
-
-
-

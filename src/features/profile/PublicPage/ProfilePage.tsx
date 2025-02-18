@@ -1,37 +1,37 @@
-import { Container } from '@/components/shared/Container'
 import s from './ProfilePage.module.scss'
 import { Avatar } from '@/features/PostModal/Avatar/Avatar'
 import { Indicator } from './Indicator/Indicator'
-import Image from 'next/image'
 import { Button } from '@/components/Button'
-import Link from 'next/link'
-import { ROUTES } from '@/common/routes/routes'
+// import Link from 'next/link'
+// import { ROUTES } from '@/common/routes/routes'
 import { cookies } from 'next/headers'
 
 export const ProfilePage = async () => {
-  const token = await cookies()
-  console.log(token)
+  // const token = await cookies()
+  // console.log(token)
 
   return (
-    <Container maxWidth="972px">
+    <div className={s.container}>
       <div className={s.header}>
-        <Avatar
-          src="https://i.pinimg.com/736x/71/1b/53/711b5384406f643d21f52e3bc1eeb391.jpg"
-          className={s.avatar}
-        />
+        <div className={s.avatar}>
+          <Avatar src="https://i.pinimg.com/736x/71/1b/53/711b5384406f643d21f52e3bc1eeb391.jpg" />
+        </div>
 
-        <div>
+        <div className={s.right}>
           <div className={s.wrapper}>
-            <h2>URLProfiele</h2>
-            <Link href={ROUTES.PROFILE_SETTINGS}>
+            <h2 className={s.title}>URLProfiele</h2>
+            {/* <Link href={ROUTES.PROFILE_SETTINGS}>
               <Button variant="secondary">Profile Settings </Button>
-            </Link>
+            </Link> */}
+            {buttonsFollowAndSend(`${s.buttons} `)}
           </div>
+
           <div className={s.indicator}>
             <Indicator count="2 218" description="Following" />
             <Indicator count="2 218" description="Following" />
             <Indicator count="2 218" description="Following" />
           </div>
+          {buttonsFollowAndSend(`${s.buttons} ${s.tablet}`)}
           <div>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -41,19 +41,37 @@ export const ProfilePage = async () => {
           </div>
         </div>
       </div>
+      <h2 className={s.title}>URLProfiele</h2>
+      {buttonsFollowAndSend(`${s.buttons} ${s.mobile}`)}
 
+      <p className={s.text}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
       <div className={s.images}>
-        <Image alt="post" src="/img/defaultAvatar.jpg" width={228} height={234} />
-        <Image alt="post" src="/img/defaultAvatar.jpg" width={228} height={234} />
-        <Image alt="post" src="/img/defaultAvatar.jpg" width={228} height={234} />
-        <Image alt="post" src="/img/defaultAvatar.jpg" width={228} height={234} />
-        <Image alt="post" src="/img/defaultAvatar.jpg" width={228} height={234} />
-        <Image alt="post" src="/img/defaultAvatar.jpg" width={228} height={234} />
-        <Image alt="post" src="/img/defaultAvatar.jpg" width={228} height={234} />
-        <Image alt="post" src="/img/defaultAvatar.jpg" width={228} height={234} />
-        <Image alt="post" src="/img/defaultAvatar.jpg" width={228} height={234} />
-        <Image alt="post" src="/img/defaultAvatar.jpg" width={228} height={234} />
+        <img alt="post" src="/img/defaultAvatar.jpg" />
+        <img alt="post" src="/img/defaultAvatar.jpg" />
+        <img alt="post" src="/img/defaultAvatar.jpg" />
+        <img alt="post" src="/img/defaultAvatar.jpg" />
+        <img alt="post" src="/img/defaultAvatar.jpg" />
+        <img alt="post" src="/img/defaultAvatar.jpg" />
+        <img alt="post" src="/img/defaultAvatar.jpg" />
+        <img alt="post" src="/img/defaultAvatar.jpg" />
+        <img alt="post" src="/img/defaultAvatar.jpg" />
+        <img alt="post" src="/img/defaultAvatar.jpg" />
       </div>
-    </Container>
+    </div>
+  )
+}
+
+const buttonsFollowAndSend = (className: string) => {
+  return (
+    true && (
+      <div className={className}>
+        <Button variant="primary">Follow</Button>
+        <Button variant="secondary">Send Message </Button>
+      </div>
+    )
   )
 }

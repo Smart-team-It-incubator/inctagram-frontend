@@ -9,7 +9,6 @@ import { Slider } from '@radix-ui/themes'
 import { CustomSlider } from '../Slider/Slider'
 
 import { PostImage, PostImages } from '@/common/store/types'
-import { useAppDispatch, useAppSelector } from '@/common/store/hooks'
 
 //Expample with upload and showresult Crop from react-easy-crop:
 // https://codesandbox.io/p/sandbox/y09komm059?file=%2Fsrc%2Findex.js%3A49%2C31
@@ -53,8 +52,6 @@ export const Crop = ({
 
   const [showTooltip, setShowTooltip] = useState<ToolsVisibility>(initToolsVisibility)
 
-  const newPost = useAppSelector(state => state.postSlice.newPost)
-  const dispatch = useAppDispatch()
 
   useEffect(() => {
     // setCurrentPostImage(images[0])
@@ -64,7 +61,7 @@ export const Crop = ({
     setCrop(crop)
   }
 
-  const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
+  const onCropComplete = (_croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
 
@@ -154,12 +151,12 @@ const ImageListTooltip = ({
   images,
   uploadPhoto,
   setSelectedImage,
-  selectedImage,
+  // selectedImage,
   setZoom,
   // cropImage,
   // croppedAreaPixels,
 }: TooltipProps) => {
-  const [imageIndex, setImageIndex] = useState<number>(0)
+  // const [imageIndex, setImageIndex] = useState<number>(0)
 
   const addImage = async () => {
     await uploadPhoto()
