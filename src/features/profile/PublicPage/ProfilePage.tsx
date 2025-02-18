@@ -4,7 +4,7 @@ import { Indicator } from './Indicator/Indicator'
 import { Button } from '@/components/Button'
 // import Link from 'next/link'
 // import { ROUTES } from '@/common/routes/routes'
-import { cookies } from 'next/headers'
+// import { cookies } from 'next/headers'
 
 export const ProfilePage = async () => {
   // const token = await cookies()

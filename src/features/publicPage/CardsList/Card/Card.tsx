@@ -1,22 +1,12 @@
 'use client'
 import Image from 'next/image'
 import styles from './Card.module.scss'
-<<<<<<< HEAD
-import Link from 'next/link'
 import { Post } from '@/common/api/posts/posts.types'
 import { ExpandText } from '@/features/publicPage/CardsList/ExpandText'
 import { useRouter } from 'next/navigation'
 import { useGetPublicProfileByUsernameQuery } from '@/common/api/users/usersApi'
 import { useEffect, useState } from 'react'
-=======
-import {Post} from '@/common/api/posts/posts.types';
-import {ExpandText} from '@/features/publicPage/CardsList/ExpandText';
-import {useRouter} from 'next/navigation';
-import {useGetPublicProfileByUsernameQuery} from '@/common/api/users/usersApi';
-import {useEffect, useState} from 'react';
-import {UserLink} from '@/components/UserLink/UserLink';
-
->>>>>>> 8ba056fc269c8a8732a225d6110677650850b047
+import { UserLink } from '@/components/UserLink/UserLink'
 
 type Props = {
   post: Post
@@ -40,27 +30,17 @@ export const Card = ({ post }: Props) => {
     }
   }, [user])
 
-<<<<<<< HEAD
   return (
     <div className={styles.cardContainer}>
       <Image
-        src={post.photos[0]?.url}
+        src={post.photos[0]?.url || '/img/defaultAvatar.jpg'}
         width={234}
         height={240}
-        alt={post.photos[0]?.photoDescription}
+        alt={post.photos[0]?.photoDescription || 'no description'}
         className={styles.photo}
         onClick={handleClick}
       />
-      <Link href={`/profile/${post.userId}`} className={styles.userLink}>
-        <Image
-          width={36}
-          height={36}
-          src={avatarUrl || '/img/defaultAvatar.jpg'}
-          className={styles.avatarUser}
-          alt={''}
-        />
-        <div className={styles.userName}>{post.author}</div>
-      </Link>
+      <UserLink userId={post.userId} avatarUrl={avatarUrl} author={post.author} />
       <div className={styles.wasTimeAgo}>22 min ago</div>
       {lengthPhotoDescription <= suitableLength ? (
         <span>{post.text}</span>
@@ -69,24 +49,4 @@ export const Card = ({ post }: Props) => {
       )}
     </div>
   )
-=======
-    useEffect(() => {
-        if (user?.profileImageUrl) {
-            setAvatarUrl(user.profileImageUrl)
-        }
-    }, [user])
-
-
-    return (
-        <div className={styles.cardContainer}>
-            <Image src={post.photos[0]?.url || '/img/defaultAvatar.jpg'} width={234} height={240}
-                   alt={post.photos[0]?.photoDescription || 'no description'}
-                   className={styles.photo} onClick={handleClick}/>
-            <UserLink userId={post.userId} avatarUrl={avatarUrl} author={post.author}/>
-            <div className={styles.wasTimeAgo}>22 min ago</div>
-            {lengthPhotoDescription <= suitableLength ? (<span>{post.text}</span>) : <ExpandText text={post.text}/>}
-        </div>
-    )
->>>>>>> 8ba056fc269c8a8732a225d6110677650850b047
 }
-
