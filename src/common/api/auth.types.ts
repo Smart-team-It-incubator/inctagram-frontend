@@ -12,7 +12,7 @@ export type User = {
   id: string
   lastName: null | string
   username: string
-  profileImageUrl:string
+  profileImageUrl: string
 }
 
 export type ErrorResponse = {
@@ -31,6 +31,8 @@ export type ErrorResponse = {
 
 export type ForgotPasswordArgs = {
   email: string
+  recaptcha: string
+  baseUrl: string
 }
 
 export type RecoveryConfirmArgs = {

@@ -12,9 +12,9 @@ export default async function PublicProfilePage({ searchParams }: Props) {
   const { post: postId } = await searchParams
 
   return (
-    <div>
-      {await ProfilePage()}
+    <>
       {postId && <>{await PostModal({ params: { postId } })}</>}
-    </div>
+      {await ProfilePage()}
+    </>
   )
 }

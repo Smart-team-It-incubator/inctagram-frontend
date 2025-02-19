@@ -3,7 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { recaptchaApi } from './recaptchaApi'
 
 type Props = {
-  callback: (isRecaptcha: boolean) => void
+  callback: (isRecaptcha: string) => void
 }
 
 export const Recaptcha = ({ callback }: Props) => {
@@ -11,9 +11,9 @@ export const Recaptcha = ({ callback }: Props) => {
     recaptchaApi(token)
 
     if (token) {
-      callback(true)
+      callback(token)
     } else {
-      callback(false)
+      callback('')
     }
   }
 

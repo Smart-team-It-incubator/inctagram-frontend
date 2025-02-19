@@ -9,7 +9,7 @@ import s from './ForgotPassword.module.scss'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { FormEvent } from 'react'
 import { useRecoveryRequestMutation } from '@/common/api/authApi'
-import {ROUTES} from '@/common/routes/routes';
+import { ROUTES } from '@/common/routes/routes'
 
 export const ForgotPassword = () => {
   const [textInput, setTextInput] = useState<string>('')
@@ -19,7 +19,7 @@ export const ForgotPassword = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [toggleRecaptcha, setToggleRecaptcha] = useState<boolean>(false)
   const [componentLoaded, setComponentLoaded] = useState<boolean>(false)
-  const [isCaptcha, setIsCaptcha] = useState<boolean>(false)
+  const [isCaptcha, setIsCaptcha] = useState<string>('')
 
   const [recoveryRequest] = useRecoveryRequestMutation()
 
@@ -72,7 +72,11 @@ export const ForgotPassword = () => {
 
     try {
       setIsDataAndCaptchaValid(false)
-      const res = await recoveryRequest({ email: textInput })
+      const res = await recoveryRequest({
+        email: textInput,
+        recaptcha: isCaptcha,
+        baseUrl: 'http://localhost:3000',
+      })
       if (res.error) {
         throw res.error
       }
@@ -85,7 +89,7 @@ export const ForgotPassword = () => {
     }
   }
 
-  const callBackCaptchaHandler = (captcha: boolean) => {
+  const callBackCaptchaHandler = (captcha: string) => {
     setIsCaptcha(captcha)
   }
 

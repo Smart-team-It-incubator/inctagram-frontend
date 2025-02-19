@@ -3,12 +3,16 @@
 .overlay {
   position: absolute;
   inset: 0;
+  padding-top: 104px;
   background: rgba(0, 0, 0, 0.5);
+  min-width: 100vw;
   display: flex;
+
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+
   z-index: 1000;
+  min-height: 100vh;
 }
 
 .container {
