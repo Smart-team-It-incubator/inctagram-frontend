@@ -1,7 +1,7 @@
 import s from './Indicator.module.scss'
 
 type Props = {
-  count: string
+  count: number
   description: string
 }
 

@@ -1,5 +1,5 @@
 export const API_URLS = {
-  BASE_URL: 'https://smart-reg.org.ru/api/v1',
+  BASE_URL: 'https://inctagram.work',
   AUTH: {
     REGISTRATION: '/users/registration',
     EMAIL_CONFIRMATION: '/users/emailConfirmation?code=',
@@ -7,7 +7,8 @@ export const API_URLS = {
     LOGIN: '/api/v1/auth/login',
     LOGOUT: '/api/v1/auth/logout',
     RECOVERY_REQUEST: '/api/v1/auth/password-recovery',
-    RECOVERY_CONFIRM: '/api/v1/auth/new-password',
+    RECOVERY_CONFIRM: '/api/v1/auth/password-recovery-resending',
+    NEW_PASSWORD: '/api/v1/auth/new-password',
     TERMS: '/api/v1/auth/terms',
     PRIVATE: '/api/v1/auth/private',
     REFRESH_TOKEN: '/api/v1/auth/refresh-token',

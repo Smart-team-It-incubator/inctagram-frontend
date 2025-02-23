@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import s from './LinkExpired.module.scss'
 import { Button } from '@/components/Button'
 import { useRouter } from 'next/navigation'
+import { ROUTES } from '@/common/routes/routes'
 
 export const LinkExpired = () => {
   const [mobileImg, setMobileImg] = useState<boolean>()
@@ -16,7 +17,6 @@ export const LinkExpired = () => {
       setMobileImg(false)
     }
   }
-
   useEffect(() => {
     setComponentLoaded(true)
 
@@ -48,7 +48,7 @@ export const LinkExpired = () => {
           children="Resend link"
           type="submit"
           className={s.btn}
-          onClick={() => router.push('/auth/forgotPassword')}
+          onClick={() => router.push(`${ROUTES.FORGOT_PASSWORD}`)}
         />
       </div>
       {componentLoaded && !mobileImg && imgEmailExpired}

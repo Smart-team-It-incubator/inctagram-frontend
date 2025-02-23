@@ -2,24 +2,40 @@ import s from './ProfilePage.module.scss'
 import { Avatar } from '@/features/PostModal/Avatar/Avatar'
 import { Indicator } from './Indicator/Indicator'
 import { Button } from '@/components/Button'
+import { Post } from './Post/Post'
+import { notFound } from 'next/navigation'
+import { getUserById, getUserPosts } from '@/common/api/requestsSSR/SSRApi'
+import { Posts, User } from '@/common/api/requestsSSR/ssr.types'
 // import Link from 'next/link'
 // import { ROUTES } from '@/common/routes/routes'
 // import { cookies } from 'next/headers'
 
-export const ProfilePage = async () => {
-  // const token = await cookies()
-  // console.log(token)
+type Props = {
+  profileId: string
+}
+
+export const ProfilePage = async ({ profileId }: Props) => {
+  const user: User = await getUserById(profileId)
+  const posts: Posts = await getUserPosts(profileId)
+
+  const avatar = user?.avatars.length
+    ? user.avatars[0]?.url
+    : 'https://rent.5ka.ru/img/media/no_img.png'
+
+  if (!user) {
+    notFound()
+  }
 
   return (
     <div className={s.container}>
       <div className={s.header}>
         <div className={s.avatar}>
-          <Avatar src="https://i.pinimg.com/736x/71/1b/53/711b5384406f643d21f52e3bc1eeb391.jpg" />
+          <Avatar src={avatar} />
         </div>
 
         <div className={s.right}>
           <div className={s.wrapper}>
-            <h2 className={s.title}>URLProfiele</h2>
+            <h2 className={s.title}>{user.userName}</h2>
             {/* <Link href={ROUTES.PROFILE_SETTINGS}>
               <Button variant="secondary">Profile Settings </Button>
             </Link> */}
@@ -27,38 +43,25 @@ export const ProfilePage = async () => {
           </div>
 
           <div className={s.indicator}>
-            <Indicator count="2 218" description="Following" />
-            <Indicator count="2 218" description="Following" />
-            <Indicator count="2 218" description="Following" />
+            <Indicator count={user.userMetadata.following} description="Following" />
+            <Indicator count={user.userMetadata.followers} description="Followers" />
+            <Indicator count={user.userMetadata.publications} description="Publications" />
           </div>
           {buttonsFollowAndSend(`${s.buttons} ${s.tablet}`)}
           <div>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
+            <p>{user.aboutMe}</p>
           </div>
         </div>
       </div>
-      <h2 className={s.title}>URLProfiele</h2>
+      <h2 className={s.title}>{user.userName}</h2>
       {buttonsFollowAndSend(`${s.buttons} ${s.mobile}`)}
 
-      <p className={s.text}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.
-      </p>
+      <p className={s.text}>{user.aboutMe}</p>
       {
         <div className={s.images}>
-          <img alt="post" src="/img/defaultAvatar.jpg" />
-          <img alt="post" src="/img/defaultAvatar.jpg" />
-          <img alt="post" src="/img/defaultAvatar.jpg" />
-          <img alt="post" src="/img/defaultAvatar.jpg" />
-          <img alt="post" src="/img/defaultAvatar.jpg" />
-          <img alt="post" src="/img/defaultAvatar.jpg" />
-          <img alt="post" src="/img/defaultAvatar.jpg" />
-          <img alt="post" src="/img/defaultAvatar.jpg" />
+          {posts.items.map(post => (
+            <Post post={post} key={post.id} />
+          ))}
         </div>
       }
     </div>

@@ -6,22 +6,20 @@ import { CloseIcon } from '../../../../public/icons'
 import Slider from '@/features/Slider/Slider'
 import { Comment } from '@/features/PostModal/Comment/Comment'
 import { Avatar } from '../Avatar/Avatar'
-import { PostType } from '../PostModal'
 import { format } from 'date-fns'
+import { PostType } from '@/common/api/requestsSSR/ssr.types'
 
-interface ModalProps {
+type ModalProps = {
   post: PostType
-  user: any
 }
 
-export const Modal = ({ post, user }: ModalProps) => {
-  /*  const { createdAt, id, location, photos, text, userId } = post*/
-  const { createdAt, photos } = post
+export const Modal = ({ post }: ModalProps) => {
+  const { createdAt, avatarOwner, userName, images, description } = post
+
   const datePublication = formatDate(createdAt)
 
   const router = useRouter()
   const searchParams = useSearchParams()
-
   const closeModal = () => {
     const params = new URLSearchParams(searchParams.toString())
     params.delete('post')
@@ -36,6 +34,14 @@ export const Modal = ({ post, user }: ModalProps) => {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [])
+
   return (
     <div className={s.overlay}>
       <div className={s.container}>
@@ -45,13 +51,13 @@ export const Modal = ({ post, user }: ModalProps) => {
 
         <div className={s.body}>
           <div className={s.slider}>
-            <Slider photos={photos} />
+            <Slider photos={images} description={description} />
           </div>
           {/* right side start*/}
           <div className={s.discussion}>
             <div className={s.header}>
-              <Avatar src={user.profileImageUrl} />
-              <h3>{user.username}</h3>
+              <Avatar src={avatarOwner} />
+              <h3>{userName}</h3>
             </div>
             <div className={s.comments}>
               <Comment />
@@ -67,7 +73,7 @@ export const Modal = ({ post, user }: ModalProps) => {
                   <Avatar src="https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg" />
                 </div>
                 <div className={s.like}>
-                  2 243 <button>"Like"</button>
+                  {post.likesCount} <button>"Like"</button>
                 </div>
               </>
               <span className={s.date}>{datePublication}</span>

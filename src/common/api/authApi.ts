@@ -10,11 +10,7 @@ import {
   User,
 } from '@/common/api/auth.types'
 import { baseApi, baseApiAuthAndGithub } from '@/common/api/baseApi'
-import {API_URLS} from '@/common/api/apiURLs';
-
-
-
-
+import { API_URLS } from '@/common/api/apiURLs'
 
 export const authApi2 = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -23,17 +19,16 @@ export const authApi2 = baseApi.injectEndpoints({
         return {
           body: data,
           method: 'POST',
-          url:API_URLS.AUTH.REGISTRATION
+          url: API_URLS.AUTH.REGISTRATION,
         }
       },
     }),
     emailConfirmation: build.mutation<BaseResponse, EmailConfirmationArgs>({
-
       query: data => {
         return {
           body: data,
           method: 'POST',
-          url:`${API_URLS.AUTH.EMAIL_CONFIRMATION}${data.code}`
+          url: `${API_URLS.AUTH.EMAIL_CONFIRMATION}${data.code}`,
         }
       },
     }),
@@ -42,7 +37,7 @@ export const authApi2 = baseApi.injectEndpoints({
         return {
           body: data,
           method: 'POST',
-          url: API_URLS.AUTH.RESEND_CONFIRMATION_CODE
+          url: API_URLS.AUTH.RESEND_CONFIRMATION_CODE,
         }
       },
     }),
@@ -55,25 +50,21 @@ export const {
   useEmailConfirmationMutation,
 } = authApi2
 
-
-
-
-
 export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
   endpoints: build => ({
     login: build.mutation<{ accessToken: string }, { email: string; password: string }>({
       query: data => ({
-        url:API_URLS.AUTH.LOGIN,
+        url: API_URLS.AUTH.LOGIN,
         method: 'POST',
         body: data,
       }),
     }),
 
     logout: build.mutation<void, void>({
-       query: () => ({
-           url: API_URLS.AUTH.LOGOUT,
-           method: 'POST'
-       })
+      query: () => ({
+        url: API_URLS.AUTH.LOGOUT,
+        method: 'POST',
+      }),
     }),
     recoveryRequest: build.mutation<any, ForgotPasswordArgs>({
       query: data => {
@@ -90,7 +81,7 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
         return {
           body: data,
           method: 'POST',
-          url: API_URLS.AUTH.RECOVERY_CONFIRM,
+          url: API_URLS.AUTH.NEW_PASSWORD,
         }
       },
     }),
@@ -98,7 +89,7 @@ export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
       query: () => {
         return {
           method: 'GET',
-          url:API_URLS.AUTH.TERMS,
+          url: API_URLS.AUTH.TERMS,
           responseHandler: response => response.text(),
         }
       },
@@ -121,5 +112,5 @@ export const {
   useRecoveryConfirmMutation,
   useTermsQuery,
   usePrivateQuery,
-  useLogoutMutation
+  useLogoutMutation,
 } = authAndGithubApi

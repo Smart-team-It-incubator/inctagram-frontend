@@ -3,13 +3,14 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './Slider.module.scss'
-import { photo } from '../PostModal/PostModal'
+import { ImageType } from '@/common/api/requestsSSR/ssr.types'
 
 type Props = {
-  photos: [photo]
+  photos: ImageType[]
+  description: string
 }
 
-export default function Slider({ photos }: Props) {
+export default function Slider({ photos, description }: Props) {
   const [index, setIndex] = useState(0)
 
   const nextSlide = () => setIndex(prev => (prev + 1) % photos.length)
@@ -27,13 +28,13 @@ export default function Slider({ photos }: Props) {
         {photos.length > 0 ? (
           <AnimatePresence mode="wait" initial={false}>
             <motion.img
-              key={photos[index].id} // Используем индекс
+              key={index}
               src={photos[index].url}
-              alt={photos[index].photoDescription}
-              // initial={{ opacity: 0, x: 100 }}
-              // animate={{ opacity: 1, x: 0 }}
-              // exit={{ opacity: 0, x: -100 }}
-              // transition={{ duration: 0.5 }}
+              alt={description}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
               className={styles.image}
             />
           </AnimatePresence>

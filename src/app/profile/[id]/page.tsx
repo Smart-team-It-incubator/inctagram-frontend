@@ -6,15 +6,14 @@ type Props = {
   searchParams: any
 }
 
-export default async function PublicProfilePage({ searchParams }: Props) {
-  //   const { id } = await params
-
+export default async function PublicProfilePage({ searchParams, params }: Props) {
   const { post: postId } = await searchParams
+  const { id: profileId } = await params
 
   return (
     <>
       {postId && <>{await PostModal({ params: { postId } })}</>}
-      {await ProfilePage()}
+      {await ProfilePage({ profileId })}
     </>
   )
 }
