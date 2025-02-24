@@ -1,9 +1,10 @@
 export const API_URLS = {
   BASE_URL: 'https://inctagram.work',
   AUTH: {
-    REGISTRATION: '/users/registration',
-    EMAIL_CONFIRMATION: '/users/emailConfirmation?code=',
-    RESEND_CONFIRMATION_CODE: '/users/resendConfirmationCode',
+    REGISTRATION: 'v1/auth/registration',
+    REGISTRATION_CONFIRMATION: '/v1/auth/registration-confirmation',
+    RESEND_CONFIRMATION_CODE: '/v1/auth/registration-email-resending',
+
     LOGIN: '/api/v1/auth/login',
     LOGOUT: '/api/v1/auth/logout',
     RECOVERY_REQUEST: '/api/v1/auth/password-recovery',

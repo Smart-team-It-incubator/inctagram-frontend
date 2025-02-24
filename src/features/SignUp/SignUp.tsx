@@ -12,13 +12,12 @@ import styles from './signUp.module.scss'
 import {GoogleIcon} from '../../../public/icons/GoogleIcon'
 import {GitAuth} from '../GitAuth'
 import {ModalSentEmail} from '@/features/ModalSentEmail';
-import {toast, ToastContainer} from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
 import {Container} from '@/components/shared/Container';
 import {ROUTES} from '@/common/routes/routes';
 import {useRegistrationMutation} from '@/common/api/authApi';
 import {SubmitHandler, useForm} from 'react-hook-form';
 import Link from 'next/link';
-import {FormFields} from '@/common/api/auth.types';
 
 export type FormValue = {
     checkboxTerms: boolean
@@ -30,10 +29,10 @@ export type FormValue = {
 
 // sI6ltOjVpKOz! pass
 
+
 export const SignUp = () => {
 
     const [registration] = useRegistrationMutation()
-
 
     const {
         control,
@@ -69,6 +68,7 @@ export const SignUp = () => {
     }
 
     const onSubmit: SubmitHandler<FormValue> = data => {
+        console.log('onSubmit data', data)
 
         if (isPasswordsMatch) {
             setEmail(data.email)
@@ -76,7 +76,7 @@ export const SignUp = () => {
             const formData = {
                 email: data.email,
                 password: data.password,
-                username: data.username,
+                userName: data.username,
             }
 
             registration(formData)
@@ -85,22 +85,21 @@ export const SignUp = () => {
                     reset()
                     setShowModal(true)
                 })
-                .catch(error => {
-                    if (error.status === 409) {
-                        const field = error.data.field as FormFields
-                        const message = error.data.message
+                /*.catch(error => {
+                    /!*                    if (error.status === 409) {
+                                            const field = error.data.field as FormFields
+                                            const message = error.data.message
 
-                        setError(field, {
-                            message,
-                            type: 'manual',
-                        })
-                    }
-                    else {
-                        toast.error('network error')
-                    }
-                })
-        }
-        else {
+                                            setError(field, {
+                                                message,
+                                                type: 'manual',
+                                            })
+                                        }
+                                        else {
+                                            toast.error('network error')
+                                        }*!/
+                })*/
+        } else {
             setError('passwordConfirmation', {message: 'Password must match', type: 'manual'})
         }
     }

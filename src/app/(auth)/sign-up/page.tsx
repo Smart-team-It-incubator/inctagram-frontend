@@ -1,6 +1,5 @@
 'use client'
 
-// import { SignUp } from '@/features/SignUp'
 import dynamic from 'next/dynamic'
 
 export default function Auth() {

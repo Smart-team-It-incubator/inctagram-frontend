@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const baseApi = createApi({
   baseQuery: async (args, api, extraOptions) => {
     const result = await fetchBaseQuery({
-      baseUrl: 'https://smart-reg.org.ru/api/v1',
+      baseUrl: 'https://inctagram.work/api/',
       prepareHeaders: headers => {
         headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
 
