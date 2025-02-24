@@ -4,27 +4,18 @@
   gap: 35px;
 }
 
-.bell {
-  cursor: pointer;
-  filter: invert(1) sepia(1) saturate(0) hue-rotate(180deg);
-  @media (max-width: 500px) {
-    display: none;
-  }
-}
 .hideOnMobile {
   display: flex;
   gap: 24px;
-  @media (max-width: 500px) {
-    display: none;
+  button {
+    width: 100px;
+    height: 36px;
+    padding: 0;
   }
 }
 
-.ellipsis {
-  display: none;
-  font-size: 24px;
-  padding-bottom: 10px;
-  cursor: pointer;
-  @media (max-width: 500px) {
-    display: block;
+@media screen and (max-width: 768px) {
+  .hideOnMobile {
+    display: none;
   }
 }
