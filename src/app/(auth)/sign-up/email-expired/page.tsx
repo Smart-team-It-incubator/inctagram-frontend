@@ -16,6 +16,7 @@ import { ModalSentEmail } from '../../../../features/ModalSentEmail/index'
 type FormValue = {
     email: string
 }
+
 export default function EmailExpired() {
     const [showModal, setShowModal] = useState(false)
     const [email, setEmail] = useState<string>('')

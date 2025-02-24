@@ -1,56 +1,67 @@
 export type SignUpArgs = {
-  email: string
-  password: string
-  username: string
+    email: string
+    password: string
+    userName: string
 }
 export type User = {
-  city: null | string
-  country: null | string
-  dateOfBirthday: null | string
-  email: string
-  firstName: null | string
-  id: string
-  lastName: null | string
-  username: string
-  profileImageUrl: string
+    city: null | string
+    country: null | string
+    dateOfBirthday: null | string
+    email: string
+    firstName: null | string
+    id: string
+    lastName: null | string
+    username: string
+    profileImageUrl: string
 }
 
 export type ErrorResponse = {
-  error: {
-    data: {
-      field: string
-      message: string
-      path: string
-      statusCode: number
-      timestamp: string
+    error: {
+        data: {
+            field: string
+            message: string
+            path: string
+            statusCode: number
+            timestamp: string
+        }
+        status: number
     }
-    status: number
-  }
-  meta?: any
+    meta?: any
 }
 
 export type ForgotPasswordArgs = {
-  email: string
-  recaptcha: string
-  baseUrl: string
+    email: string
+    recaptcha: string
+    baseUrl: string
 }
 
 export type RecoveryConfirmArgs = {
-  recoveryCode: string | null
-  newPassword: string
+    recoveryCode: string | null
+    newPassword: string
 }
 
 export type FormFields = keyof SignUpArgs
 
 export type EmailConfirmationArgs = {
-  code: string
+    confirmationCode: string
 }
 
 export type ResendConfirmCodeArgs = {
-  email: string
+    email: string
+}
+
+export type BaseResponseOld = {
+    message: string
+    statusCode?: number
 }
 
 export type BaseResponse = {
-  message: string
-  statusCode?: number
+    statusCode: number,
+    messages: [
+        {
+            message: string,
+            field: string
+        }
+    ],
+    error?: string
 }
