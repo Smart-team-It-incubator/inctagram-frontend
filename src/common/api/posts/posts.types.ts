@@ -1,16 +1,35 @@
-export type PublicPosts = Post[]
-
 export type Post = {
-  id: string
-  author: string
-  text: string
-  location: string
-  createdAt: string
-  userId: string
-  photos: [
-    {
-      id: string
-      url: string
-      photoDescription: string
-    }]
+    id: string
+    avatarOwner: string
+    avatarWhoLikes: []
+    createdAt: string
+    description: string
+    images: Image[]
+    isLiked: boolean
+    likesCount: number
+    location: string | null
+    owner: {
+        firstName: string | null
+        lastName: string | null
+    }
+    ownerId: number
+    updatedAt: string
+    userName: string
 }
+
+export type Image = {
+    createdAt: string
+    fileSize: number
+    height: number
+    uploadId: string
+    url: string
+    width: number
+}
+
+export type PublicPosts = {
+    items: Post[]
+    pageSize: number
+    totalCount: number
+    totalUsers: number
+}
+
