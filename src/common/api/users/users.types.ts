@@ -1,5 +1,3 @@
-import {User} from '@/common/api/auth.types';
-
-export type GetUsersResponse=User[]
+export type TotalUsersCount={totalCount:number}
 
 

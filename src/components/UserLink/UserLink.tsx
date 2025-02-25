@@ -3,8 +3,8 @@ import styles from './UserLink.module.scss';
 import Image from 'next/image';
 
 type Props = {
-    userId: string
-    avatarUrl: string | undefined
+    userId: number
+    avatarUrl: string
     author: string
 }
 export const UserLink = (props: Props) => {
