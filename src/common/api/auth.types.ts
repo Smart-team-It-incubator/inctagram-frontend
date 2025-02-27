@@ -50,11 +50,6 @@ export type ResendConfirmCodeArgs = {
     email: string
 }
 
-export type BaseResponseOld = {
-    message: string
-    statusCode?: number
-}
-
 export type BaseResponse = {
     statusCode: number,
     messages: [

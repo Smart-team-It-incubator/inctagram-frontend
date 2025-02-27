@@ -7,8 +7,6 @@ type Props={
 
 export const RegisteredCounter = (props:Props)=>{
 
-    // Клиентская компон, РТК Квери перезапрашивает каждую минуту новый список юзеров и обновл тоталКаунт
-
     const {totalUsers}=props
     const totalUsersCount = totalUsers?.toString().padStart(6, '0').split('') || []
         const mappedCount= totalUsersCount.map((count, index) => (
