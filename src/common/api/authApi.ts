@@ -1,6 +1,7 @@
 'use client'
 
 import {
+    AuthMe,
     BaseResponse,
     EmailConfirmationArgs,
     ForgotPasswordArgs,
@@ -42,6 +43,15 @@ export const authApi = baseApi.injectEndpoints({
                 }
             },
         }),
+        authMe: build.query<AuthMe, void>({
+            query: () => {
+                console.log("зашла в authMe")
+                return {
+                    method: 'GET',
+                    url: API_URLS.AUTH.AUTH_ME,
+                }
+            },
+        }),
     }),
 })
 
@@ -49,6 +59,8 @@ export const {
     useRegistrationMutation,
     useResendConfirmationCodeMutation,
     useRegistrationConfirmationMutation,
+    useAuthMeQuery,
+    useLazyAuthMeQuery
 } = authApi
 
 export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({

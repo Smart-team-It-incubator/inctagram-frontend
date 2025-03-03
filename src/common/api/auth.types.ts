@@ -60,3 +60,10 @@ export type BaseResponse = {
     ],
     error?: string
 }
+
+export type AuthMe = {
+    userId: number
+    userName: string
+    email: string
+    isBlocked: boolean
+}

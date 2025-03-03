@@ -4,9 +4,9 @@ export const API_URLS = {
     REGISTRATION: 'api/v1/auth/registration',
     REGISTRATION_CONFIRMATION: 'api/v1/auth/registration-confirmation',
     RESEND_CONFIRMATION_CODE: 'api/v1/auth/registration-email-resending',
-
     LOGIN: 'api/v1/auth/login',
     LOGOUT: 'api/v1/auth/logout',
+    AUTH_ME:'/api/v1/auth/me',
     RECOVERY_REQUEST: '/api/v1/auth/password-recovery',
     RECOVERY_CONFIRM: '/api/v1/auth/password-recovery-resending',
     NEW_PASSWORD: '/api/v1/auth/new-password',
