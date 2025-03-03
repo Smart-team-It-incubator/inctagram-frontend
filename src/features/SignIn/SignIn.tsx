@@ -12,6 +12,7 @@ import { emailValidation, passwordValidation } from './validators'
 
 import styles from './SignIn.module.scss'
 import {ROUTES} from '@/common/routes/routes';
+import {useAuth} from '@/common/providers/AuthProvider';
 
 type FormValue = {
   email: string
@@ -22,6 +23,7 @@ type FormValue = {
 export const SignIn = () => {
   const router = useRouter()
   const [login] = useLoginMutation()
+  const {refetchAuth } = useAuth();
 
   const {
     handleSubmit,
@@ -37,6 +39,7 @@ export const SignIn = () => {
     try {
       const response = await login(data).unwrap()
       localStorage.setItem('accessToken', response.accessToken)
+      refetchAuth() //пойдет новый запров authMe и обновит данные в контексте
       router.push('/')
     } catch (err) {
       if (isApiError(err)) {

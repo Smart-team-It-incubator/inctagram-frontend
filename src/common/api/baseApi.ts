@@ -19,7 +19,9 @@ export const baseApi = createApi({
             },
         })(args, api, extraOptions)
 
-/*
+
+/*      //обработка каждого респонса
+
         if(result?.error){
             const refreshToken = getRefreshTokenFromCookie('refreshToken')
             const refreshResponse = await fetch('https://inctagram.work/api/v1/auth/update-tokens', {
@@ -31,7 +33,7 @@ export const baseApi = createApi({
             console.log("refreshResponse", refreshResponse)
         }
 */
-
+        console.log("ответ сервера в baseApi:", result)
         return result  //{error: {…}, meta: {…}} если ошибка, {data: null, meta: {…}} если ОК
     },
     endpoints: () => ({}),
