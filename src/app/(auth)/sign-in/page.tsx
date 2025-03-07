@@ -1,5 +1,6 @@
-import { SignIn } from '@/features/SignIn'
+
 import { Container } from '@/components/shared/Container'
+import SignIn from '@/features/SignIn/SignIn';
 
 export default function Auth() {
   return (
