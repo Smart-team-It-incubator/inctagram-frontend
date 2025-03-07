@@ -1,17 +1,18 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { Header } from './Header'
+import Header from '@/components/Header/Header';
+
 
 const meta: Meta<typeof Header> = {
   title: 'Components/Header',
   component: Header,
   argTypes: {
-    isAuth: {
-      control: { type: 'boolean' },
-      description: 'Indicates whether the user is authenticated.',
-    },
+      /*{ auth:
+         control: { type: 'boolean' },
+         description: 'Indicates whether the user is authenticated.',
+       },*/
   },
   args: {
-    isAuth: true,
+    auth: true,
   },
 }
 

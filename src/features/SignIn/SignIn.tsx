@@ -12,7 +12,11 @@ import { emailValidation, passwordValidation } from './validators'
 
 import styles from './SignIn.module.scss'
 import {ROUTES} from '@/common/routes/routes';
-import {useAuth} from '@/common/providers/AuthProvider';
+import { withAuthMe } from '@/common/HOC/WithAuth'
+
+type Props={
+  trigger?:() => void;
+}
 
 type FormValue = {
   email: string
@@ -20,10 +24,9 @@ type FormValue = {
   errors: string
 }
 
-export const SignIn = () => {
+const SignIn = ({trigger} : Props) => {
   const router = useRouter()
   const [login] = useLoginMutation()
-  const {refetchAuth } = useAuth();
 
   const {
     handleSubmit,
@@ -39,7 +42,7 @@ export const SignIn = () => {
     try {
       const response = await login(data).unwrap()
       localStorage.setItem('accessToken', response.accessToken)
-      refetchAuth() //пойдет новый запров authMe и обновит данные в контексте
+      trigger!();//пойдет новый запров authMe и обновит данные LS
       router.push('/')
     } catch (err) {
       if (isApiError(err)) {
@@ -111,3 +114,4 @@ export const SignIn = () => {
     </div>
   )
 }
+export default withAuthMe(SignIn);

@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/Button'
 import s from './RightBlock.module.scss'
-import { usePathname } from 'next/navigation'
+import {usePathname, useRouter} from 'next/navigation'
 import { AUTH } from '@/common/routes/routes'
 import { Notice } from './Notice/Notice'
 import { Dropdown } from './Dropdown/Dropdown'
@@ -13,6 +13,11 @@ type Props = {
 
 export const RightBlock = ({ isAuth = false }: Props) => {
   const validateButtons = isAuthPage() || isAuth
+  const router=useRouter()
+
+  const handleBtn=(path:string)=>{
+    router.push(path)
+  }
 
   return (
     <div className={s.wrapper}>
@@ -21,8 +26,8 @@ export const RightBlock = ({ isAuth = false }: Props) => {
           {isAuth && <Notice />}
 
           <div className={s.hideOnMobile}>
-            <Button variant="link">Log in</Button>
-            <Button>Sign up</Button>
+            <Button variant="link" onClick={()=>handleBtn("/sign-in")}>Log in</Button>
+            <Button onClick={()=>handleBtn("/sign-up")}>Sign up</Button>
           </div>
         </>
       )}
