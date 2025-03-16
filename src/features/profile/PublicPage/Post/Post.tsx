@@ -11,6 +11,6 @@ export const Post = ({ post }: any) => {
   }
 
   return (
-    <img alt="post" src={post.images[0].url} key={post.id} onClick={() => handleClick(post.id)} />
+    <img alt="post" src={post?.images[0]?.url} key={post.id} onClick={() => handleClick(post.id)} />
   )
 }

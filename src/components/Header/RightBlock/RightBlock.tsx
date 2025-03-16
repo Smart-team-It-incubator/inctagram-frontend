@@ -1,43 +1,27 @@
 'use client'
 
-import { Button } from '@/components/Button'
 import s from './RightBlock.module.scss'
-import {usePathname, useRouter} from 'next/navigation'
-import { AUTH } from '@/common/routes/routes'
-import { Notice } from './Notice/Notice'
 import { Dropdown } from './Dropdown/Dropdown'
+import { ButtonsAuth } from './ButtonsAuth/ButtonsAuth'
+import { Notice } from './Notice/Notice'
+import { CustomAccordion } from './CustomAccordion'
 
 type Props = {
   isAuth?: boolean
 }
 
-export const RightBlock = ({ isAuth = false }: Props) => {
-  const validateButtons = isAuthPage() || isAuth
-  const router=useRouter()
-
-  const handleBtn=(path:string)=>{
-    router.push(path)
-  }
+export const RightBlock = ({ isAuth }: Props) => {
+  console.log(isAuth)
 
   return (
     <div className={s.wrapper}>
-      {!validateButtons && (
-        <>
-          {isAuth && <Notice />}
-
-          <div className={s.hideOnMobile}>
-            <Button variant="link" onClick={()=>handleBtn("/sign-in")}>Log in</Button>
-            <Button onClick={()=>handleBtn("/sign-up")}>Sign up</Button>
-          </div>
-        </>
-      )}
-      {!isAuthPage() && <Dropdown />}
+      <div className={s.notice}>{isAuth && <Notice />}</div>
+      {/*  */}
+      <CustomAccordion />
+      <div className={!isAuth ? s.btn : ''}>{!isAuth && <ButtonsAuth isAuth={isAuth} />}</div>
+      <div className={s.drop}>
+        <Dropdown isAuth={isAuth} />
+      </div>
     </div>
   )
-}
-
-export const isAuthPage = () => {
-  const pathname = usePathname()
-
-  return Object.values(AUTH).some(path => pathname.startsWith(path))
 }

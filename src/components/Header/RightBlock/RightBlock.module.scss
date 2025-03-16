@@ -1,21 +1,22 @@
 .wrapper {
   display: flex;
   align-items: center;
-  gap: 35px;
+  justify-content: end;
 }
 
-.hideOnMobile {
-  display: flex;
-  gap: 24px;
-  button {
-    width: 100px;
-    height: 36px;
-    padding: 0;
-  }
+.notice {
+  margin-right: 45px;
+}
+
+.btn {
+  margin-left: 36px;
 }
 
 @media screen and (max-width: 768px) {
-  .hideOnMobile {
+  .btn {
     display: none;
+  }
+  .drop {
+    margin-left: 24px;
   }
 }

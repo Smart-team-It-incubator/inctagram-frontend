@@ -1,14 +1,12 @@
 import s from './ProfilePage.module.scss'
 import { Avatar } from '@/features/PostModal/Avatar/Avatar'
 import { Indicator } from './Indicator/Indicator'
-import { Button } from '@/components/Button'
 import { Post } from './Post/Post'
 import { notFound } from 'next/navigation'
 import { getUserById, getUserPosts } from '@/common/api/requestsSSR/SSRApi'
 import { Posts, User } from '@/common/api/requestsSSR/ssr.types'
-// import Link from 'next/link'
-// import { ROUTES } from '@/common/routes/routes'
-// import { cookies } from 'next/headers'
+import ButtonsFollowAndSend from './ButtonsFollowAndSend/ButtonsFollowAndSend'
+import classNames from 'classnames'
 
 type Props = {
   profileId: string
@@ -36,10 +34,10 @@ export const ProfilePage = async ({ profileId }: Props) => {
         <div className={s.right}>
           <div className={s.wrapper}>
             <h2 className={s.title}>{user.userName}</h2>
-            {/* <Link href={ROUTES.PROFILE_SETTINGS}>
-              <Button variant="secondary">Profile Settings </Button>
-            </Link> */}
-            {buttonsFollowAndSend(`${s.buttons} `)}
+
+            <ButtonsFollowAndSend />
+
+            <ButtonsFollowAndSend size={`desk`} />
           </div>
 
           <div className={s.indicator}>
@@ -47,14 +45,16 @@ export const ProfilePage = async ({ profileId }: Props) => {
             <Indicator count={user.userMetadata.followers} description="Followers" />
             <Indicator count={user.userMetadata.publications} description="Publications" />
           </div>
-          {buttonsFollowAndSend(`${s.buttons} ${s.tablet}`)}
+          <ButtonsFollowAndSend size={`tablet`} />
           <div>
             <p>{user.aboutMe}</p>
           </div>
         </div>
       </div>
-      <h2 className={s.title}>{user.userName}</h2>
-      {buttonsFollowAndSend(`${s.buttons} ${s.mobile}`)}
+      <h2 className={classNames(s.title, s.underTitle)}>{user.userName}</h2>
+      <div>
+        <ButtonsFollowAndSend size={`mobile`} />
+      </div>
 
       <p className={s.text}>{user.aboutMe}</p>
       {
@@ -65,16 +65,5 @@ export const ProfilePage = async ({ profileId }: Props) => {
         </div>
       }
     </div>
-  )
-}
-
-const buttonsFollowAndSend = (className: string) => {
-  return (
-    true && (
-      <div className={className}>
-        <Button variant="primary">Follow</Button>
-        <Button variant="secondary">Send Message </Button>
-      </div>
-    )
   )
 }

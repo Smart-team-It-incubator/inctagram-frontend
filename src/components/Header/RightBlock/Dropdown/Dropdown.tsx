@@ -1,21 +1,37 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
 import s from './Dropdown.module.scss'
 import { FilePen, LogIn, LogOut, Settings, Star, TrendingUp } from 'lucide-react'
 import { ROUTES } from '@/common/routes/routes'
 import Link from 'next/link'
+import { authAndGithubApi, authApi, useLogoutMutation } from '@/common/api/authApi'
+import { useAppDispatch } from '@/common/store/hooks'
 
 type Props = {
-  authorized?: boolean
+  isAuth?: boolean
 }
 
-export const Dropdown = ({ authorized = false }: Props) => {
-  const menu = dropdownListItems(authorized)
+export const Dropdown = ({ isAuth = false }: Props) => {
+  const dispatch = useAppDispatch()
+
+  const menu = dropdownListItems(isAuth)
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev)
   const closeMenu = () => setIsMenuOpen(false)
+
+  const [logout] = useLogoutMutation()
+
+  const logoutHandler = () => {
+    logout().then(() => {
+      localStorage.removeItem('accessToken')
+      dispatch(authAndGithubApi.util.resetApiState())
+      dispatch(authApi.util.resetApiState())
+    })
+  }
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -42,7 +58,7 @@ export const Dropdown = ({ authorized = false }: Props) => {
         <ul className={s.drop}>
           {menu.map((item, index) => (
             <li key={index}>
-              <Link href={item.path}>
+              <Link href={item.path} onClick={item.path === '/' ? logoutHandler : () => {}}>
                 {item.icon}
                 <span>{item.value}</span>
               </Link>
@@ -60,9 +76,8 @@ export const Dropdown = ({ authorized = false }: Props) => {
 //
 //
 //
-
-const dropdownListItems = (authorized: boolean) => {
-  if (authorized) {
+const dropdownListItems = (isAuth: boolean) => {
+  if (isAuth) {
     return [
       { value: 'Profile Settings', icon: <Settings size={24} />, path: ROUTES.PROFILE_SETTINGS },
       { value: 'Statistics', icon: <TrendingUp size={24} />, path: '' },

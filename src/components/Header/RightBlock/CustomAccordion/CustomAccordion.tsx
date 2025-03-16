@@ -12,7 +12,7 @@ type Props = {
   heightImg?: number
 }
 
-export const CustomAccordion = ({ heightImg = 22, widthImg = 22 }: Props) => {
+export const CustomAccordion = ({ heightImg = 24, widthImg = 24 }: Props) => {
   const [selectedLanguage, setSelectedLanguage] = useState({
     language: 'English',
     flag: '/Flag United Kingdom.svg',

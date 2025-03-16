@@ -14,18 +14,9 @@
   padding: 0 60px;
 }
 
-.rightSide {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-}
-
 @media screen and (max-width: 1000px) {
   .wrapper {
     padding: 0 30px;
-  }
-  .rightSide {
-    gap: 24px;
   }
 }
 

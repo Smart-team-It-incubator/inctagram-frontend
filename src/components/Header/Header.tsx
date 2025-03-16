@@ -1,25 +1,19 @@
-"use client"
+'use client'
 import { Logo } from '../shared/Logo'
-import { RightBlock } from './RightBlock'
 import s from './Header.module.scss'
-import { CustomAccordion } from './RightBlock/CustomAccordion'
-import { withAuthMe } from '@/common/HOC/WithAuth';
-
-
+import { withAuthMe } from '@/common/HOC/WithAuth'
+import { RightBlock } from './RightBlock/RightBlock'
 
 const Header = ({ auth }: { auth?: any }) => {
+  return (
+    <div className={s.container}>
+      <header className={s.wrapper}>
+        <Logo />
 
-    return (
-        <div className={s.container}>
-            <header className={s.wrapper}>
-                <Logo />
-                <div className={s.rightSide}>
-                    <CustomAccordion />
-                    <RightBlock isAuth={!!auth}/>
-                </div>
-            </header>
-        </div>
-    );
-};
+        <RightBlock isAuth={auth} />
+      </header>
+    </div>
+  )
+}
 
-export default withAuthMe(Header);
+export default withAuthMe(Header)
