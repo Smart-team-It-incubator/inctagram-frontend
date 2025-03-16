@@ -75,7 +75,7 @@ export const ForgotPassword = () => {
       const res = await recoveryRequest({
         email: textInput,
         recaptcha: isCaptcha,
-        baseUrl: 'http://localhost:3000',
+        baseUrl: 'https://smart-reg.org.ru',
       })
       if (res.error) {
         throw res.error
