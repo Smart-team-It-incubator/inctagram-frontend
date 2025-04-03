@@ -7,7 +7,7 @@ export function withAuthMe<T extends object>(Component: ComponentType<T>) {
   return function WrappedComponent(props: T) {
     const [authState, setAuthState] = useState<string | null>(null)
 
-    const { data: auth, refetch } = useAuthMeQuery()
+    const { data: auth, refetch } = useAuthMeQuery() // гет запрос, в котором текущ токен из локСтор зепляется в хедерс и рефреш токен находится всегда в куке
 
     useEffect(() => {
       const token = localStorage.getItem('accessToken')

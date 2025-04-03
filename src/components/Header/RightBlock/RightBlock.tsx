@@ -11,7 +11,6 @@ type Props = {
 }
 
 export const RightBlock = ({ isAuth }: Props) => {
-  console.log(isAuth)
 
   return (
     <div className={s.wrapper}>

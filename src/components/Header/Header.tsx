@@ -9,7 +9,6 @@ const Header = ({ auth }: { auth?: any }) => {
     <div className={s.container}>
       <header className={s.wrapper}>
         <Logo />
-
         <RightBlock isAuth={auth} />
       </header>
     </div>
