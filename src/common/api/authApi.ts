@@ -17,7 +17,6 @@ export const authApi = baseApi.injectEndpoints({
     endpoints: build => ({
         registration: build.mutation<User, SignUpArgs>({
             query: data => {
-                console.log('registration', data)
                 return {
                     body: data,
                     method: 'POST',
