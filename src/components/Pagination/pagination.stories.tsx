@@ -1,4 +1,4 @@
-import { useState } from 'react'
+/*import { useState } from 'react'
 
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -36,4 +36,4 @@ export const Default: Story = {
 
     return <TablePagination {...args} currentPage={currentPage} onPageChange={handlePageChange} />
   },
-}
+}*/
