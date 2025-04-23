@@ -1,11 +1,12 @@
 'use client'
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {BASE_API_URL} from '@/common/api/apiURLs';
 
 export const baseApi = createApi({
   baseQuery: async (args, api, extraOptions) => {
     const result = await fetchBaseQuery({
-      baseUrl: 'https://inctagram.work/',
+      baseUrl: BASE_API_URL,
 /*      baseUrl: 'smart-reg.org.ru/api/v1',*/
       credentials: 'include',
       prepareHeaders: headers => {
