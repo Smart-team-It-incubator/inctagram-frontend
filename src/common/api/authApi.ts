@@ -1,87 +1,108 @@
 'use client'
 
 import {
-  BaseResponse, EmailConfirmationArgs,
-  ForgotPasswordArgs,
-  RecoveryConfirmArgs, ResendConfirmCodeArgs,
-  SignUpArgs,
-  SignUpDataSuccess,
+    AuthMe,
+    BaseResponse,
+    EmailConfirmationArgs,
+    ForgotPasswordArgs,
+    RecoveryConfirmArgs,
+    ResendConfirmCodeArgs,
+    SignUpArgs,
+    User,
 } from '@/common/api/auth.types'
-import { baseApi, baseApiAuthAndGithub } from '@/common/api/baseApi'
+import {baseApi, baseApiAuthAndGithub} from '@/common/api/baseApi'
+import {API_URLS} from '@/common/api/apiURLs'
 
-export const authApi2 = baseApi.injectEndpoints({
-  endpoints: build => ({
-    registration: build.mutation<SignUpDataSuccess, SignUpArgs>({
-      query: data => {
-        return {
-          body: data,
-          method: 'POST',
-          url: '/users/registration',
-        }
-      },
+export const authApi = baseApi.injectEndpoints({
+    endpoints: build => ({
+        registration: build.mutation<User, SignUpArgs>({
+            query: data => {
+                return {
+                    body: data,
+                    method: 'POST',
+                    url: API_URLS.AUTH.REGISTRATION,
+                }
+            },
+        }),
+        registrationConfirmation: build.mutation<BaseResponse | null, EmailConfirmationArgs>({
+            query: data => {
+                return {
+                    body: data,
+                    method: 'POST',
+                    url: API_URLS.AUTH.REGISTRATION_CONFIRMATION,
+                }
+            },
+        }),
+        resendConfirmationCode: build.mutation<any, ResendConfirmCodeArgs>({
+            query: data => {
+                return {
+                    body: data,
+                    method: 'POST',
+                    url: API_URLS.AUTH.RESEND_CONFIRMATION_CODE,
+                }
+            },
+        }),
+        authMe: build.query<AuthMe, void>({
+            query: () => {
+                console.log("зашла в authMe")
+                return {
+                    method: 'GET',
+                    url: API_URLS.AUTH.AUTH_ME,
+                }
+            },
+        }),
     }),
-    emailConfirmation: build.mutation<BaseResponse, EmailConfirmationArgs>({
-      query: data => {
-        return {
-          body: data,
-          method: 'POST',
-          url: `/users/emailConfirmation?code=${data.code}`,
-        }
-      },
-    }),
-    resendConfirmationCode: build.mutation<BaseResponse, ResendConfirmCodeArgs>({
-      query: data => {
-        return {
-          body: data,
-          method: 'POST',
-          url: '/users/resendConfirmationCode',
-        }
-      },
-    }),
-  }),
 })
 
-export const { useRegistrationMutation, useResendConfirmationCodeMutation, useEmailConfirmationMutation} = authApi2
+export const {
+    useRegistrationMutation,
+    useResendConfirmationCodeMutation,
+    useRegistrationConfirmationMutation,
+    useAuthMeQuery,
+    useLazyAuthMeQuery
+} = authApi
 
 export const authAndGithubApi = baseApiAuthAndGithub.injectEndpoints({
-  endpoints: build => ({
-    recoveryRequest: build.mutation<any, ForgotPasswordArgs>({
-      query: data => {
-        return {
-          body: data,
-          method: 'POST',
-          url: '/api/v1/auth/password-reset/request',
-        }
-      },
+    endpoints: build => ({
+        login: build.mutation<{ accessToken: string }, { email: string; password: string }>({
+            query: data => ({
+                url: API_URLS.AUTH.LOGIN,
+                method: 'POST',
+                body: data,
+            }),
+        }),
+
+        logout: build.mutation<void, void>({
+            query: () => ({
+                url: API_URLS.AUTH.LOGOUT,
+                method: 'POST',
+            }),
+        }),
+        recoveryRequest: build.mutation<any, ForgotPasswordArgs>({
+            query: data => {
+                return {
+                    body: data,
+                    method: 'POST',
+                    url: API_URLS.AUTH.RECOVERY_REQUEST,
+                }
+            },
+        }),
+
+        recoveryConfirm: build.mutation<any, RecoveryConfirmArgs>({
+            query: data => {
+                return {
+                    body: data,
+                    method: 'POST',
+                    url: API_URLS.AUTH.NEW_PASSWORD,
+                }
+            },
+        }),
     }),
-    recoveryConfirm: build.mutation<any, RecoveryConfirmArgs>({
-      query: data => {
-        return {
-          body: data,
-          method: 'POST',
-          url: '/api/v1/auth/password-reset/confirm',
-        }
-      },
-    }),
-    terms: build.query<string,void>({
-      query: () => {
-        return {
-          method: 'GET',
-          url: '/api/v1/auth/terms',
-          responseHandler: (response) => response.text()
-        }
-      }
-    }),
-    private: build.query<string,void>({
-        query: () => {
-          return {
-            method: 'GET',
-            url: '/api/v1/auth/private',
-            responseHandler: (response) => response.text()
-          }
-        }
-    }),
-  }),
 })
 
-export const { useRecoveryRequestMutation, useRecoveryConfirmMutation, useTermsQuery, usePrivateQuery } = authAndGithubApi
+export const {
+    useLoginMutation,
+    useRecoveryRequestMutation,
+    useRecoveryConfirmMutation,
+    useLogoutMutation,
+} = authAndGithubApi

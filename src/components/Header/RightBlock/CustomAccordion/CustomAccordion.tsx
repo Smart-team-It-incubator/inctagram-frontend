@@ -7,7 +7,12 @@ import { ChevronDownIcon } from '@radix-ui/react-icons'
 
 import styles from './CustomAccordion.module.scss'
 
-export const CustomAccordion = () => {
+type Props = {
+  widthImg?: number
+  heightImg?: number
+}
+
+export const CustomAccordion = ({ heightImg = 24, widthImg = 24 }: Props) => {
   const [selectedLanguage, setSelectedLanguage] = useState({
     language: 'English',
     flag: '/Flag United Kingdom.svg',
@@ -36,9 +41,14 @@ export const CustomAccordion = () => {
       <Accordion.Item value="item-1">
         <Accordion.Header className={styles.accordionHeader}>
           <Accordion.Trigger className={styles.accordionTrigger}>
-            <Image src={selectedLanguage.flag} alt={selectedLanguage.alt} width={20} height={15} />
+            <Image
+              src={selectedLanguage.flag}
+              alt={selectedLanguage.alt}
+              width={widthImg}
+              height={heightImg}
+            />
             <span className={styles.language}>{selectedLanguage.language}</span>
-            <ChevronDownIcon className={styles.icon} />
+            <ChevronDownIcon className={styles.icon} width={20} height={20} />
           </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Content className={styles.accordionContent}>

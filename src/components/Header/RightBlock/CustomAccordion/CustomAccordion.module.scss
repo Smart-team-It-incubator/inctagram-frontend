@@ -6,9 +6,6 @@
   cursor: pointer;
   position: relative;
   width: 163px;
-  @media (max-width: 500px) {
-    width: 100%;
-  }
 }
 
 .accordionRoot:hover {
@@ -29,9 +26,6 @@
 
 .language {
   font-size: 16px;
-  @media (max-width: 500px) {
-    display: none;
-  }
 }
 
 .icon {
@@ -43,7 +37,6 @@
 }
 
 .accordionContent {
-
   transition: height 0.3s ease;
   position: absolute;
   top: 39px;
@@ -52,16 +45,11 @@
   border-top: none;
   border-radius: 0 0 2px 2px;
   width: 163px;
-  @media (max-width: 500px) {
-    top: 35px;
-    width: 103%;
-  }
 }
 
 .contentWrapper {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
 .languageButton {
@@ -82,5 +70,35 @@
 
 .languageButton img {
   width: 20px;
-  height: 15px;
+  height: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .accordionRoot {
+    padding: 0;
+    width: 42px;
+    border: none;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  .language {
+    display: none;
+  }
+
+  .accordionContent {
+    top: 25px;
+    left: -5px;
+    width: 103%;
+    border: none;
+  }
+  .languageButton {
+    background-color: transparent;
+    padding: 5px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }

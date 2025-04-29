@@ -1,30 +1,26 @@
-import Image from 'next/image'
-import { Button } from '@/components/Button'
-import { CustomAccordion } from './CustomAccordion'
+'use client'
 
-import styles from './RightBlock.module.scss'
+import s from './RightBlock.module.scss'
+import { Dropdown } from './Dropdown/Dropdown'
+import { ButtonsAuth } from './ButtonsAuth/ButtonsAuth'
+import { Notice } from './Notice/Notice'
+import { CustomAccordion } from './CustomAccordion'
 
 type Props = {
   isAuth?: boolean
 }
 
 export const RightBlock = ({ isAuth }: Props) => {
+  console.log(isAuth)
+
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.wrapper}>
-        {isAuth && (
-          <Image src="/Mask.svg" alt="Bell" width={24} height={24} className={styles.bell} />
-        )}
-        <CustomAccordion />
-        {!isAuth && (
-          <>
-            <div className={styles.hideOnMobile}>
-              <Button variant="link">Log in</Button>
-              <Button>Sign up</Button>
-            </div>
-            <span className={styles.ellipsis}>...</span>
-          </>
-        )}
+    <div className={s.wrapper}>
+      <div className={s.notice}>{isAuth && <Notice />}</div>
+      {/*  */}
+      <CustomAccordion />
+      <div className={!isAuth ? s.btn : ''}>{!isAuth && <ButtonsAuth isAuth={isAuth} />}</div>
+      <div className={s.drop}>
+        <Dropdown isAuth={isAuth} />
       </div>
     </div>
   )

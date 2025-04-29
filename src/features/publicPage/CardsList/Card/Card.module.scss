@@ -1,0 +1,17 @@
+.cardContainer{
+  display: flex;
+  flex-direction: column;
+  gap:12px;
+}
+
+.photo{
+  cursor: pointer;
+}
+
+.wasTimeAgo{
+  font-family: var(--font-family), sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-xxs);
+  line-height: var(--line-height-xs);
+  color: var(--light-900);
+}

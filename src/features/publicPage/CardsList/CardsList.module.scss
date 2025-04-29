@@ -1,0 +1,9 @@
+.cardsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.cardsContainer > * {
+  flex: 1 1 0;
+}

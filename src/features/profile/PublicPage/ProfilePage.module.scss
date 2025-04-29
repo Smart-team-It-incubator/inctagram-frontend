@@ -1,0 +1,192 @@
+.container {
+  max-width: 972px;
+  margin: 0 auto;
+}
+.title {
+  all: unset;
+  display: none;
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 20px;
+  line-height: 36px;
+  text-wrap: wrap;
+}
+
+.header {
+  margin-top: 36px;
+  display: flex;
+  gap: 38px;
+  margin-bottom: 48px;
+
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.adaptiveBtn {
+  display: none;
+}
+
+.right {
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .title {
+    display: inline;
+  }
+
+  button {
+    width: 167px;
+    height: 36px;
+    :focus {
+      outline: 0;
+    }
+    :active {
+      outline: 0;
+    }
+  }
+}
+
+.indicator {
+  display: flex;
+  gap: 90px;
+  margin-bottom: 25px;
+}
+
+.avatar {
+  max-width: 204px;
+
+  width: 100%;
+
+  img {
+    width: 100%;
+
+    max-height: 204px;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+.images {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  flex-wrap: wrap;
+  img {
+    border-radius: 2px;
+    max-width: 234px;
+    min-width: 170px;
+    width: 100%;
+    max-height: 228px;
+    cursor: pointer;
+  }
+}
+
+.text {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    margin-bottom: 0px;
+    gap: 27px;
+
+    p {
+      display: none;
+    }
+  }
+
+  .buttons {
+    display: none;
+  }
+
+  .text {
+    display: inline-block;
+    line-height: 24px;
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .indicator {
+    gap: 27px;
+  }
+
+  .images {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3px;
+    img {
+      min-width: 108px;
+    }
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .header {
+    justify-content: center;
+    margin-bottom: -20px;
+  }
+
+  .avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wrapper {
+    display: none;
+  }
+
+  .right {
+    justify-content: center;
+  }
+
+  .indicator {
+    margin-bottom: 0;
+  }
+
+  .title {
+    display: inline;
+    margin-top: 6px;
+    font-size: 20px;
+  }
+  .underTitle {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .text {
+    margin-top: 19px;
+    margin-bottom: 29px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .avatar {
+    img {
+      width: 72px;
+      height: 72px;
+    }
+  }
+
+  .title {
+    font-size: 16px;
+  }
+}

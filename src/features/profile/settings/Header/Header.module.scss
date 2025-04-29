@@ -1,0 +1,30 @@
+.wrapper {
+  max-width: 972px;
+  width: 100%;
+  max-height: 36px;
+  height: 100%;
+  color: var(--dark-100);
+  margin-bottom: 24px;
+}
+
+.item {
+  border-bottom: 2px solid var(--dark-100);
+  padding: 6px 45px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--dark-100);
+}
+
+.active {
+  border-bottom: var(--primary-500) 2px solid;
+}
+.active:visited {
+  color: var(--primary-500);
+}
+
+// className={`${
+//     activeSegment === tab.segment
+//       ? 'text-white border-b-2 border-blue-500'
+//       : 'text-gray-400'
+//   }`}

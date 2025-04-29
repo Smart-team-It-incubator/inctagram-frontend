@@ -1,4 +1,9 @@
-.container {
+.container{
+  width: 378px;
+  margin: 24px auto;
+}
+
+.wrapper {
   display: flex;
   flex-direction: column;
   padding: 24px;
@@ -68,7 +73,7 @@
   color: var(--light-100);
 
   & p {
-    margin: 0;
+    margin: 0 ;
   }
 }
 
@@ -86,5 +91,21 @@
 .signInButton{
   &:focus {
     outline: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .container{
+    margin: 0 auto;
+  }
+
+  .wrapper{
+    padding: 20px 15px;
+    background: transparent;
+    border: none;
+  }
+
+  .form{
+    max-width: 330px;
   }
 }

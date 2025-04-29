@@ -1,0 +1,38 @@
+.form {
+  .profileInfo {
+  }
+
+  .formContent {
+    .formTextarea {
+      width: 100%;
+    }
+
+    .formLocation {
+    }
+  }
+}
+
+.publicationContent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 972px;
+  min-width: 600px;
+  height: 89%;
+
+  .block {
+    flex: 1;
+  }
+
+  .leftBlock {
+    align-content: center;
+    img {
+      width: 100%;
+      height: 85%;
+    }
+  }
+
+  .rightBlock {
+    padding: 24px 44px;
+  }
+}

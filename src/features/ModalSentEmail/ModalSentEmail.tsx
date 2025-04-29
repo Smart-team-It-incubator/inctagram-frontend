@@ -15,7 +15,7 @@ export const ModalSentEmail = (props: Props) => {
   const {email, closeHandler } = props
 
   const closeModalHandler = () => {
-    closeHandler(false)
+    closeHandler(true) //изменила
   }
 
   return (

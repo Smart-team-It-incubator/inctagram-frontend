@@ -1,16 +1,15 @@
 .ground {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin-top: 35px;
   gap: 25px;
 }
 
 .wrapper {
-  display: flex;
   width: 290px;
   background-color: #0d0d0d;
-  justify-content: center;
 }
 
 .title {
@@ -37,8 +36,8 @@
   width: 100%;
 }
 
-.img{
-margin-top: 40px;
+.img {
+  margin-top: 40px;
 }
 
 @media only screen and (max-width: 767px) {

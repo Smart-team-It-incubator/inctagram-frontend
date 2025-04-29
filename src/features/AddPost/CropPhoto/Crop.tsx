@@ -1,0 +1,215 @@
+'use client'
+import { useEffect, useState } from 'react'
+import Cropper, { Area, Point } from 'react-easy-crop'
+import styles from './crop.module.scss'
+
+import { CloseOutline, Expand, Image, Maximize, PlusCircleOutline } from '@/components/icons'
+
+import { Slider } from '@radix-ui/themes'
+import { CustomSlider } from '../Slider/Slider'
+
+import { PostImage, PostImages } from '@/common/store/types'
+
+//Expample with upload and showresult Crop from react-easy-crop:
+// https://codesandbox.io/p/sandbox/y09komm059?file=%2Fsrc%2Findex.js%3A49%2C31
+
+type CropProps = {
+  images: PostImages
+  uploadPhoto: Function
+  currentImageIdx: number
+  setCurrentImageIdx: Function
+
+  setCurrentImage: Function
+  setCroppedAreaPixels: Function
+}
+
+type Tools = 'zoom' | 'aspect' | 'image'
+
+type ToolsVisibility = {
+  zoom: boolean
+  aspect: boolean
+  image: boolean
+}
+
+const initToolsVisibility = {
+  zoom: false,
+  aspect: false,
+  image: false,
+}
+
+export const Crop = ({
+  images,
+  currentImageIdx,
+  setCurrentImageIdx,
+  uploadPhoto,
+  setCroppedAreaPixels,
+}: CropProps) => {
+  const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
+  const [zoom, setZoom] = useState<number>(1)
+
+  // const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
+  // const [croppedImage, setCroppedImage] = useState<string | null>(null)
+
+  const [showTooltip, setShowTooltip] = useState<ToolsVisibility>(initToolsVisibility)
+
+
+  useEffect(() => {
+    // setCurrentPostImage(images[0])
+  }, [])
+
+  const cropChange = (crop: Point) => {
+    setCrop(crop)
+  }
+
+  const onCropComplete = (_croppedArea: Area, croppedAreaPixels: Area) => {
+    setCroppedAreaPixels(croppedAreaPixels)
+  }
+
+  const openImageList = () => {
+    setCurrentImageIdx(0)
+  }
+
+  const showTooltipHandle = (sourse: Tools): void => {
+    setShowTooltip({ ...showTooltip, [sourse]: !showTooltip[sourse] })
+  }
+
+  return (
+    <>
+      <div
+        className={styles.cropContainer}
+        style={{  }}
+      >
+        <Cropper
+          image={images[currentImageIdx].imageUrl}
+          zoom={zoom}
+          crop={crop}
+          aspect={4 / 3}
+          onCropChange={cropChange}
+          onCropComplete={onCropComplete}
+          onZoomChange={setZoom}
+        />
+
+        <div className={styles.controls}>
+          <div className={styles.buttons}>
+            <div className={styles.buttonsLeft}>
+              <div className={styles.iconContainer}>
+                <Expand
+                  width={24}
+                  height={24}
+                  className={styles.icon}
+                  onClick={() => showTooltipHandle('aspect')}
+                />
+              </div>
+
+              {showTooltip['aspect'] && <div className="aspect">Aspect</div>}
+
+              <div className={styles.iconContainer}>
+                <Maximize
+                  width={24}
+                  height={24}
+                  className={styles.icon}
+                  onClick={() => showTooltipHandle('zoom')}
+                />
+              </div>
+
+              {showTooltip['zoom'] && <CustomSlider setValue={setZoom} />}
+            </div>
+
+            {showTooltip['image'] && (
+              <ImageListTooltip
+                images={images}
+                uploadPhoto={uploadPhoto}
+                setSelectedImage={setCurrentImageIdx}
+                selectedImage={currentImageIdx}
+                setZoom={setZoom}
+                // cropImage={cropImage}
+                // croppedAreaPixels={croppedAreaPixels}
+              />
+            )}
+
+            <div className={styles.iconContainer} onClick={() => showTooltipHandle('image')}>
+              <Image width={24} height={24} className={styles.icon} onClick={openImageList} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+type TooltipProps = {
+  images: PostImage[]
+  uploadPhoto: Function
+  setSelectedImage: Function
+  selectedImage: number
+  setZoom?: Function
+  // cropImage: Function
+  // croppedAreaPixels: Area | null
+}
+
+const ImageListTooltip = ({
+  images,
+  uploadPhoto,
+  setSelectedImage,
+  // selectedImage,
+  setZoom,
+  // cropImage,
+  // croppedAreaPixels,
+}: TooltipProps) => {
+  // const [imageIndex, setImageIndex] = useState<number>(0)
+
+  const addImage = async () => {
+    await uploadPhoto()
+    setSelectedImage((prev: number) => prev + 1)
+    console.log(images)
+    setZoom && setZoom(1)
+  }
+
+  const selectImageFromTooltip = (index: number) => {
+    setSelectedImage(index)
+  }
+
+  return (
+    <div className={styles.imagesTooltip}>
+      <Slider defaultValue={[50]} />
+      <div className={styles.imageList}>
+        {images?.map((image, index) => {
+          return (
+            <div className={styles.imageBlock} key={image.id}>
+              <img
+                src={image.croppedImageUrl ? image.croppedImageUrl : image.imageUrl}
+                alt="image"
+                onClick={() => selectImageFromTooltip(index)}
+              />
+              <div className={styles.closeBtn}>
+                <div className={`${styles.iconContainer}`}>
+                  <CloseOutline className={styles.icon} width={12} height={12} onClick={() => {}} />
+                  {/* <IconButton style={{backgroundColor: "darkgray"}}>
+                  <CloseOutline
+                    className={styles.icon}
+                    width={12}
+                    height={12}
+                    onClick={() => {}}
+                  />
+</IconButton> */}
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      <div className={styles.tooltipControls}>
+        <div className={styles.iconContainer}>
+          <PlusCircleOutline className={styles.icon} onClick={addImage} />
+          {/* <div
+            onClick={() => cropImage(images[imageIndex].imageUrl, croppedAreaPixels)}
+            style={{ cursor: 'pointer' }}
+          >
+            V
+          </div> */}
+        </div>
+      </div>
+    </div>
+  )
+}

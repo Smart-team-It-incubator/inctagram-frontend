@@ -9,6 +9,7 @@ import { passwordValidation } from './passwordValidation'
 import { useRecoveryConfirmMutation } from '@/common/api/authApi'
 import { useRouter } from 'next/navigation'
 import { LinkExpired } from './LinkExpired/LinkExpired'
+import { ROUTES } from '@/common/routes/routes'
 
 export const NewPassword = () => {
   const [firstPassword, setFirstPassword] = useState<string>('')
@@ -21,7 +22,7 @@ export const NewPassword = () => {
   const [recoveryConfirm] = useRecoveryConfirmMutation()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const recoveryCode = searchParams?.get('recoveryCode') || ''
+  const recoveryCode = searchParams?.get('code') || ''
 
   const getFirstPass = (e: ChangeEvent<HTMLInputElement>) => {
     setFirstPassword(e.currentTarget.value)
@@ -46,12 +47,13 @@ export const NewPassword = () => {
       try {
         setIsButtonDisabled(true)
         const res = await recoveryConfirm({ recoveryCode, newPassword: firstPassword })
+        console.log(res)
+
         if (res.error) {
           throw res.error
         }
-        router.push('/auth/signIn')
+        router.push(ROUTES.SIGN_IN)
       } catch (err) {
-        router.replace('/auth/newPassword')
         setIsLinkExpired(true)
       }
     }

@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: var(--font-family-primary);
+  span {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    text-align: center;
+    gap: 5px;
+    font-weight: 700;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wrapper {
+    text-align: center;
+    gap: 5px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .wrapper {
+    font-size: 12px;
+  }
+}

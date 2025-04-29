@@ -18,7 +18,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, Props>(
     const [textPlaceholder, setTextPlaceholder] = useState(placeholder)
     const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
       if (onChange) {
-        onChange(e.currentTarget.value)
+        onChange(e.target.value)
       }
     }
 
