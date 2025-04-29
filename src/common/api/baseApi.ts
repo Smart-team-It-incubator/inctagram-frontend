@@ -1,13 +1,13 @@
 'use client'
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import {BASE_API_URL} from '@/common/api/apiURLs';
+
 
 export const baseApi = createApi({
   baseQuery: async (args, api, extraOptions) => {
     const result = await fetchBaseQuery({
-      baseUrl: BASE_API_URL,
-/*      baseUrl: 'smart-reg.org.ru/api/v1',*/
+      /*baseUrl: BASE_API_URL,*/
+      baseUrl: 'https://smart-reg.org.ru/',
       credentials: 'include',
       prepareHeaders: headers => {
         const token = localStorage.getItem('accessToken')
@@ -49,7 +49,7 @@ export const baseApi = createApi({
 export const baseApiAuthAndGithub = createApi({
   reducerPath: 'authAndGithub',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://inctagram.work/',
+    baseUrl: 'https://smart-reg.org.ru/',
     credentials: 'include',
 
     prepareHeaders: headers => {
